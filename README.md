@@ -16,7 +16,7 @@
   <img alt="Defender" src="https://img.shields.io/badge/Defender%20for%20AI-Standard-dc3545">
 </p>
 
-**Live demo:** <https://ca-portal-jiehil2zaklu2.blueforest-2582abfc.westeurope.azurecontainerapps.io>
+**Live:** <https://www.nebula-forge.at> (also reachable at the platform FQDN <https://ca-portal-jiehil2zaklu2.blueforest-2582abfc.westeurope.azurecontainerapps.io>)
 
 ---
 
@@ -257,6 +257,7 @@ See [ARCHITECTURE.md § 13](./ARCHITECTURE.md#13-known-issues--limitations) for 
 - One shared Managed Identity for all tiers (broader blast radius than ideal).
 - Key Vault soft-delete is 7 days (immutable post-create on Azure KV).
 - API in-memory rate limiter on the public Apply endpoint (5/replica/hour). Move to Redis if traffic grows.
+- Apex `nebula-forge.at` not yet bound — only `www.nebula-forge.at`. DNS TXT record for `asuid` apex hasn't propagated; once it does, repeating the bind flow brings it online.
 
 ---
 

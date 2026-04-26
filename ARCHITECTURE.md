@@ -1,7 +1,8 @@
 # Nebula Forge — Architecture & System Documentation
 
 > **Status:** Live  
-> **Production URL:** <https://ca-portal-jiehil2zaklu2.blueforest-2582abfc.westeurope.azurecontainerapps.io>  
+> **Production URL:** <https://www.nebula-forge.at> (custom domain)  
+> **Platform URL:** <https://ca-portal-jiehil2zaklu2.blueforest-2582abfc.westeurope.azurecontainerapps.io>  
 > **Last verified:** 2026-04-26
 
 This document is the source of truth for how the Nebula Forge platform is
@@ -205,8 +206,9 @@ All in resource group **`rg-nebula-forge-nebula-forge`** (West Europe).
 | Container App — api | `ca-api-jiehil2zaklu2` | **Internal** ingress only |
 | Container Apps × 9 (MCP) | `ca-{hr,materials,exploration,science,safety,engineering,logistics,comms,medbay}-jiehil2zaklu2` | Internal ingress, scale-to-zero |
 
-**Public DNS**:
-- Portal: `ca-portal-jiehil2zaklu2.blueforest-2582abfc.westeurope.azurecontainerapps.io`
+**Public DNS / endpoints**:
+- Production (custom domain): `www.nebula-forge.at` (managed cert auto-renewed by Container Apps)
+- Platform FQDN: `ca-portal-jiehil2zaklu2.blueforest-2582abfc.westeurope.azurecontainerapps.io`
 - Internal API: `ca-api-jiehil2zaklu2.internal.blueforest-2582abfc.westeurope.azurecontainerapps.io`
 
 ---
@@ -245,6 +247,12 @@ identityProviders.azureActiveDirectory:
   registration.openIdIssuer:      https://login.microsoftonline.com/<tenant>/v2.0
   validation.allowedAudiences:    [api://<clientId>, <clientId>]
 login.tokenStore.enabled:         false   # SAS-blob backing incompatible w/ AAD-only storage
+httpSettings.forwardProxy.convention: Standard
+  # MANDATORY for any custom domain. Tells Easy Auth to honour
+  # X-Forwarded-Host / X-Forwarded-Proto so OAuth callbacks use the
+  # hostname the user actually requested. Without it the AppServiceAuthSession
+  # cookie ends up bound to the original Azure FQDN and same-origin POSTs
+  # from the custom domain return 401. (Bug #7 in OPERATIONS.md.)
 ```
 
 ### 4.4 The proxy → API trust boundary
@@ -719,6 +727,46 @@ extended with **anchored** entries (no broad regex):
 the public careers page can submit. The hard guardrails listed above mitigate
 abuse; without them this would be a wide-open AI billing surface.
 
+### 12.7 Custom domain (`www.nebula-forge.at`)
+
+The portal serves on both the platform FQDN and `www.nebula-forge.at`.
+The custom hostname is wired through bicep (`portalCustomDomains` array
+in `containerapp-portal.bicep`), so it survives `azd provision`.
+
+What had to be in place:
+
+| Layer | Setting |
+|---|---|
+| DNS | `A nebula-forge.at -> 20.23.90.205` (CAE static IP), `TXT asuid -> <verifyId>`, `CNAME www -> ca-portal-…azurecontainerapps.io`, `TXT asuid.www -> <verifyId>` |
+| Container Apps | `customDomains` binding with managed cert (`SniEnabled`); cert auto-renewed by Azure |
+| Easy Auth | `httpSettings.forwardProxy.convention=Standard` so OAuth callbacks use the request host |
+| API CORS | `extraAllowedOrigins=['https://www.nebula-forge.at']` widens the lock-down |
+| Entra app reg | extra redirect URI `https://www.nebula-forge.at/.auth/login/aad/callback` |
+
+azd env vars driving the bicep params: `PORTAL_CUSTOM_HOSTNAMES_JSON`,
+`PORTAL_CUSTOM_DOMAINS_JSON` (JSON arrays).
+
+### 12.8 Image preservation across `azd provision`
+
+Bicep used to hard-code `image: placeholderImage` for every container
+app, which meant **every `azd provision` rolled all containers back to
+the platform quickstart image** — silently breaking everything that
+relied on our actual code (chat, HR portal, all `/api/*`).
+
+The fix is to thread azd's per-service `SERVICE_<NAME>_IMAGE_NAME` env
+vars (which it already maintains for every deploy) into bicep:
+
+```bicep
+param apiImageName string = ''
+// ... 10 more params ...
+
+image: !empty(apiImageName) ? apiImageName : placeholderImage
+```
+
+The placeholder is now only used on the very first provision before
+any `azd deploy` has run. See `azure/infra/main.parameters.json` for
+the env-var → param wiring. Documented as bug #8.
+
 ---
 
 ## 13. Known issues / limitations
@@ -755,5 +803,4 @@ abuse; without them this would be a wide-open AI billing surface.
    the API into its own app reg with OBO / app-token flows is a refactor we
    chose not to do; the proxy shared-secret model is the simpler equivalent.
 
-9. **Custom domain `nebula-forge.at` is not yet wired.** Requires DNS A/TXT
-   + Container Apps managed cert + Easy Auth allowed-redirect-URL update.
+9. **Custom domain `nebula-forge.at` apex is not yet wired.** Only `www.nebula-forge.at` is bound. The apex needs an `asuid.nebula-forge.at` TXT record that propagates to public DNS resolvers; once that's verifiable, repeating the same `hostname add → managed cert → bind → bicep update` flow brings it online.

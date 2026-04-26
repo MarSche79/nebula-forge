@@ -12,7 +12,8 @@
 5. [Smoke tests](#5-smoke-tests)
 6. [Common pitfalls we hit & how to avoid them](#6-common-pitfalls-we-hit--how-to-avoid-them)
 7. [Defender for AI demo](#7-defender-for-ai-demo)
-8. [Decommissioning / costs](#8-decommissioning--costs)
+8. [Custom domains](#8-custom-domains)
+9. [Decommissioning / costs](#9-decommissioning--costs)
 
 ---
 
@@ -61,6 +62,14 @@ azd deploy                   # all 11 services
 azd provision                # apply bicep changes (also rotates proxy-shared-secret)
 ```
 
+> ⚠️ **`azd provision` USED to roll containers back to the platform quickstart
+> image.** Fixed in bug #8 by threading `SERVICE_<NAME>_IMAGE_NAME` env vars
+> into bicep. If you ever see chat returning 401 / "Invalid proxy authentication"
+> right after a provision, the first thing to check is whether
+> `az containerapp show -n ca-api-… --query properties.template.containers[0].image`
+> contains `quickstart` — if yes, just `azd deploy api` (and `azd deploy portal`)
+> to bring the real images back.
+
 ### Rollback to a previous revision
 
 ```pwsh
@@ -103,7 +112,9 @@ portal proxy), and tails the last 200 log lines of the API.
 ### Verify routing & gating
 
 ```pwsh
-$portal = "https://ca-portal-jiehil2zaklu2.blueforest-2582abfc.westeurope.azurecontainerapps.io"
+$portal = "https://www.nebula-forge.at"   # or the platform FQDN
+# Production (custom domain): https://www.nebula-forge.at
+# Platform FQDN:              https://ca-portal-jiehil2zaklu2.blueforest-2582abfc.westeurope.azurecontainerapps.io
 
 # Public landing — should be 200
 curl.exe -s -o NUL -w "HTTP:%{http_code}\n" -H "Accept: text/html" -H "User-Agent: Mozilla/5.0" "$portal/"
@@ -155,13 +166,15 @@ trigger a chat first to wake it, then retry.)
 
 | Symptom | First check | Likely cause |
 |---|---|---|
-| Chat says **"chat failed: 401"** | `az containerapp logs show -n ca-api-…` filter for `[auth]` lines | proxy-shared-secret out of sync (run `azd provision`) OR Easy Auth not attaching `X-MS-Client-Principal` (sign out + back in) |
+| Chat says **"chat failed: 401"** | `az containerapp logs show -n ca-api-…` filter for `[auth]` lines | proxy-shared-secret out of sync (run `azd provision`) OR Easy Auth not attaching `X-MS-Client-Principal` (sign out + back in) OR API container is the placeholder image (bug #8 — `azd deploy api`) |
+| HR portal returns **"Invalid proxy authentication"** | `az containerapp show -n ca-api-…  --query properties.template.containers[0].image` | API rolled back to platform quickstart by `azd provision`. Fix: `azd deploy api`. (Bug #8.) |
+| Chat works on platform FQDN but **401 on custom domain** | `az containerapp auth show -n ca-portal-… --query httpSettings` | `forwardProxy.convention` missing. Fix: `az containerapp auth update --proxy-convention Standard`. (Bug #7.) |
 | Chat says **"failed to reach the Master Agent"** | Same logs, look for `mcp-client` errors | A child MCP is unreachable (504 / 405 / cold-start timeout). Trigger a warm-up by hitting `/api/agents`. |
 | Public landing returns **404** right after deploy | Wait 30 s, retry | Stale Next.js prerender cache from previous revision. `x-nextjs-cache: HIT` is the smoking gun. |
 | `/command-center` returns **404** instead of 307 | Same as above (cache) | Wait, retry. If still broken, confirm `middleware.ts` matcher. |
 | Storage write fails with `AuthorizationFailure` | `az storage account show -n stjiehil2zaklu2 -g $rg --query "{publicNetworkAccess,allowSharedKeyAccess}"` | `publicNetworkAccess` got set back to `Disabled` (no PE = no path). Fix: `az storage account update --public-network-access Enabled`. |
 | Easy Auth 500 on `/.auth/login/aad` | `az containerapp auth show -n ca-portal-…` | Token store enabled but storage SAS unavailable — keep `tokenStore.enabled: false` (already set). |
-| Browser sees **CORS error** calling `/api/...` | Network tab — should be same-origin via proxy | `NEXT_PUBLIC_API_URL` is non-empty → browser hits API directly. Set it to empty in bicep + redeploy portal. |
+| Browser sees **CORS error** calling `/api/...` | Network tab — should be same-origin via proxy | `NEXT_PUBLIC_API_URL` is non-empty → browser hits API directly. Set it to empty in bicep + redeploy portal. **For custom domains:** check `corsPolicy.allowedOrigins` includes the new origin. |
 | Header-spoofing test (`X-MS-Client-Principal` from browser) returns 200 | Proxy `BLOCKED_INBOUND_HEADER_PREFIXES` regression | Re-check `azure/portal/src/app/api/[...path]/route.ts`. |
 | Child container doesn't start, Application Insights shows no logs | Replica scaled to zero | Normal until a request arrives. |
 
@@ -274,6 +287,16 @@ tool pill appears above the bubble.
 - **When a Next.js page returns 404 right after deploy**, wait 30 s before
   debugging — Container Apps' revision rollover briefly serves a stale
   `x-nextjs-cache: HIT` from the previous revision.
+- **Don't add a new container app to bicep without an image-name parameter.**
+  Otherwise the next `azd provision` will roll it back to the platform
+  quickstart placeholder and break it. (Bug #8 — see the
+  `param ...ImageName string = ''` block in `resources.bicep`.)
+- **Don't add a new custom domain without `--proxy-convention Standard`.**
+  The OAuth callback will go to the wrong hostname and POSTs will 401.
+  (Bug #7.)
+- **Don't forget to widen API CORS** when you add a new portal origin
+  (`extraAllowedOrigins` in `containerapp-api.bicep`), and to add the
+  matching redirect URI to the Entra app reg.
 
 ---
 
@@ -328,7 +351,90 @@ Idempotent — creates the table if missing, re-grants the MI role.
 
 ---
 
-## 8. Decommissioning / costs
+## 8. Custom domains
+
+`www.nebula-forge.at` is currently bound. To add another hostname (e.g. the
+apex `nebula-forge.at` once its DNS propagates):
+
+### 8.1 What you do at the registrar
+
+| Type | Name | Value |
+|---|---|---|
+| `A` (or ALIAS/ANAME if your provider doesn't support apex `A`) | `@` (apex) | the CAE static IP — `az containerapp env show -n cae-jiehil2zaklu2 -g $rg --query properties.staticIp -o tsv` |
+| `TXT` | `asuid` | the verification ID — `az containerapp show -n ca-portal-jiehil2zaklu2 -g $rg --query properties.customDomainVerificationId -o tsv` |
+| `CNAME` | `www` (or any subdomain) | the platform FQDN |
+| `TXT` | `asuid.www` | same verification ID |
+
+Verify with:
+
+```pwsh
+nslookup nebula-forge.at 8.8.8.8
+nslookup -type=TXT asuid.nebula-forge.at 8.8.8.8
+```
+
+### 8.2 What we do once DNS resolves
+
+```pwsh
+$rg     = "rg-nebula-forge-nebula-forge"
+$portal = "ca-portal-jiehil2zaklu2"
+$envName = "cae-jiehil2zaklu2"
+$host   = "www.nebula-forge.at"
+
+# 1. Validate hostname (Azure checks DNS now)
+az containerapp hostname add -n $portal -g $rg --hostname $host
+
+# 2. Create + wait for managed cert
+$certName = ($host -replace '\.','-')
+az containerapp env certificate create -n $envName -g $rg `
+    --hostname $host --validation-method CNAME `
+    --certificate-name $certName | Out-Null
+
+do {
+    Start-Sleep 15
+    $state = az containerapp env certificate list -n $envName -g $rg `
+        --managed-certificates-only --query "[?name=='$certName'].properties.provisioningState | [0]" -o tsv
+    Write-Host "  cert status: $state"
+} until ($state -in 'Succeeded', 'Failed', 'Canceled')
+
+# 3. Bind cert to hostname
+$certId = az containerapp env certificate list -n $envName -g $rg `
+    --managed-certificates-only --query "[?name=='$certName'].id | [0]" -o tsv
+az containerapp hostname bind -n $portal -g $rg --hostname $host --certificate $certId --environment $envName
+
+# 4. Widen API CORS to the new origin
+az containerapp ingress cors enable -n ca-api-jiehil2zaklu2 -g $rg `
+    --allowed-origins "https://$host" "https://ca-portal-…azurecontainerapps.io" `
+    --allowed-methods GET POST PUT DELETE OPTIONS `
+    --allowed-headers '*' --allow-credentials true
+
+# 5. Add the new redirect URI to the Entra app reg
+$appId = (azd env get-value AAD_CLIENT_ID)
+az ad app update --id $appId --web-redirect-uris @(
+    az ad app show --id $appId --query "web.redirectUris" -o tsv) `
+    "https://$host/.auth/login/aad/callback"
+
+# 6. Bake into bicep so future provisions keep it
+$hostnames = ConvertTo-Json -Compress @($host)
+$domains   = ConvertTo-Json -Compress @(@{ hostname = $host; certificateId = $certId })
+azd env set PORTAL_CUSTOM_HOSTNAMES_JSON $hostnames
+azd env set PORTAL_CUSTOM_DOMAINS_JSON   $domains
+
+# 7. (Required exactly once per environment) Easy Auth must honour X-Forwarded-Host
+az containerapp auth update -n $portal -g $rg --proxy-convention Standard
+```
+
+### 8.3 Things to remember
+
+- **Easy Auth `--proxy-convention Standard` is mandatory.** Without it, the
+  AppServiceAuthSession cookie will be bound to the platform FQDN and
+  same-origin POSTs from the custom domain will return 401. (Bug #7.)
+- **Don't push `azd provision` between cert creation and binding.** The cert
+  is in the managed-environment scope and survives, but you'll waste time.
+- The managed cert auto-renews; nothing to do at expiry.
+
+---
+
+## 9. Decommissioning / costs
 
 ### Tear down everything
 
