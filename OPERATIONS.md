@@ -200,6 +200,20 @@ trigger a chat first to wake it, then retry.)
    in `containerapp-portal.bicep` (or imperatively `az containerapp auth update --proxy-convention Standard`).
    Mandatory for every custom domain.
 
+8. **`azd provision` rolled every container app back to the placeholder image**
+   (`mcr.microsoft.com/k8se/quickstart:latest`). `azd deploy` had set the
+   real ACR images, but the next `azd provision` re-applied the bicep
+   template which hard-coded `image: placeholderImage` for every container.
+   Symptoms: HR portal returned `Invalid proxy authentication`, chat returned
+   401, all `/api/*` endpoints behaved unexpectedly because the running
+   container was the platform quickstart, not our Express API.
+   **Fix:** wired `SERVICE_<NAME>_IMAGE_NAME` (azd already tracks these per
+   service) into bicep params, so each container's `image` is
+   `!empty(serviceImageName) ? serviceImageName : placeholderImage`. The
+   placeholder is now only used on the very first provision before any
+   `azd deploy` has run. See `azure/infra/main.parameters.json` and the
+   `param ...ImageName` block in `resources.bicep`.
+
 ---
 
 ## 5. Smoke tests

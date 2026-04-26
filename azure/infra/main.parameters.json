@@ -34,6 +34,17 @@
     },
     "portalCustomDomains": {
       "value": "${PORTAL_CUSTOM_DOMAINS_JSON=[]}"
-    }
+    },
+    "apiImageName":         { "value": "${SERVICE_API_IMAGE_NAME=}" },
+    "portalImageName":      { "value": "${SERVICE_PORTAL_IMAGE_NAME=}" },
+    "hrImageName":          { "value": "${SERVICE_HR_IMAGE_NAME=}" },
+    "materialsImageName":   { "value": "${SERVICE_MATERIALS_IMAGE_NAME=}" },
+    "explorationImageName": { "value": "${SERVICE_EXPLORATION_IMAGE_NAME=}" },
+    "scienceImageName":     { "value": "${SERVICE_SCIENCE_IMAGE_NAME=}" },
+    "safetyImageName":      { "value": "${SERVICE_SAFETY_IMAGE_NAME=}" },
+    "engineeringImageName": { "value": "${SERVICE_ENGINEERING_IMAGE_NAME=}" },
+    "logisticsImageName":   { "value": "${SERVICE_LOGISTICS_IMAGE_NAME=}" },
+    "commsImageName":       { "value": "${SERVICE_COMMS_IMAGE_NAME=}" },
+    "medbayImageName":      { "value": "${SERVICE_MEDBAY_IMAGE_NAME=}" }
   }
 }

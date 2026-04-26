@@ -40,7 +40,37 @@ param customDomainHostnames array = []
 @description('Custom hostname -> managed-certificate-id bindings for the portal ingress.')
 param portalCustomDomains array = []
 
+// Per-service container images, populated by azd from SERVICE_<NAME>_IMAGE_NAME.
+// On first provision (before any `azd deploy`) these are empty and we fall
+// back to the platform quickstart placeholder.
+param apiImageName string = ''
+param portalImageName string = ''
+param hrImageName string = ''
+param materialsImageName string = ''
+param explorationImageName string = ''
+param scienceImageName string = ''
+param safetyImageName string = ''
+param engineeringImageName string = ''
+param logisticsImageName string = ''
+param commsImageName string = ''
+param medbayImageName string = ''
+
 var placeholderImage = 'mcr.microsoft.com/k8se/quickstart:latest'
+
+// Helper: pick the real per-service image if azd has tracked one, otherwise
+// the platform quickstart placeholder (only used on the very first provision
+// before `azd deploy` has built any containers).
+var mcpImageMap = {
+  hr: !empty(hrImageName) ? hrImageName : placeholderImage
+  materials: !empty(materialsImageName) ? materialsImageName : placeholderImage
+  exploration: !empty(explorationImageName) ? explorationImageName : placeholderImage
+  science: !empty(scienceImageName) ? scienceImageName : placeholderImage
+  safety: !empty(safetyImageName) ? safetyImageName : placeholderImage
+  engineering: !empty(engineeringImageName) ? engineeringImageName : placeholderImage
+  logistics: !empty(logisticsImageName) ? logisticsImageName : placeholderImage
+  comms: !empty(commsImageName) ? commsImageName : placeholderImage
+  medbay: !empty(medbayImageName) ? medbayImageName : placeholderImage
+}
 
 var mcpAgents = [
   { name: 'nebula-hr',          serviceName: 'hr',          port: 3001 }
@@ -153,7 +183,7 @@ module mcpApps 'modules/containerapp-mcp.bicep' = [for agent in mcpAgents: {
     location: location
     tags: union(tags, { 'azd-service-name': agent.serviceName })
     name: 'ca-${agent.serviceName}-${resourceToken}'
-    image: placeholderImage
+    image: mcpImageMap[agent.serviceName]
     targetPort: agent.port
     agentName: agent.name
     containerAppsEnvId: containerAppsEnv.outputs.environmentId
@@ -179,7 +209,7 @@ module apiApp 'modules/containerapp-api.bicep' = {
     location: location
     tags: union(tags, { 'azd-service-name': 'api' })
     name: 'ca-api-${resourceToken}'
-    image: placeholderImage
+    image: !empty(apiImageName) ? apiImageName : placeholderImage
     containerAppsEnvId: containerAppsEnv.outputs.environmentId
     managedIdentityId: identity.outputs.managedIdentityId
     managedIdentityClientId: identity.outputs.managedIdentityClientId
@@ -213,7 +243,7 @@ module portalApp 'modules/containerapp-portal.bicep' = {
     location: location
     tags: union(tags, { 'azd-service-name': 'portal' })
     name: 'ca-portal-${resourceToken}'
-    image: placeholderImage
+    image: !empty(portalImageName) ? portalImageName : placeholderImage
     containerAppsEnvId: containerAppsEnv.outputs.environmentId
     managedIdentityId: identity.outputs.managedIdentityId
     managedIdentityClientId: identity.outputs.managedIdentityClientId

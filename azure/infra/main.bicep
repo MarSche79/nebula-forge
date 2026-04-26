@@ -38,6 +38,19 @@ param customDomainHostnames array = []
 @description('Per-hostname managed-cert resource IDs. Same length and order as customDomainHostnames.')
 param portalCustomDomains array = []
 
+// Per-service container images, populated by azd from SERVICE_<NAME>_IMAGE_NAME.
+param apiImageName string = ''
+param portalImageName string = ''
+param hrImageName string = ''
+param materialsImageName string = ''
+param explorationImageName string = ''
+param scienceImageName string = ''
+param safetyImageName string = ''
+param engineeringImageName string = ''
+param logisticsImageName string = ''
+param commsImageName string = ''
+param medbayImageName string = ''
+
 var resourceToken = uniqueString(subscription().subscriptionId, environmentName, location)
 var tags = {
   'azd-env-name': environmentName
@@ -66,6 +79,17 @@ module resources 'resources.bicep' = {
     aadClientSecret: aadClientSecret
     customDomainHostnames: customDomainHostnames
     portalCustomDomains: portalCustomDomains
+    apiImageName: apiImageName
+    portalImageName: portalImageName
+    hrImageName: hrImageName
+    materialsImageName: materialsImageName
+    explorationImageName: explorationImageName
+    scienceImageName: scienceImageName
+    safetyImageName: safetyImageName
+    engineeringImageName: engineeringImageName
+    logisticsImageName: logisticsImageName
+    commsImageName: commsImageName
+    medbayImageName: medbayImageName
   }
 }
 
