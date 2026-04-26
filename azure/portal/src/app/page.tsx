@@ -9,6 +9,8 @@ import {
 } from 'lucide-react';
 import MarketingNav from '@/components/MarketingNav';
 import Footer from '@/components/Footer';
+import HeroVisual from '@/components/HeroVisual';
+import CeoStatement from '@/components/CeoStatement';
 import { AGENTS } from '@/lib/agents';
 
 export const metadata = { title: 'Nebula Forge — Beyond the Frontier' };
@@ -107,9 +109,12 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <HeroBadge />
+          <HeroVisual />
         </div>
       </section>
+
+      {/* CEO MISSION STATEMENT */}
+      <CeoStatement />
 
       {/* MISSION */}
       <section id="mission" className="py-24 relative">
@@ -346,73 +351,5 @@ function BackgroundOrbs() {
         }}
       />
     </>
-  );
-}
-
-function HeroBadge() {
-  return (
-    <div className="hidden lg:flex justify-center">
-      <div className="relative" style={{ width: 380, height: 380 }}>
-        {/* Outer glow */}
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background:
-              'conic-gradient(from 90deg, var(--primary) 0deg, var(--accent) 180deg, var(--primary) 360deg)',
-            opacity: 0.18,
-            filter: 'blur(40px)',
-          }}
-        />
-        {/* Mid ring (rotates) */}
-        <div
-          className="absolute inset-6 rounded-full"
-          style={{
-            border: '1px dashed var(--primary-border)',
-            animation: 'nf-spin 60s linear infinite',
-          }}
-        />
-        {/* Inner orb */}
-        <div
-          className="absolute inset-16 rounded-full flex items-center justify-center"
-          style={{
-            background:
-              'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), var(--primary) 60%, var(--primary-dark) 100%)',
-            boxShadow:
-              '0 30px 80px rgba(14,138,181,0.45), inset 0 -10px 30px rgba(0,0,0,0.25)',
-          }}
-        >
-          <div className="text-center px-6">
-            <div className="text-[10px] uppercase tracking-[0.4em] text-white/70">
-              Sector 7 · Live
-            </div>
-            <div className="mt-2 text-3xl font-extrabold text-white">98%</div>
-            <div className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/85">
-              Systems Nominal
-            </div>
-          </div>
-        </div>
-
-        {/* Orbit dots */}
-        {[0, 1, 2, 3].map((i) => (
-          <span
-            key={i}
-            className="absolute"
-            style={{
-              top: '50%',
-              left: '50%',
-              width: 10,
-              height: 10,
-              marginLeft: -5,
-              marginTop: -5,
-              borderRadius: '50%',
-              background: i % 2 === 0 ? 'var(--primary)' : 'var(--accent)',
-              transform: `rotate(${i * 90}deg) translateX(170px)`,
-              transformOrigin: 'center',
-              boxShadow: `0 0 18px ${i % 2 === 0 ? 'var(--primary)' : 'var(--accent)'}`,
-            }}
-          />
-        ))}
-      </div>
-    </div>
   );
 }
