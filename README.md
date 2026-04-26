@@ -228,8 +228,9 @@ Day-2 deploys: `azd deploy api`, `azd deploy portal`, `azd deploy hr`, `azd prov
 | Doc | When to read it |
 |---|---|
 | **[ARCHITECTURE.md](./ARCHITECTURE.md)** | Source of truth: layout, identity, network, frontend, backend, MCP children, data, configuration, build, HR pipeline + Defender, known issues |
-| **[OPERATIONS.md](./OPERATIONS.md)** | Runbook: deploy, rollback, diagnostics, incident playbook, smoke tests, pitfalls, Defender for AI demo |
-| **[system-overview.html](./system-overview.html)** | Single-file visual overview — open in any browser. Use for whiteboard-style explanations and demos. |
+| **[OPERATIONS.md](./OPERATIONS.md)** | Runbook: deploy, rollback, diagnostics, incident playbook, smoke tests, pitfalls, custom domains, Defender for AI demo |
+| **[presentation.html](./presentation.html)** | Single-file deck-style presentation. 12 slides, full-keyboard navigation (← / → / Space / F / T), share by email or Drop. |
+| **[system-overview.html](./system-overview.html)** | Single-file scrollable visual overview — same design language as the live portal. |
 | [DEPLOYMENT.md](./DEPLOYMENT.md) | Original azd deployment quickstart |
 | [azure/portal/DESIGN-SYSTEM.md](./azure/portal/DESIGN-SYSTEM.md) | Tailwind tokens, component patterns, design language |
 
