@@ -190,6 +190,15 @@ trigger a chat first to wake it, then retry.)
    must `createPortal(jsx, document.body)` so it's hoisted out of any
    parent stacking context. See `azure/portal/src/components/ApplyModal.tsx`
    for the pattern.
+7. **Easy Auth on a custom domain returned 401 on POSTs** even though
+   pages rendered fine. Cause: without `httpSettings.forwardProxy.convention=Standard`
+   on the auth config, Easy Auth always derived its OAuth callback from the
+   original Azure FQDN — so a user on `www.nebula-forge.at` would sign in,
+   the AppServiceAuthSession cookie would get bound to the *Azure* FQDN, and
+   subsequent same-origin POSTs from `www.nebula-forge.at` had no cookie →
+   no principal → API 401. **Fix:** set `httpSettings.forwardProxy.convention='Standard'`
+   in `containerapp-portal.bicep` (or imperatively `az containerapp auth update --proxy-convention Standard`).
+   Mandatory for every custom domain.
 
 ---
 

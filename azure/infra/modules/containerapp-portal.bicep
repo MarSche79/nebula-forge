@@ -181,6 +181,16 @@ resource auth 'Microsoft.App/containerApps/authConfigs@2024-03-01' = if (authEna
       }
       preserveUrlFragmentsForLogins: false
     }
+    httpSettings: {
+      // Standard convention = read X-Forwarded-Host / X-Forwarded-Proto so
+      // Easy Auth's OAuth callback URL matches the hostname the user
+      // actually requested. Required for any custom domain (otherwise the
+      // callback always goes to the original Azure FQDN, the cookie ends
+      // up bound to the wrong host, and downstream calls 401).
+      forwardProxy: {
+        convention: 'Standard'
+      }
+    }
   }
 }
 
