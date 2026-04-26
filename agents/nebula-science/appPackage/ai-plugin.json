@@ -1,0 +1,141 @@
+{
+  "$schema": "https://aka.ms/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Nebula Forge Science Officer",
+  "description_for_human": "Space science research — experiment tracking, observation logging, hypothesis management, and publication queries.",
+  "description_for_model": "This plugin manages all science and research operations aboard Nebula Forge station. It can list experiments with optional filters, log new scientific observations, search across experiments/observations/publications by keyword, list research publications, and submit new research hypotheses as proposed experiments. Use it when users ask about experiments, observations, research data, publications, or hypotheses.",
+  "contact_email": "science@nebulaforge.station",
+  "namespace": "nebula-science",
+  "logo_url": "",
+  "legal_info_url": "",
+  "privacy_url": "",
+  "runtimes": [
+    {
+      "type": "MCP",
+      "spec": {
+        "url": "http://localhost:3004/mcp"
+      },
+      "run_for_functions": [
+        "get_experiments",
+        "log_observation",
+        "query_research_data",
+        "get_publications",
+        "submit_hypothesis"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_experiments",
+      "description": "List all scientific experiments. Optionally filter by status or department.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["proposed", "approved", "in-progress", "completed", "peer-review"],
+            "description": "Filter by experiment status"
+          },
+          "department": {
+            "type": "string",
+            "description": "Filter by department name"
+          }
+        }
+      }
+    },
+    {
+      "name": "log_observation",
+      "description": "Log a new scientific observation for an experiment.",
+      "parameters": {
+        "type": "object",
+        "required": ["experimentId", "observer", "category", "data", "significance"],
+        "properties": {
+          "experimentId": {
+            "type": "string",
+            "description": "ID of the related experiment (e.g. EXP-001)"
+          },
+          "observer": {
+            "type": "string",
+            "description": "Name of the observer"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["astrophysical", "biological", "chemical", "quantum", "geological"],
+            "description": "Observation category"
+          },
+          "data": {
+            "type": "object",
+            "description": "Measurement data as key-value pairs"
+          },
+          "significance": {
+            "type": "string",
+            "enum": ["routine", "notable", "breakthrough"],
+            "description": "Significance level"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes"
+          }
+        }
+      }
+    },
+    {
+      "name": "query_research_data",
+      "description": "Search across experiments, observations, and publications by keyword.",
+      "parameters": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search keyword or phrase"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_publications",
+      "description": "List research publications. Optionally filter by status.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["draft", "submitted", "published", "retracted"],
+            "description": "Filter by publication status"
+          }
+        }
+      }
+    },
+    {
+      "name": "submit_hypothesis",
+      "description": "Submit a new research hypothesis, creating a proposed experiment.",
+      "parameters": {
+        "type": "object",
+        "required": ["title", "researcher", "department", "hypothesis"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Experiment title"
+          },
+          "researcher": {
+            "type": "string",
+            "description": "Lead researcher name"
+          },
+          "department": {
+            "type": "string",
+            "description": "Research department"
+          },
+          "hypothesis": {
+            "type": "string",
+            "description": "Hypothesis statement"
+          },
+          "relatedExperimentId": {
+            "type": "string",
+            "description": "ID of a related experiment, if any"
+          }
+        }
+      }
+    }
+  ]
+}

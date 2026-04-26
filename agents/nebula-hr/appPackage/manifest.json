@@ -1,0 +1,39 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Nebula Forge Station Operations",
+        "websiteUrl": "https://nebulaforge.station",
+        "privacyUrl": "https://nebulaforge.station/privacy",
+        "termsOfUseUrl": "https://nebulaforge.station/terms"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "NF HR Assistant",
+        "full": "Nebula Forge HR Assistant"
+    },
+    "description": {
+        "short": "HR & Personnel management for Nebula Forge space station",
+        "full": "Nebula Forge HR Assistant manages crew roster operations, candidate screening and evaluation, leave request processing, and onboarding workflows for all station personnel. Ensures qualified crew members are selected, properly onboarded, and supported throughout their station assignment."
+    },
+    "accentColor": "#4A90D9",
+    "composeExtensions": [],
+    "copilotAgents": {
+        "declarativeAgents": [
+            {
+                "id": "declarativeAgent",
+                "file": "declarativeAgent.json"
+            }
+        ]
+    },
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}

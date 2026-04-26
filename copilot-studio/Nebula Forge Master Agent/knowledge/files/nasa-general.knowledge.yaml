@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: NASA — General Reference
+description: NASA general reference for cross-domain space-station questions
+siteUrl: https://www.nasa.gov
+maxResultCount: 5

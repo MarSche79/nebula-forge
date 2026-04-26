@@ -1,0 +1,81 @@
+[
+  {
+    "id": "RPT-001",
+    "sampleId": "SAM-001",
+    "analyst": "Dr. Elara Voss",
+    "date": "2347-03-28",
+    "methodology": "X-Ray Diffraction",
+    "findings": "Nebulite-7 displays a unique hexagonal crystal lattice with interstitial pockets of unknown-element-47. The element exhibits properties inconsistent with any known periodic table entry — potentially a stable superheavy element. Bioluminescence originates from photon emission during lattice vibration at 412nm wavelength.",
+    "riskAssessment": "caution",
+    "potentialApplications": [
+      "High-efficiency photovoltaic cells",
+      "Bioluminescent navigation markers",
+      "Quantum computing substrate research"
+    ],
+    "recommendations": "Continue spectral analysis with quantum resonance scanning. Isolate unknown-element-47 for dedicated study. Recommend Level 3 containment during extraction procedures."
+  },
+  {
+    "id": "RPT-002",
+    "sampleId": "SAM-004",
+    "analyst": "Prof. Henrik Johansson",
+    "date": "2347-06-22",
+    "methodology": "Mass Spectrometry",
+    "findings": "Ferro-Titanium Alloy X shows an unprecedented molecular bonding structure where titanium and iron atoms share electron clouds in a novel configuration. This results in a material with 340% higher tensile strength than standard Ti-6Al-4V while maintaining comparable weight. The vanadium and chromium inclusions create a self-healing micro-fracture mechanism.",
+    "riskAssessment": "safe",
+    "potentialApplications": [
+      "Next-generation hull plating",
+      "Structural reinforcement for deep-space vessels",
+      "High-stress mechanical components",
+      "Radiation shielding composites"
+    ],
+    "recommendations": "Fast-track metallurgical synthesis trials. Begin prototype hull panel fabrication. Submit findings to Stellar Engineering Review Board for priority classification."
+  },
+  {
+    "id": "RPT-003",
+    "sampleId": "SAM-005",
+    "analyst": "Dr. Amara Osei",
+    "date": "2347-08-05",
+    "methodology": "Quantum Resonance Scanning",
+    "findings": "Helix Spore Cluster contains triple-strand helical structures with a base-pair system using 6 nucleotide analogs instead of the standard 4. The organisms demonstrate extremophile characteristics, remaining viable at temperatures between -180°C and +95°C. Metabolic activity detected — organisms convert methane into complex organic compounds through an unknown enzymatic pathway.",
+    "riskAssessment": "caution",
+    "potentialApplications": [
+      "Bioremediation of methane-rich atmospheres",
+      "Novel antibiotic compound synthesis",
+      "Xenobiological research baseline",
+      "Bio-engineered life support filtration"
+    ],
+    "recommendations": "Maintain BSL-4 containment protocols. Initiate genome mapping with triple-helix sequencing array. Cross-reference with Titan Subsurface Biological Database. Do not expose to station atmosphere without approval from Chief Science Officer."
+  },
+  {
+    "id": "RPT-004",
+    "sampleId": "SAM-008",
+    "analyst": "Prof. Henrik Johansson",
+    "date": "2347-11-02",
+    "methodology": "Magneto-Acoustic Resonance Imaging",
+    "findings": "Obsidian Whisper contains aligned ferromagnetic microdomains that produce coherent acoustic emissions when exposed to oscillating magnetic fields between 2-8 Tesla. The resonance frequency varies predictably with field strength, suggesting potential as a precision sensor material. Sulfur inclusions from Io's volcanic environment create natural piezoelectric boundaries within the crystal matrix.",
+    "riskAssessment": "safe",
+    "potentialApplications": [
+      "Magnetic field sensors for navigation",
+      "Deep-space communication resonators",
+      "Seismic monitoring on planetary surfaces",
+      "Acoustic signaling devices"
+    ],
+    "recommendations": "Map complete resonance frequency spectrum across 0-15 Tesla range. Fabricate prototype sensor array for field testing. Coordinate with Engineering department for integration feasibility study."
+  },
+  {
+    "id": "RPT-005",
+    "sampleId": "SAM-010",
+    "analyst": "Dr. Amara Osei",
+    "date": "2347-12-18",
+    "methodology": "Bio-Spectral Analysis",
+    "findings": "Bioluminescent Gel Matrix contains a silicon-carbon hybrid polymer hosting approximately 10^8 bioluminescent microorganisms per cubic centimeter. The organisms communicate through photon signaling, forming rudimentary neural-like networks. When stimulated electrically, the gel matrix exhibits binary switching behavior — individual luminescent cells activate and deactivate in coordinated patterns resembling logic gate operations.",
+    "riskAssessment": "caution",
+    "potentialApplications": [
+      "Biological computing substrates",
+      "Self-healing optical circuitry",
+      "Environmental biosensors",
+      "Adaptive camouflage systems"
+    ],
+    "recommendations": "Expand culture in controlled nutrient medium to increase sample volume. Map signal propagation patterns with high-speed photon detectors. Assess computational throughput compared to silicon-based systems. Explore potential for hybrid bio-electronic interfaces."
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "id": "MSG-001",
+    "from": "Cdr. Elena Vasquez",
+    "to": "ALL-STATION",
+    "channel": "internal",
+    "priority": "routine",
+    "timestamp": "2287-03-15T08:00:00Z",
+    "subject": "Morning Status Report",
+    "body": "All systems nominal. Day shift commencing at 0800 station time. Docking Bay 3 remains closed for maintenance until further notice.",
+    "status": "received"
+  },
+  {
+    "id": "MSG-002",
+    "from": "Lt. Kenji Tanaka",
+    "to": "Engineering Deck",
+    "channel": "internal",
+    "priority": "priority",
+    "timestamp": "2287-03-15T09:23:00Z",
+    "subject": "Coolant Pressure Anomaly — Reactor 2",
+    "body": "Detecting intermittent pressure fluctuations in the secondary coolant loop for Reactor 2. Requesting engineering team to perform manual inspection within the next two hours.",
+    "status": "acknowledged"
+  },
+  {
+    "id": "MSG-003",
+    "from": "Earth Command — Admiral Holt",
+    "to": "Cdr. Elena Vasquez",
+    "channel": "command",
+    "priority": "priority",
+    "timestamp": "2287-03-14T22:45:00Z",
+    "subject": "Revised Supply Schedule Q2-2287",
+    "body": "Commander, be advised that the Q2 supply convoy has been rescheduled. New ETA is stardate 2287.112. Adjust station reserves accordingly. Full manifest attached via encrypted subspace channel.",
+    "status": "received"
+  },
+  {
+    "id": "MSG-004",
+    "from": "Deep Space Probe Theta-9",
+    "to": "Science Division",
+    "channel": "deep-space",
+    "priority": "routine",
+    "timestamp": "2287-03-15T03:17:00Z",
+    "subject": "Telemetry Packet — Sector 7G Survey",
+    "body": "Automated telemetry dump: 42 spectral analyses, 18 gravimetric readings, 3 anomalous energy signatures flagged for review. Data integrity check passed. Next transmission window in 72 hours.",
+    "status": "received"
+  },
+  {
+    "id": "MSG-005",
+    "from": "Freighter Orion's Belt",
+    "to": "Nebula Forge Station",
+    "channel": "deep-space",
+    "priority": "urgent",
+    "timestamp": "2287-03-15T11:02:00Z",
+    "subject": "DISTRESS — Navigation System Failure",
+    "body": "MAYDAY MAYDAY. Freighter Orion's Belt experiencing total navigation system failure at coordinates 47.3, -12.8, 89.1. Life support stable but drifting off course. Requesting immediate navigational assistance or tow. 14 souls aboard.",
+    "status": "received"
+  },
+  {
+    "id": "MSG-006",
+    "from": "Station AI — ARIA",
+    "to": "ALL-STATION",
+    "channel": "emergency",
+    "priority": "flash",
+    "timestamp": "2287-03-15T14:30:00Z",
+    "subject": "Micrometeorite Shower — Brace for Impact",
+    "body": "ALERT: Uncharted micrometeorite cluster detected on collision trajectory. Impact window T-minus 12 minutes. All personnel secure loose equipment and proceed to reinforced sections. Shields raised to maximum. Hull integrity teams standby.",
+    "status": "sent"
+  },
+  {
+    "id": "MSG-007",
+    "from": "Dr. Amara Osei",
+    "to": "Cdr. Elena Vasquez",
+    "channel": "internal",
+    "priority": "routine",
+    "timestamp": "2287-03-15T10:15:00Z",
+    "subject": "Weekly Medical Summary",
+    "body": "All crew physicals for week 11 completed. Two minor cases of zero-G vertigo in new arrivals — cleared for duty after acclimation protocol. Radiation exposure levels within normal parameters across all departments.",
+    "status": "acknowledged"
+  },
+  {
+    "id": "MSG-008",
+    "from": "Cdr. Elena Vasquez",
+    "to": "Earth Command",
+    "channel": "command",
+    "priority": "urgent",
+    "timestamp": "2287-03-15T11:30:00Z",
+    "subject": "Request Rescue Assets — Freighter Orion's Belt",
+    "body": "Earth Command, relaying distress signal from Freighter Orion's Belt. Navigation failure, 14 crew drifting at coordinates 47.3, -12.8, 89.1. Nebula Forge dispatching shuttlecraft for initial assistance. Requesting nearest patrol vessel divert for tow operations. Priority response required.",
+    "status": "sent"
+  }
+]

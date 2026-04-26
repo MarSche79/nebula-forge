@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: SHRM HR Best Practices
+description: Society for Human Resource Management — HR best practices and standards
+siteUrl: https://www.shrm.org/topics-tools
+maxResultCount: 5

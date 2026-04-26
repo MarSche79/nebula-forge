@@ -1,0 +1,112 @@
+[
+  {
+    "id": "SAM-001",
+    "name": "Nebulite-7",
+    "origin": "Asteroid Theta-7",
+    "collectedDate": "2347-03-15",
+    "collectedBy": "Dr. Elara Voss",
+    "type": "mineral",
+    "composition": { "iron": 34.2, "nickel": 12.8, "unknown-element-47": 8.3, "silicon": 22.1, "carbon": 6.4, "trace-elements": 16.2 },
+    "status": "analyzed",
+    "notes": "Exhibits faint bioluminescence under UV exposure. Crystal lattice shows non-standard hexagonal geometry."
+  },
+  {
+    "id": "SAM-002",
+    "name": "Xenon Crystalline",
+    "origin": "Europa Deep Rift",
+    "collectedDate": "2347-04-02",
+    "collectedBy": "Lt. Cmdr. Riku Tanaka",
+    "type": "mineral",
+    "composition": { "xenon": 41.5, "silicon": 18.7, "oxygen": 14.2, "argon": 9.8, "neon": 3.1, "trace-elements": 12.7 },
+    "status": "analyzed",
+    "notes": "Crystalline structure traps noble gases in micro-cavities. Potential applications in energy storage."
+  },
+  {
+    "id": "SAM-003",
+    "name": "Dark Matter Residue",
+    "origin": "Void Sector Omega-9",
+    "collectedDate": "2347-05-19",
+    "collectedBy": "Dr. Elara Voss",
+    "type": "unknown",
+    "composition": { "unknown-compound-alpha": 62.4, "hydrogen": 8.1, "helium": 5.3, "neutrino-dense-matter": 24.2 },
+    "status": "pending-analysis",
+    "notes": "Gravitational anomalies detected within 2m radius. Handle with extreme caution — containment field required."
+  },
+  {
+    "id": "SAM-004",
+    "name": "Ferro-Titanium Alloy X",
+    "origin": "Asteroid Belt K-12",
+    "collectedDate": "2347-06-08",
+    "collectedBy": "Sgt. Marcus Chen",
+    "type": "metallic",
+    "composition": { "titanium": 45.6, "iron": 28.3, "chromium": 11.2, "vanadium": 7.8, "manganese": 4.1, "trace-elements": 3.0 },
+    "status": "analyzed",
+    "notes": "Tensile strength 340% above standard titanium alloy. Could revolutionize hull plating construction."
+  },
+  {
+    "id": "SAM-005",
+    "name": "Helix Spore Cluster",
+    "origin": "Titan Subsurface Lake",
+    "collectedDate": "2347-07-22",
+    "collectedBy": "Dr. Amara Osei",
+    "type": "organic",
+    "composition": { "carbon": 38.7, "nitrogen": 22.4, "oxygen": 18.9, "hydrogen": 11.3, "phosphorus": 5.2, "sulfur": 3.5 },
+    "status": "analyzed",
+    "notes": "Microscopic helical structures resemble DNA but with triple-strand configuration. Possible extremophile origin."
+  },
+  {
+    "id": "SAM-006",
+    "name": "Cryovapor-12",
+    "origin": "Enceladus Plume Zone",
+    "collectedDate": "2347-08-11",
+    "collectedBy": "Lt. Cmdr. Riku Tanaka",
+    "type": "gaseous",
+    "composition": { "methane": 31.6, "ammonia": 24.8, "water-vapor": 19.4, "hydrogen-cyanide": 8.7, "ethane": 6.3, "trace-gases": 9.2 },
+    "status": "pending-analysis",
+    "notes": "Collected during cryovolcanic eruption event. Contains complex organic precursors."
+  },
+  {
+    "id": "SAM-007",
+    "name": "Prismatic Quartz",
+    "origin": "Asteroid Theta-7",
+    "collectedDate": "2347-09-03",
+    "collectedBy": "Dr. Elara Voss",
+    "type": "mineral",
+    "composition": { "silicon": 46.2, "oxygen": 32.8, "aluminum": 8.4, "lithium": 5.1, "boron": 4.3, "trace-elements": 3.2 },
+    "status": "archived",
+    "notes": "Refracts light in 7 distinct spectral bands simultaneously. High piezoelectric potential."
+  },
+  {
+    "id": "SAM-008",
+    "name": "Obsidian Whisper",
+    "origin": "Io Volcanic Fields",
+    "collectedDate": "2347-10-17",
+    "collectedBy": "Sgt. Marcus Chen",
+    "type": "mineral",
+    "composition": { "silicon": 36.4, "iron": 18.9, "magnesium": 14.7, "sulfur": 12.3, "calcium": 8.2, "trace-elements": 9.5 },
+    "status": "analyzed",
+    "notes": "Formed under extreme volcanic pressure. Emits low-frequency resonance when subjected to magnetic fields."
+  },
+  {
+    "id": "SAM-009",
+    "name": "Quantum Foam Precipitate",
+    "origin": "Orion Nebula Boundary",
+    "collectedDate": "2347-11-05",
+    "collectedBy": "Dr. Amara Osei",
+    "type": "unknown",
+    "composition": { "unknown-particle-Z": 44.8, "hydrogen": 18.2, "helium-3": 15.6, "lithium": 9.7, "trace-elements": 11.7 },
+    "status": "pending-analysis",
+    "notes": "Exhibits quantum superposition at macro scale. Requires specialized containment. Classification pending."
+  },
+  {
+    "id": "SAM-010",
+    "name": "Bioluminescent Gel Matrix",
+    "origin": "Ganymede Ice Shelf",
+    "collectedDate": "2347-12-01",
+    "collectedBy": "Dr. Amara Osei",
+    "type": "organic",
+    "composition": { "carbon": 28.3, "oxygen": 24.6, "hydrogen": 19.8, "nitrogen": 14.2, "phosphorus": 7.4, "silicon": 5.7 },
+    "status": "analyzed",
+    "notes": "Self-organizing gel matrix with embedded bioluminescent microorganisms. Potential bio-computing substrate."
+  }
+]

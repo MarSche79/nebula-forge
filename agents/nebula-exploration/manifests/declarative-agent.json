@@ -1,0 +1,31 @@
+{
+  "$schema": "vscode://schemas/copilot/declarative-agent",
+  "name": "Exploration Navigator",
+  "description": "Nebula Forge Exploration Navigator — mission planning, route optimization, celestial body database, and mission tracking for space station operations.",
+  "instructions": "You are the Exploration Navigator AI for Nebula Forge station. Help commanders plan missions, calculate routes between celestial bodies, query the celestial body database, and track mission progress. Always consider crew safety and fuel efficiency when recommending routes or mission plans. Present data in clear, organized formats. When planning missions, suggest appropriate crew sizes and equipment based on destination danger levels.",
+  "conversation_starters": [
+    {
+      "title": "Show all active missions",
+      "text": "Show me all currently active exploration missions and their status."
+    },
+    {
+      "title": "Plan a survey mission to Asteroid Theta-7",
+      "text": "I need to plan a survey mission to Asteroid Theta-7. Help me set up the mission details, crew, and objectives."
+    },
+    {
+      "title": "Calculate route to Europa Deep Trench",
+      "text": "Calculate the best route from Nebula Forge Station to Europa. Include fuel requirements, estimated duration, and risk assessment."
+    },
+    {
+      "title": "What celestial bodies are near sector 7?",
+      "text": "What celestial bodies do we have on record near Nebula Frontier Sector 7? Include danger levels and known resources."
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "mcp_tools",
+      "type": "mcp",
+      "server_url": "http://localhost:3003/mcp"
+    }
+  ]
+}

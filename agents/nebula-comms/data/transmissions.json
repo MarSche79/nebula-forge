@@ -1,0 +1,42 @@
+[
+  {
+    "id": "TX-001",
+    "targetStation": "Earth Command HQ",
+    "message": "Weekly station status report and crew manifest update. All departments reporting nominal operations. Supply request for Q3 attached.",
+    "scheduledTime": "2287-03-16T06:00:00Z",
+    "windowDuration": 45,
+    "relayPath": ["RELAY-001", "RELAY-004"],
+    "status": "queued",
+    "priority": "routine"
+  },
+  {
+    "id": "TX-002",
+    "targetStation": "Deep Space Observatory Kepler-7",
+    "message": "Transmitting spectral analysis data from Sector 7G survey. Anomalous energy signatures require collaborative review. Full dataset attached.",
+    "scheduledTime": "2287-03-15T18:00:00Z",
+    "windowDuration": 30,
+    "relayPath": ["RELAY-001", "RELAY-002"],
+    "status": "transmitting",
+    "priority": "priority"
+  },
+  {
+    "id": "TX-003",
+    "targetStation": "Frontier Colony Artemis",
+    "message": "Medical supply manifest and emergency protocol updates. Colony requested additional radiation medication due to solar flare activity in their sector.",
+    "scheduledTime": "2287-03-15T08:00:00Z",
+    "windowDuration": 60,
+    "relayPath": ["RELAY-001", "RELAY-002", "RELAY-005"],
+    "status": "failed",
+    "priority": "urgent"
+  },
+  {
+    "id": "TX-004",
+    "targetStation": "Mars Orbital Platform",
+    "message": "Encrypted personnel transfer orders and security clearance updates for incoming crew rotation. Authorization code embedded.",
+    "scheduledTime": "2287-03-17T12:00:00Z",
+    "windowDuration": 20,
+    "relayPath": ["RELAY-001", "RELAY-004"],
+    "status": "queued",
+    "priority": "priority"
+  }
+]

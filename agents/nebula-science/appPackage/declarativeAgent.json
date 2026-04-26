@@ -1,0 +1,30 @@
+{
+    "version": "v1.6",
+    "name": "Nebula Forge Science Officer",
+    "description": "Space science research — experiment tracking, observation logging, hypothesis management, and publication queries for Nebula Forge station",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Show Active Experiments",
+            "text": "Show active experiments"
+        },
+        {
+            "title": "Log an Observation",
+            "text": "Log an observation for experiment EXP-001"
+        },
+        {
+            "title": "Search Research Data",
+            "text": "Search research data about dark energy"
+        },
+        {
+            "title": "List Publications",
+            "text": "List published papers"
+        }
+    ],
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: USGS Mineral Resources
+description: U.S. Geological Survey — mineral and material science reference
+siteUrl: https://www.usgs.gov/programs/mineral-resources-program
+maxResultCount: 5

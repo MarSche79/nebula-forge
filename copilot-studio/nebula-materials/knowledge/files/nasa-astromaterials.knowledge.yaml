@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: NASA Astromaterials Research
+description: NASA Astromaterials Research and Exploration Science Division
+siteUrl: https://ares.jsc.nasa.gov
+maxResultCount: 5

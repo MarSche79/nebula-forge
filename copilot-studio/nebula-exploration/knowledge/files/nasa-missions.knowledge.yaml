@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: NASA Missions
+description: NASA mission database and current/past mission information
+siteUrl: https://www.nasa.gov/missions/
+maxResultCount: 5

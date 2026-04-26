@@ -1,0 +1,57 @@
+[
+  {
+    "id": "PUB-001",
+    "title": "Vacuum Survival Mechanisms in Modified Tardigrada: A 96-Hour Exposure Study",
+    "authors": ["Dr. Marcus Chen", "Dr. Priya Sharma", "Dr. Elena Vasquez"],
+    "experimentId": "EXP-003",
+    "publishDate": "2026-03-20",
+    "journal": "Interstellar Journal of Astrobiology",
+    "abstract": "We demonstrate that tardigrade-derived organisms pre-treated with novel cryoprotectant compounds maintain metabolic viability at 78% after 96 hours of hard vacuum exposure, significantly exceeding the previously established 72-hour threshold.",
+    "citationCount": 12,
+    "status": "published"
+  },
+  {
+    "id": "PUB-002",
+    "title": "Graviton Emission Signatures at Dark Energy Boundary Layers",
+    "authors": ["Prof. Amara Osei", "Dr. Sofia Alvarez"],
+    "experimentId": "EXP-002",
+    "publishDate": "2026-04-05",
+    "journal": "Quarterly Review of Quantum Astrophysics",
+    "abstract": "We report the first 4.7σ detection of graviton emission spikes correlated with dark energy density gradients at nebula boundary regions, observed using quantum sensor array QS-Alpha-7.",
+    "citationCount": 7,
+    "status": "published"
+  },
+  {
+    "id": "PUB-003",
+    "title": "Long-Range Quantum Entanglement Stability Under MHD Shielding",
+    "authors": ["Dr. Sofia Alvarez"],
+    "experimentId": "EXP-004",
+    "publishDate": null,
+    "journal": "Frontiers in Deep Space Communications",
+    "abstract": "We present evidence that magnetohydrodynamic shielding enables quantum-entangled particle pairs to maintain 92.3% fidelity over distances approaching 500 AU, establishing a new practical limit for quantum relay networks.",
+    "citationCount": 0,
+    "status": "submitted"
+  },
+  {
+    "id": "PUB-004",
+    "title": "Microgravity Crystal Growth: Defect Reduction in Semiconductor Lattices",
+    "authors": ["Dr. Yuki Tanaka"],
+    "experimentId": "EXP-001",
+    "publishDate": null,
+    "journal": "Journal of Zero-Gravity Materials Engineering",
+    "abstract": "Preliminary findings indicate a 32% reduction in crystal lattice defects when growth occurs in microgravity environments, with implications for next-generation semiconductor fabrication.",
+    "citationCount": 0,
+    "status": "draft"
+  },
+  {
+    "id": "PUB-005",
+    "title": "Artificial Gravity and Skeletal Health: An 8-Month Longitudinal Study",
+    "authors": ["Dr. Elena Vasquez", "Dr. Marcus Chen"],
+    "experimentId": "EXP-006",
+    "publishDate": null,
+    "journal": "Space Medicine & Life Sciences",
+    "abstract": "Longitudinal monitoring of 32 crew members living under 0.8g artificial gravity shows bone density and muscle mass within 4% of Earth baseline values after 8 months of continuous exposure.",
+    "citationCount": 0,
+    "status": "draft"
+  }
+]

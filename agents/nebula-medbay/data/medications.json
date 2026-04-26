@@ -1,0 +1,134 @@
+[
+  {
+    "id": "MED-RX-001",
+    "name": "NanoHeal-X7",
+    "category": "surgical",
+    "quantity": 45,
+    "unit": "dermal patches",
+    "minimumStock": 20,
+    "expiryDate": "2188-06-15",
+    "storageRequirements": "Room temperature, sealed container",
+    "manufacturer": "Proxima BioSynth Corp"
+  },
+  {
+    "id": "MED-RX-002",
+    "name": "RadiShield Compound",
+    "category": "radiation",
+    "quantity": 30,
+    "unit": "vials",
+    "minimumStock": 15,
+    "expiryDate": "2188-09-01",
+    "storageRequirements": "Refrigerated (2-8°C)",
+    "manufacturer": "Stellar Pharmaceuticals"
+  },
+  {
+    "id": "MED-RX-003",
+    "name": "CryoStim Injection",
+    "category": "surgical",
+    "quantity": 18,
+    "unit": "auto-injectors",
+    "minimumStock": 10,
+    "expiryDate": "2188-03-20",
+    "storageRequirements": "Cryogenic storage (-80°C)",
+    "manufacturer": "Titan Medical Systems"
+  },
+  {
+    "id": "MED-RX-004",
+    "name": "NeuroCalm-3",
+    "category": "psychological",
+    "quantity": 60,
+    "unit": "capsules",
+    "minimumStock": 30,
+    "expiryDate": "2189-01-10",
+    "storageRequirements": "Room temperature, light-protected",
+    "manufacturer": "Andromeda NeuroLabs"
+  },
+  {
+    "id": "MED-RX-005",
+    "name": "XenoShield-9",
+    "category": "antibiotic",
+    "quantity": 25,
+    "unit": "vials",
+    "minimumStock": 12,
+    "expiryDate": "2188-07-30",
+    "storageRequirements": "Refrigerated (2-8°C)",
+    "manufacturer": "Proxima BioSynth Corp"
+  },
+  {
+    "id": "MED-RX-006",
+    "name": "PulmoClean Mist",
+    "category": "antibiotic",
+    "quantity": 8,
+    "unit": "nebulizer cartridges",
+    "minimumStock": 10,
+    "expiryDate": "2188-05-22",
+    "storageRequirements": "Room temperature",
+    "manufacturer": "Stellar Pharmaceuticals"
+  },
+  {
+    "id": "MED-RX-007",
+    "name": "OsteoForge-IV",
+    "category": "nutritional",
+    "quantity": 40,
+    "unit": "tablets",
+    "minimumStock": 20,
+    "expiryDate": "2189-02-28",
+    "storageRequirements": "Room temperature, dry storage",
+    "manufacturer": "Zenith Nutrition Labs"
+  },
+  {
+    "id": "MED-RX-008",
+    "name": "HemoSync Plasma",
+    "category": "surgical",
+    "quantity": 12,
+    "unit": "units",
+    "minimumStock": 8,
+    "expiryDate": "2187-12-15",
+    "storageRequirements": "Cryogenic storage (-30°C)",
+    "manufacturer": "Titan Medical Systems"
+  },
+  {
+    "id": "MED-RX-009",
+    "name": "TranqWave Dermal",
+    "category": "analgesic",
+    "quantity": 35,
+    "unit": "patches",
+    "minimumStock": 15,
+    "expiryDate": "2188-11-01",
+    "storageRequirements": "Room temperature, sealed",
+    "manufacturer": "Andromeda NeuroLabs"
+  },
+  {
+    "id": "MED-RX-010",
+    "name": "BioFlora-Z",
+    "category": "nutritional",
+    "quantity": 50,
+    "unit": "capsules",
+    "minimumStock": 25,
+    "expiryDate": "2189-04-15",
+    "storageRequirements": "Refrigerated (2-8°C)",
+    "manufacturer": "Zenith Nutrition Labs"
+  },
+  {
+    "id": "MED-RX-011",
+    "name": "VoidBane Antitoxin",
+    "category": "radiation",
+    "quantity": 5,
+    "unit": "vials",
+    "minimumStock": 8,
+    "expiryDate": "2188-08-10",
+    "storageRequirements": "Refrigerated (2-8°C), light-protected",
+    "manufacturer": "Stellar Pharmaceuticals"
+  },
+  {
+    "id": "MED-RX-012",
+    "name": "SynaptiClear-5",
+    "category": "psychological",
+    "quantity": 22,
+    "unit": "sublingual strips",
+    "minimumStock": 10,
+    "expiryDate": "2188-10-20",
+    "storageRequirements": "Room temperature, humidity-controlled",
+    "manufacturer": "Andromeda NeuroLabs"
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "CAND-001",
+    "name": "Dr. Amara Osei",
+    "appliedPosition": "Senior Xenobiologist",
+    "department": "Science",
+    "experience": 8,
+    "skills": ["xenobiology", "genetic sequencing", "biosafety protocols", "field research"],
+    "educationLevel": "PhD Xenobiology — Proxima Centauri Institute",
+    "psyEvalScore": 88,
+    "physicalFitnessScore": 72,
+    "status": "screening",
+    "applicationDate": "2387-03-01"
+  },
+  {
+    "id": "CAND-002",
+    "name": "Marcus Chen",
+    "appliedPosition": "Reactor Technician",
+    "department": "Engineering",
+    "experience": 3,
+    "skills": ["fusion reactor ops", "plasma containment", "EVA-certified", "emergency protocols"],
+    "educationLevel": "BSc Nuclear Engineering — Titan Academy",
+    "psyEvalScore": 65,
+    "physicalFitnessScore": 85,
+    "status": "pending",
+    "applicationDate": "2387-03-10"
+  },
+  {
+    "id": "CAND-003",
+    "name": "Freya Holm",
+    "appliedPosition": "Navigation Officer",
+    "department": "Command",
+    "experience": 6,
+    "skills": ["stellar cartography", "FTL navigation", "crisis management", "fleet coordination"],
+    "educationLevel": "MSc Astrogation — Earth Naval Academy",
+    "psyEvalScore": 92,
+    "physicalFitnessScore": 78,
+    "status": "screening",
+    "applicationDate": "2387-02-18"
+  },
+  {
+    "id": "CAND-004",
+    "name": "Renn Dax",
+    "appliedPosition": "Security Operative",
+    "department": "Security",
+    "experience": 10,
+    "skills": ["combat tactics", "threat analysis", "boarding defense", "weapons systems"],
+    "educationLevel": "Military Academy Graduate — Mars Defense Corps",
+    "psyEvalScore": 58,
+    "physicalFitnessScore": 95,
+    "status": "pending",
+    "applicationDate": "2387-03-15"
+  },
+  {
+    "id": "CAND-005",
+    "name": "Elara Quinn",
+    "appliedPosition": "Medical Research Assistant",
+    "department": "Medical",
+    "experience": 2,
+    "skills": ["pharmacology", "lab analysis", "patient care", "data modeling"],
+    "educationLevel": "MSc Pharmacology — Ganymede University",
+    "psyEvalScore": 81,
+    "physicalFitnessScore": 55,
+    "status": "pending",
+    "applicationDate": "2387-03-20"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "CHK-001",
+    "crewMemberId": "CREW-001",
+    "crewMemberName": "Cmdr. Sarah Chen",
+    "type": "quarterly-physical",
+    "scheduledDate": "2187-06-15",
+    "physician": "Dr. Elena Vasquez",
+    "notes": "Standard quarterly physical — command staff priority",
+    "status": "scheduled"
+  },
+  {
+    "id": "CHK-002",
+    "crewMemberId": "CREW-004",
+    "crewMemberName": "Ens. Yuki Sato",
+    "type": "psychological-followup",
+    "scheduledDate": "2187-04-22",
+    "physician": "Dr. Elena Vasquez",
+    "notes": "Follow-up for adjustment disorder — weekly check-in #2",
+    "status": "scheduled"
+  },
+  {
+    "id": "CHK-003",
+    "crewMemberId": "CREW-005",
+    "crewMemberName": "Chief Raj Patel",
+    "type": "radiation-screening",
+    "scheduledDate": "2187-04-25",
+    "physician": "Dr. Marcus Chen",
+    "notes": "Post-exposure radiation monitoring — mandatory 30-day follow-up",
+    "status": "scheduled"
+  },
+  {
+    "id": "CHK-004",
+    "crewMemberId": "CREW-007",
+    "crewMemberName": "Spc. Lina Johansson",
+    "type": "post-treatment-review",
+    "scheduledDate": "2187-04-15",
+    "physician": "Dr. Marcus Chen",
+    "notes": "Follow-up after decompression syndrome treatment — hyperbaric assessment",
+    "status": "completed"
+  },
+  {
+    "id": "CHK-005",
+    "crewMemberId": "CREW-006",
+    "crewMemberName": "Lt. Cmdr. Aleksei Volkov",
+    "type": "fitness-evaluation",
+    "scheduledDate": "2187-04-10",
+    "physician": "Dr. Elena Vasquez",
+    "notes": "Cardiovascular endurance re-evaluation after exercise program",
+    "status": "rescheduled"
+  },
+  {
+    "id": "CHK-006",
+    "crewMemberId": "CREW-002",
+    "crewMemberName": "Lt. Kenji Tanaka",
+    "type": "quarterly-physical",
+    "scheduledDate": "2187-06-18",
+    "physician": "Dr. Marcus Chen",
+    "notes": "Standard quarterly physical examination",
+    "status": "scheduled"
+  }
+]

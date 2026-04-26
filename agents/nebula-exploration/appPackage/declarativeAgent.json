@@ -1,0 +1,30 @@
+{
+    "version": "v1.6",
+    "name": "Nebula Forge Exploration Navigator",
+    "description": "Nebula Forge Exploration Navigator — mission planning, route optimization, celestial body database, and mission tracking for space station operations.",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Show All Active Missions",
+            "text": "Show me all currently active exploration missions and their status."
+        },
+        {
+            "title": "Plan a Survey Mission",
+            "text": "I need to plan a survey mission to Asteroid Theta-7. Help me set up the mission details, crew, and objectives."
+        },
+        {
+            "title": "Calculate Route to Europa",
+            "text": "Calculate the best route from Nebula Forge Station to Europa. Include fuel requirements, estimated duration, and risk assessment."
+        },
+        {
+            "title": "Celestial Bodies Near Sector 7",
+            "text": "What celestial bodies do we have on record near Nebula Frontier Sector 7? Include danger levels and known resources."
+        }
+    ],
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+[
+  {
+    "id": "EXP-001",
+    "title": "Zero-G Crystal Growth Dynamics",
+    "leadResearcher": "Dr. Yuki Tanaka",
+    "department": "Materials Science",
+    "status": "in-progress",
+    "startDate": "2026-01-15",
+    "hypothesis": "Crystal lattice structures grown in microgravity will exhibit 40% fewer defects than Earth-grown counterparts, enabling superior semiconductor applications.",
+    "findings": "Preliminary results show 32% reduction in lattice defects. Further trials underway."
+  },
+  {
+    "id": "EXP-002",
+    "title": "Dark Energy Field Interaction Study",
+    "leadResearcher": "Prof. Amara Osei",
+    "department": "Astrophysics",
+    "status": "in-progress",
+    "startDate": "2025-11-03",
+    "hypothesis": "Localized dark energy fluctuations near nebula boundaries correlate with measurable graviton emissions detectable by quantum sensors.",
+    "findings": "Detected anomalous graviton signatures at 3 of 7 survey points. Statistical significance pending."
+  },
+  {
+    "id": "EXP-003",
+    "title": "Extremophile Adaptation in Vacuum Conditions",
+    "leadResearcher": "Dr. Marcus Chen",
+    "department": "Astrobiology",
+    "status": "completed",
+    "startDate": "2025-06-20",
+    "endDate": "2026-02-28",
+    "hypothesis": "Tardigrade-derived organisms can sustain metabolic activity in hard vacuum for periods exceeding 72 hours when pre-treated with cryoprotectants.",
+    "findings": "Confirmed: modified tardigrade cultures survived 96 hours in vacuum with 78% viability. Published in Interstellar Journal of Astrobiology."
+  },
+  {
+    "id": "EXP-004",
+    "title": "Quantum Entanglement Relay Stability",
+    "leadResearcher": "Dr. Sofia Alvarez",
+    "department": "Quantum Physics",
+    "status": "peer-review",
+    "startDate": "2025-09-12",
+    "endDate": "2026-03-15",
+    "hypothesis": "Quantum-entangled particle pairs can maintain coherence over distances exceeding 500 AU when shielded by magnetohydrodynamic fields.",
+    "findings": "Coherence maintained at 487 AU. Degradation curve suggests 520 AU theoretical maximum. MHD shielding proved essential above 200 AU."
+  },
+  {
+    "id": "EXP-005",
+    "title": "Nebular Gas Composition Mapping",
+    "leadResearcher": "Lt. Kenji Tanaka",
+    "department": "Astrophysics",
+    "status": "in-progress",
+    "startDate": "2026-02-01",
+    "hypothesis": "The Forge Nebula contains trace concentrations of stable transuranic elements formed during the preceding supernova event.",
+    "findings": null
+  },
+  {
+    "id": "EXP-006",
+    "title": "Artificial Gravity Long-Term Health Effects",
+    "leadResearcher": "Dr. Elena Vasquez",
+    "department": "Medical Research",
+    "status": "in-progress",
+    "startDate": "2025-08-01",
+    "hypothesis": "Crew members exposed to 0.8g artificial gravity for 6+ months show statistically equivalent bone density to 1g Earth controls.",
+    "findings": "At month 8, bone density averages 96.2% of Earth baseline. Muscle mass within 3% variance."
+  },
+  {
+    "id": "EXP-007",
+    "title": "Solar Wind Plasma Harvesting Efficiency",
+    "leadResearcher": "Chief Engineer Rex Holden",
+    "department": "Energy Research",
+    "status": "proposed",
+    "startDate": "2026-05-01",
+    "hypothesis": "Magnetic funnel arrays can capture and compress solar wind plasma to generate 15% of station auxiliary power requirements.",
+    "findings": null
+  },
+  {
+    "id": "EXP-008",
+    "title": "Micro-Organism Biofilm Formation in Space Alloys",
+    "leadResearcher": "Dr. Priya Sharma",
+    "department": "Astrobiology",
+    "status": "approved",
+    "startDate": "2026-04-15",
+    "hypothesis": "Biofilm formation on titanium-vanadium station hull alloys proceeds 2.3x faster in space radiation environments than in shielded laboratories.",
+    "findings": null
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "RELAY-001",
+    "name": "Relay Alpha-7",
+    "location": "Lagrange Point L4 — Nebula Forge Sector",
+    "type": "subspace",
+    "status": "online",
+    "signalStrength": 98,
+    "range": 450,
+    "lastPing": "2287-03-15T14:58:00Z"
+  },
+  {
+    "id": "RELAY-002",
+    "name": "Deep Space Beacon Omega",
+    "location": "Outer Rim — Sector 9K",
+    "type": "quantum",
+    "status": "online",
+    "signalStrength": 87,
+    "range": 1200,
+    "lastPing": "2287-03-15T14:55:00Z"
+  },
+  {
+    "id": "RELAY-003",
+    "name": "Waypoint Echo-3",
+    "location": "Asteroid Belt Corridor — Nav Point Charlie",
+    "type": "laser",
+    "status": "degraded",
+    "signalStrength": 42,
+    "range": 80,
+    "lastPing": "2287-03-15T14:30:00Z"
+  },
+  {
+    "id": "RELAY-004",
+    "name": "Sol Gateway Relay",
+    "location": "Earth Orbit — L2 Station",
+    "type": "subspace",
+    "status": "online",
+    "signalStrength": 95,
+    "range": 500,
+    "lastPing": "2287-03-15T14:57:00Z"
+  },
+  {
+    "id": "RELAY-005",
+    "name": "Frontier Station Kappa",
+    "location": "Unexplored Frontier — Sector 12F",
+    "type": "radio",
+    "status": "offline",
+    "signalStrength": 0,
+    "range": 15,
+    "lastPing": "2287-03-12T06:22:00Z"
+  },
+  {
+    "id": "RELAY-006",
+    "name": "Quantum Hub Zenith",
+    "location": "Central Corridor — Junction Nexus",
+    "type": "quantum",
+    "status": "maintenance",
+    "signalStrength": 0,
+    "range": 1500,
+    "lastPing": "2287-03-14T20:00:00Z"
+  }
+]

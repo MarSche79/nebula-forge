@@ -1,0 +1,10 @@
+mcs.metadata:
+  componentName: Nebula Forge Quartermaster
+kind: GptComponentMetadata
+instructions:
+gptCapabilities:
+  webBrowsing: true
+
+aISettings:
+  model:
+    modelNameHint: Sonnet46

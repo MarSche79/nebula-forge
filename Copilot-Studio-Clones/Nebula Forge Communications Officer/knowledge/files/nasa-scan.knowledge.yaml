@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: NASA SCaN Program
+description: NASA Space Communications and Navigation Program
+siteUrl: https://www.nasa.gov/communicating-with-missions/
+maxResultCount: 5

@@ -1,0 +1,74 @@
+[
+  {
+    "sectorId": "SEC-CMD",
+    "sectorName": "Command Bridge",
+    "currentLevel": 0.12,
+    "unit": "mSv/h",
+    "safeThreshold": 0.5,
+    "status": "normal",
+    "lastUpdated": "2187-11-25T14:30:00Z"
+  },
+  {
+    "sectorId": "SEC-ENG",
+    "sectorName": "Engineering Deck",
+    "currentLevel": 0.38,
+    "unit": "mSv/h",
+    "safeThreshold": 0.5,
+    "status": "elevated",
+    "lastUpdated": "2187-11-25T14:30:00Z"
+  },
+  {
+    "sectorId": "SEC-HYDRO",
+    "sectorName": "Hydroponics Bay",
+    "currentLevel": 0.08,
+    "unit": "mSv/h",
+    "safeThreshold": 0.5,
+    "status": "normal",
+    "lastUpdated": "2187-11-25T14:30:00Z"
+  },
+  {
+    "sectorId": "SEC-HULL-P",
+    "sectorName": "External Hull - Port Side",
+    "currentLevel": 1.74,
+    "unit": "mSv/h",
+    "safeThreshold": 2.0,
+    "status": "warning",
+    "lastUpdated": "2187-11-25T14:30:00Z"
+  },
+  {
+    "sectorId": "SEC-REACTOR",
+    "sectorName": "Reactor Core",
+    "currentLevel": 4.21,
+    "unit": "mSv/h",
+    "safeThreshold": 5.0,
+    "status": "warning",
+    "lastUpdated": "2187-11-25T14:30:00Z"
+  },
+  {
+    "sectorId": "SEC-CQ-A",
+    "sectorName": "Crew Quarters Alpha",
+    "currentLevel": 0.05,
+    "unit": "mSv/h",
+    "safeThreshold": 0.5,
+    "status": "normal",
+    "lastUpdated": "2187-11-25T14:30:00Z"
+  },
+  {
+    "sectorId": "SEC-SCILAB",
+    "sectorName": "Science Lab",
+    "currentLevel": 0.29,
+    "unit": "mSv/h",
+    "safeThreshold": 0.5,
+    "status": "normal",
+    "lastUpdated": "2187-11-25T14:30:00Z"
+  },
+  {
+    "sectorId": "SEC-CARGO",
+    "sectorName": "Cargo Bay",
+    "currentLevel": 0.15,
+    "unit": "mSv/h",
+    "safeThreshold": 0.5,
+    "status": "normal",
+    "lastUpdated": "2187-11-25T14:30:00Z"
+  }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "id": "INV-001",
+    "name": "Ration Pack Alpha",
+    "category": "food",
+    "quantity": 1200,
+    "unit": "units",
+    "minimumStock": 500,
+    "storageLocation": "Bay Alpha-1",
+    "lastRestocked": "2187-03-01",
+    "expiryDate": "2187-09-01"
+  },
+  {
+    "id": "INV-002",
+    "name": "Purified Water Reserves",
+    "category": "food",
+    "quantity": 8000,
+    "unit": "liters",
+    "minimumStock": 5000,
+    "storageLocation": "Bay Alpha-1",
+    "lastRestocked": "2187-02-28",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-003",
+    "name": "Med-Kit Type III",
+    "category": "medical",
+    "quantity": 45,
+    "unit": "kits",
+    "minimumStock": 60,
+    "storageLocation": "Bay Bravo-2",
+    "lastRestocked": "2187-02-15",
+    "expiryDate": "2188-02-15"
+  },
+  {
+    "id": "INV-004",
+    "name": "Surgical Instruments",
+    "category": "medical",
+    "quantity": 12,
+    "unit": "kits",
+    "minimumStock": 10,
+    "storageLocation": "Bay Bravo-2",
+    "lastRestocked": "2187-01-20",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-005",
+    "name": "Cryo-Bandage Packs",
+    "category": "medical",
+    "quantity": 30,
+    "unit": "packs",
+    "minimumStock": 50,
+    "storageLocation": "Bay Bravo-2",
+    "lastRestocked": "2187-02-10",
+    "expiryDate": "2187-08-10"
+  },
+  {
+    "id": "INV-006",
+    "name": "Titanium Alloy Sheets",
+    "category": "engineering",
+    "quantity": 150,
+    "unit": "panels",
+    "minimumStock": 100,
+    "storageLocation": "Bay Charlie-3",
+    "lastRestocked": "2187-03-05",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-007",
+    "name": "Welding Compound X7",
+    "category": "engineering",
+    "quantity": 20,
+    "unit": "barrels",
+    "minimumStock": 25,
+    "storageLocation": "Bay Charlie-3",
+    "lastRestocked": "2187-02-20",
+    "expiryDate": "2187-12-20"
+  },
+  {
+    "id": "INV-008",
+    "name": "Plasma Conduit Spares",
+    "category": "engineering",
+    "quantity": 8,
+    "unit": "units",
+    "minimumStock": 15,
+    "storageLocation": "Bay Charlie-3",
+    "lastRestocked": "2187-01-30",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-009",
+    "name": "Spectrometer Modules",
+    "category": "scientific",
+    "quantity": 5,
+    "unit": "units",
+    "minimumStock": 3,
+    "storageLocation": "Bay Delta-4",
+    "lastRestocked": "2187-03-14",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-010",
+    "name": "Chemical Reagent Sets",
+    "category": "scientific",
+    "quantity": 22,
+    "unit": "kits",
+    "minimumStock": 20,
+    "storageLocation": "Bay Delta-4",
+    "lastRestocked": "2187-03-14",
+    "expiryDate": "2187-06-14"
+  },
+  {
+    "id": "INV-011",
+    "name": "Kinetic Rounds M40",
+    "category": "ammunition",
+    "quantity": 5000,
+    "unit": "rounds",
+    "minimumStock": 3000,
+    "storageLocation": "Bay Echo-5",
+    "lastRestocked": "2187-03-08",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-012",
+    "name": "Point Defense Cells",
+    "category": "ammunition",
+    "quantity": 18,
+    "unit": "units",
+    "minimumStock": 20,
+    "storageLocation": "Bay Echo-5",
+    "lastRestocked": "2187-02-25",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-013",
+    "name": "Deuterium Fuel Rods",
+    "category": "fuel",
+    "quantity": 40,
+    "unit": "rods",
+    "minimumStock": 50,
+    "storageLocation": "Bay Foxtrot-6",
+    "lastRestocked": "2187-02-18",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-014",
+    "name": "Reactor Coolant ZR-9",
+    "category": "fuel",
+    "quantity": 600,
+    "unit": "liters",
+    "minimumStock": 400,
+    "storageLocation": "Bay Foxtrot-6",
+    "lastRestocked": "2187-03-02",
+    "expiryDate": "2188-03-02"
+  },
+  {
+    "id": "INV-015",
+    "name": "EVA Suit Repair Kits",
+    "category": "general",
+    "quantity": 10,
+    "unit": "kits",
+    "minimumStock": 8,
+    "storageLocation": "Bay Golf-7",
+    "lastRestocked": "2187-02-12",
+    "expiryDate": null
+  },
+  {
+    "id": "INV-016",
+    "name": "Air Filtration Cartridges",
+    "category": "general",
+    "quantity": 75,
+    "unit": "cartridges",
+    "minimumStock": 100,
+    "storageLocation": "Bay Golf-7",
+    "lastRestocked": "2187-02-05",
+    "expiryDate": "2187-08-05"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.4/schema.json",
+  "version": "v1.4",
+  "name": "Nebula Forge HR Assistant",
+  "description": "HR & Personnel management for Nebula Forge space station",
+  "instructions": "You are the HR Assistant for Nebula Forge space station. You help with crew screening, onboarding new personnel, managing the crew roster, and processing leave requests. Always verify candidate qualifications against station requirements. Be thorough but concise in your responses.",
+  "conversation_starters": [
+    { "text": "Show me the current crew roster" },
+    { "text": "Screen candidate CAND-001 for the open position" },
+    { "text": "Process the pending leave requests" },
+    { "text": "Onboard candidate CAND-003 to the station" }
+  ],
+  "capabilities": [
+    { "name": "actions", "actions_file": "ai-plugin.json" }
+  ]
+}

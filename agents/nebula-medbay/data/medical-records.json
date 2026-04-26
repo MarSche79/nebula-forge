@@ -1,0 +1,122 @@
+[
+  {
+    "id": "MED-001",
+    "crewMemberId": "CREW-001",
+    "crewMemberName": "Cmdr. Sarah Chen",
+    "type": "checkup",
+    "date": "2187-03-15",
+    "physician": "Dr. Elena Vasquez",
+    "diagnosis": "Fit for duty — all vitals within normal parameters",
+    "treatment": "None required",
+    "status": "completed",
+    "notes": "Quarterly fitness evaluation passed. Bone density stable despite extended zero-g exposure."
+  },
+  {
+    "id": "MED-002",
+    "crewMemberId": "CREW-002",
+    "crewMemberName": "Lt. Kenji Tanaka",
+    "type": "treatment",
+    "date": "2187-03-18",
+    "physician": "Dr. Marcus Chen",
+    "diagnosis": "Minor plasma burn on left forearm",
+    "treatment": "Applied NanoHeal-X7 dermal patch, regenerative therapy session",
+    "status": "completed",
+    "notes": "Injury sustained during reactor maintenance. Full recovery expected within 48 hours."
+  },
+  {
+    "id": "MED-003",
+    "crewMemberId": "CREW-003",
+    "crewMemberName": "Dr. Amara Osei",
+    "type": "vaccination",
+    "date": "2187-03-20",
+    "physician": "Dr. Elena Vasquez",
+    "diagnosis": "Pre-mission immunization protocol",
+    "treatment": "Administered XenoShield-9 broad-spectrum vaccine and RadiShield booster",
+    "status": "completed",
+    "notes": "Standard pre-EVA immunization course. No adverse reactions observed."
+  },
+  {
+    "id": "MED-004",
+    "crewMemberId": "CREW-004",
+    "crewMemberName": "Ens. Yuki Sato",
+    "type": "psychological",
+    "date": "2187-03-22",
+    "physician": "Dr. Elena Vasquez",
+    "diagnosis": "Mild adjustment disorder — homesickness and sleep disruption",
+    "treatment": "Cognitive behavioral therapy sessions scheduled, NeuroCalm-3 prescribed for sleep",
+    "status": "follow-up-required",
+    "notes": "First deep-space deployment. Recommend weekly check-ins for the next month."
+  },
+  {
+    "id": "MED-005",
+    "crewMemberId": "CREW-005",
+    "crewMemberName": "Chief Raj Patel",
+    "type": "treatment",
+    "date": "2187-03-25",
+    "physician": "Dr. Marcus Chen",
+    "diagnosis": "Elevated radiation exposure — Sector 7 incident",
+    "treatment": "RadiShield Compound infusion, 24-hour monitoring in medbay",
+    "status": "follow-up-required",
+    "notes": "Radiation levels 15% above annual threshold. Restricted from high-rad zones for 30 days."
+  },
+  {
+    "id": "MED-006",
+    "crewMemberId": "CREW-006",
+    "crewMemberName": "Lt. Cmdr. Aleksei Volkov",
+    "type": "checkup",
+    "date": "2187-03-28",
+    "physician": "Dr. Elena Vasquez",
+    "diagnosis": "Fit for duty — slight decrease in cardiovascular endurance",
+    "treatment": "Recommended increased physical training regimen",
+    "status": "completed",
+    "notes": "Cardio metrics 8% below baseline. Prescribed supplemental exercise program."
+  },
+  {
+    "id": "MED-007",
+    "crewMemberId": "CREW-007",
+    "crewMemberName": "Spc. Lina Johansson",
+    "type": "emergency",
+    "date": "2187-04-01",
+    "physician": "Dr. Marcus Chen",
+    "diagnosis": "Acute decompression syndrome — EVA suit micro-breach",
+    "treatment": "Hyperbaric chamber treatment, CryoStim injection, 48-hour observation",
+    "status": "follow-up-required",
+    "notes": "Patient stabilized after emergency treatment. Suit breach traced to micro-meteorite impact."
+  },
+  {
+    "id": "MED-008",
+    "crewMemberId": "CREW-008",
+    "crewMemberName": "Dr. Fatima Al-Rashid",
+    "type": "checkup",
+    "date": "2187-04-02",
+    "physician": "Dr. Elena Vasquez",
+    "diagnosis": "Fit for duty — all metrics nominal",
+    "treatment": "None required",
+    "status": "completed",
+    "notes": "Routine quarterly checkup. Excellent adaptation to station gravity."
+  },
+  {
+    "id": "MED-009",
+    "crewMemberId": "CREW-002",
+    "crewMemberName": "Lt. Kenji Tanaka",
+    "type": "psychological",
+    "date": "2187-04-05",
+    "physician": "Dr. Elena Vasquez",
+    "diagnosis": "Routine psychological wellness assessment — passed",
+    "treatment": "None required",
+    "status": "completed",
+    "notes": "No concerns. Crew member reports high morale and team cohesion."
+  },
+  {
+    "id": "MED-010",
+    "crewMemberId": "CREW-003",
+    "crewMemberName": "Dr. Amara Osei",
+    "type": "treatment",
+    "date": "2187-04-08",
+    "physician": "Dr. Marcus Chen",
+    "diagnosis": "Lab chemical exposure — mild respiratory irritation",
+    "treatment": "PulmoClean nebulizer treatment, 12-hour rest period",
+    "status": "completed",
+    "notes": "Exposure occurred during xenobiology specimen analysis. Safety protocol review recommended."
+  }
+]

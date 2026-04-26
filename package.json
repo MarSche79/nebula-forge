@@ -1,0 +1,53 @@
+{
+  "name": "nebula-forge-agents",
+  "version": "1.0.0",
+  "description": "Nebula Forge — AI Agent Suite for Space Station Operations",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "agents/*"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "start:azurite": "azurite-table --tableHost 127.0.0.1 --tablePort 10002 --location .azurite --silent",
+    "seed": "npx tsx scripts/seed-all.ts",
+    "start:all": "npx tsx scripts/start-all.ts",
+    "start:hr": "npx tsx agents/nebula-hr/src/main.ts",
+    "start:materials": "npx tsx agents/nebula-materials/src/main.ts",
+    "start:exploration": "npx tsx agents/nebula-exploration/src/main.ts",
+    "start:science": "npx tsx agents/nebula-science/src/main.ts",
+    "start:safety": "npx tsx agents/nebula-safety/src/main.ts",
+    "start:engineering": "npx tsx agents/nebula-engineering/src/main.ts",
+    "start:logistics": "npx tsx agents/nebula-logistics/src/main.ts",
+    "start:comms": "npx tsx agents/nebula-comms/src/main.ts",
+    "start:medbay": "npx tsx agents/nebula-medbay/src/main.ts",
+    "package": "pwsh -ExecutionPolicy Bypass -File scripts/build-packages.ps1",
+    "inspector:hr": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3001/mcp",
+    "inspector:materials": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3002/mcp",
+    "inspector:exploration": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3003/mcp",
+    "inspector:science": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3004/mcp",
+    "inspector:safety": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3005/mcp",
+    "inspector:engineering": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3006/mcp",
+    "inspector:logistics": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3007/mcp",
+    "inspector:comms": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3008/mcp",
+    "inspector:medbay": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3009/mcp"
+  },
+  "dependencies": {
+    "@azure/data-tables": "^13.3.0",
+    "@azure/identity": "^4.13.1",
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "express": "^4.21.0",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.0",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/inspector": "^0.14.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.0",
+    "@types/uuid": "^10.0.0",
+    "azurite": "^3.34.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

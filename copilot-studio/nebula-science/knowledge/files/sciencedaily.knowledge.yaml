@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: ScienceDaily Space News
+description: ScienceDaily — latest space and astronomy research news
+siteUrl: https://www.sciencedaily.com/news/space_time/
+maxResultCount: 5

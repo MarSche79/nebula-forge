@@ -1,0 +1,113 @@
+{
+  "$schema": "https://aka.ms/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Nebula Forge HR Assistant",
+  "description_for_human": "HR & Personnel management for Nebula Forge station — crew screening, onboarding, roster management, and leave processing.",
+  "description_for_model": "This plugin manages all HR and personnel operations aboard Nebula Forge station. It can list the crew roster with optional filters, retrieve detailed crew profiles, screen candidates against station qualification thresholds, process leave requests (approve or deny), and onboard new crew members from the candidate pipeline. Use it when users ask about crew members, candidates, leave requests, or personnel management.",
+  "contact_email": "hr@nebulaforge.station",
+  "namespace": "nebula-hr",
+  "logo_url": "",
+  "legal_info_url": "",
+  "privacy_url": "",
+  "runtimes": [
+    {
+      "type": "MCP",
+      "spec": {
+        "url": "http://localhost:3001/mcp"
+      },
+      "run_for_functions": [
+        "get_crew_roster",
+        "get_crew_profile",
+        "screen_candidate",
+        "process_leave_request",
+        "onboard_crew_member"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_crew_roster",
+      "description": "List all crew members on the station roster. Optionally filter by department or status.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "department": {
+            "type": "string",
+            "enum": ["Command", "Engineering", "Science", "Medical", "Security", "Operations"],
+            "description": "Filter crew by department"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "on-leave", "medical", "off-station"],
+            "description": "Filter crew by current status"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_crew_profile",
+      "description": "Get the detailed profile of a specific crew member by their ID.",
+      "parameters": {
+        "type": "object",
+        "required": ["crewId"],
+        "properties": {
+          "crewId": {
+            "type": "string",
+            "description": "Crew member ID (e.g. CREW-001)"
+          }
+        }
+      }
+    },
+    {
+      "name": "screen_candidate",
+      "description": "Screen a candidate applying for a position. Returns candidate data with an AI-friendly assessment summary evaluating qualifications against station requirements.",
+      "parameters": {
+        "type": "object",
+        "required": ["candidateId"],
+        "properties": {
+          "candidateId": {
+            "type": "string",
+            "description": "Candidate ID (e.g. CAND-001)"
+          }
+        }
+      }
+    },
+    {
+      "name": "process_leave_request",
+      "description": "Approve or deny a pending leave request. Updates the leave request status in the system.",
+      "parameters": {
+        "type": "object",
+        "required": ["requestId", "decision"],
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "description": "Leave request ID (e.g. LR-001)"
+          },
+          "decision": {
+            "type": "string",
+            "enum": ["approved", "denied"],
+            "description": "Decision on the leave request"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Optional reason for the decision"
+          }
+        }
+      }
+    },
+    {
+      "name": "onboard_crew_member",
+      "description": "Initiate onboarding for an approved candidate. Changes candidate status to approved and creates a new crew member entry on the roster.",
+      "parameters": {
+        "type": "object",
+        "required": ["candidateId"],
+        "properties": {
+          "candidateId": {
+            "type": "string",
+            "description": "Candidate ID to onboard (e.g. CAND-001)"
+          }
+        }
+      }
+    }
+  ]
+}

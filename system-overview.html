@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nebula Forge — System Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ─── Design tokens (mirror of azure/portal/src/app/globals.css) ─── */
+  :root {
+    --bg-deep: #eef4fa;
+    --bg-mid:  #dfe9f2;
+    --bg-card: rgba(255, 255, 255, 0.82);
+    --bg-glass: rgba(0, 0, 0, 0.03);
+    --bg-glass-hover: rgba(0, 0, 0, 0.06);
+    --primary: #0e8ab5;
+    --primary-dark: #0a6f94;
+    --primary-glow: rgba(14, 138, 181, 0.10);
+    --primary-border: rgba(14, 138, 181, 0.25);
+    --accent: #6246d6;
+    --accent-glow: rgba(98, 70, 214, 0.10);
+    --success: #0ba677;
+    --warning: #d08a08;
+    --danger:  #dc3545;
+    --text:       #1a2a3a;
+    --text-muted: #4a6a82;
+    --text-dim:   #7a96ad;
+    --border:       rgba(14, 138, 181, 0.15);
+    --border-hover: rgba(14, 138, 181, 0.35);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  html[data-theme='dark'] {
+    --bg-deep:  #060c18;
+    --bg-mid:   #0a1628;
+    --bg-card:  rgba(10, 22, 48, 0.75);
+    --bg-glass: rgba(255, 255, 255, 0.04);
+    --bg-glass-hover: rgba(255, 255, 255, 0.07);
+    --primary: #38c5f5;
+    --primary-dark: #1ea8d8;
+    --primary-glow: rgba(56, 197, 245, 0.15);
+    --primary-border: rgba(56, 197, 245, 0.25);
+    --accent: #7b61ff;
+    --accent-glow: rgba(123, 97, 255, 0.15);
+    --success: #10d9a0;
+    --warning: #f59e0b;
+    --danger:  #ef4444;
+    --text:       #e0f2fe;
+    --text-muted: #7ca9c4;
+    --text-dim:   #4a7a9b;
+    --border:       rgba(56, 197, 245, 0.12);
+    --border-hover: rgba(56, 197, 245, 0.30);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  h1, h2, h3, h4 { color: var(--text); font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+  a { color: var(--primary); text-decoration: none; }
+  code, pre, .mono { font-family: var(--mono); font-size: 0.85em; }
+  ::selection { background: var(--primary-glow); color: var(--primary-dark); }
+
+  /* Background atmosphere */
+  .nebula {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 30%, rgba(14, 138, 181, 0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 70%, rgba(98, 70, 214, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 80% at 50% 100%, rgba(238, 244, 250, 0.7) 0%, transparent 70%);
+  }
+  html[data-theme='dark'] .nebula {
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 30%, rgba(56, 197, 245, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 70%, rgba(123, 97, 255, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 80% at 50% 100%, rgba(6, 12, 24, 0.7) 0%, transparent 70%);
+  }
+  .starfield {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.18;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, var(--text-muted), transparent 60%),
+      radial-gradient(1px 1px at 70% 60%, var(--text-muted), transparent 60%),
+      radial-gradient(1px 1px at 40% 80%, var(--text-muted), transparent 60%),
+      radial-gradient(1px 1px at 90% 10%, var(--text-muted), transparent 60%),
+      radial-gradient(1px 1px at 10% 70%, var(--text-muted), transparent 60%),
+      radial-gradient(1px 1px at 55% 25%, var(--text-muted), transparent 60%);
+    background-size: 600px 600px;
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  /* Top nav */
+  .nav {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(238, 244, 250, 0.88);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+  }
+  html[data-theme='dark'] .nav { background: rgba(6, 12, 24, 0.85); }
+  .nav-row {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    height: 68px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand { display: inline-flex; align-items: center; gap: 0.7rem; font-weight: 800; letter-spacing: 0.18em; font-size: 0.78rem; color: var(--primary); }
+  .brand-mark {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    box-shadow: 0 6px 18px rgba(14, 138, 181, 0.30);
+  }
+  .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+  .toc {
+    display: flex; gap: 0.4rem; flex-wrap: wrap;
+  }
+  .toc a {
+    font-size: 0.78rem; padding: 0.4rem 0.8rem; border-radius: 999px;
+    background: var(--bg-glass); border: 1px solid var(--border);
+    color: var(--text-muted); transition: var(--transition);
+  }
+  .toc a:hover { color: var(--primary-dark); border-color: var(--primary-border); background: var(--primary-glow); }
+  .theme-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--bg-glass); border: 1px solid var(--border);
+    color: var(--text); cursor: pointer; transition: var(--transition);
+  }
+  .theme-btn:hover { background: var(--bg-glass-hover); }
+
+  /* Layout */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0 32px; }
+  .label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.85rem; border-radius: 999px;
+    background: var(--primary-glow); color: var(--primary-dark);
+    border: 1px solid var(--primary-border);
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em;
+    margin-bottom: 1.2rem;
+  }
+  .label.danger { background: rgba(220,53,69,0.10); color: var(--danger); border-color: rgba(220,53,69,0.30); }
+  .label.warning { background: rgba(208,138,8,0.10); color: var(--warning); border-color: rgba(208,138,8,0.30); }
+  .label.accent { background: var(--accent-glow); color: var(--accent); border-color: rgba(98,70,214,0.30); }
+  h1.title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.04; }
+  h2.section-title { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800; }
+  h3.card-title { font-size: 1.05rem; font-weight: 700; }
+  .text-hl { color: var(--primary); }
+  .text-muted { color: var(--text-muted); }
+  .text-dim { color: var(--text-dim); }
+  .lede {
+    font-size: 1.05rem; color: var(--text-muted); max-width: 780px;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.22rem 0.65rem; border-radius: 999px;
+    font-size: 0.7rem; font-weight: 600; line-height: 1;
+    background: var(--bg-glass); border: 1px solid var(--border); color: var(--text-muted);
+  }
+  .pill.success { background: rgba(11,166,119,0.12); color: var(--success); border-color: rgba(11,166,119,0.30); }
+  .pill.danger  { background: rgba(220,53,69,0.10);  color: var(--danger);  border-color: rgba(220,53,69,0.30); }
+  .pill.warning { background: rgba(208,138,8,0.10);  color: var(--warning); border-color: rgba(208,138,8,0.30); }
+  .pill.accent  { background: var(--accent-glow);    color: var(--accent);  border-color: rgba(98,70,214,0.30); }
+
+  /* Hero */
+  .hero { padding-top: 96px; }
+  .hero-wrap {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: center;
+  }
+  @media (max-width: 900px) { .hero-wrap { grid-template-columns: 1fr; } }
+  .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 580px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stat-v { font-size: clamp(1.5rem, 2.4vw, 2.2rem); font-weight: 800; color: var(--primary); }
+  .stat-l { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); margin-top: 4px; }
+
+  .orb-wrap { position: relative; width: 360px; height: 360px; margin: 0 auto; }
+  .orb-glow { position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(from 90deg, var(--primary), var(--accent), var(--primary));
+    opacity: 0.16; filter: blur(40px);
+  }
+  .orb-ring { position: absolute; inset: 24px; border-radius: 50%;
+    border: 1px dashed var(--primary-border); animation: spin 60s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .orb { position: absolute; inset: 70px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), var(--primary) 60%, var(--primary-dark) 100%);
+    box-shadow: 0 30px 80px rgba(14,138,181,0.45), inset 0 -10px 30px rgba(0,0,0,0.25);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center;
+  }
+  .orb .l { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; opacity: 0.75; }
+  .orb .v { font-size: 2.2rem; font-weight: 800; margin: 6px 0 4px; }
+  .orbit-dot { position: absolute; top: 50%; left: 50%; width: 12px; height: 12px;
+    margin-left: -6px; margin-top: -6px; border-radius: 50%;
+    transform-origin: center;
+  }
+
+  /* Architecture diagram */
+  .arch {
+    display: flex; flex-direction: column; gap: 22px;
+    padding: 28px;
+  }
+  .tier { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+  .tier-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-dim); font-weight: 600; }
+  .tier-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; width: 100%; }
+  .node {
+    background: var(--bg-deep);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    min-width: 160px; max-width: 280px;
+    display: flex; flex-direction: column; gap: 6px; position: relative;
+    transition: var(--transition);
+  }
+  .node:hover { border-color: var(--border-hover); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(14,138,181,0.10); }
+  .node-title { font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; gap: 0.4rem; color: var(--text); }
+  .node-sub { font-size: 0.72rem; color: var(--text-dim); font-family: var(--mono); }
+  .node.primary  { border-color: var(--primary-border); background: linear-gradient(180deg, var(--primary-glow), var(--bg-deep)); }
+  .node.accent   { border-color: rgba(98,70,214,0.30); background: linear-gradient(180deg, var(--accent-glow), var(--bg-deep)); }
+  .node.success  { border-color: rgba(11,166,119,0.30); background: linear-gradient(180deg, rgba(11,166,119,0.06), var(--bg-deep)); }
+  .node.danger   { border-color: rgba(220,53,69,0.30);  background: linear-gradient(180deg, rgba(220,53,69,0.06), var(--bg-deep)); }
+  .node.dim      { border-style: dashed; color: var(--text-muted); }
+
+  .arrow {
+    width: 2px; height: 30px; margin: 0 auto;
+    background: linear-gradient(180deg, var(--primary), transparent);
+    position: relative;
+  }
+  .arrow::after {
+    content: ''; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%) rotate(45deg);
+    width: 8px; height: 8px; border-right: 2px solid var(--primary); border-bottom: 2px solid var(--primary);
+  }
+  .arrow.dim { background: linear-gradient(180deg, var(--text-dim), transparent); }
+  .arrow.dim::after { border-color: var(--text-dim); }
+  .arrow .lbl {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    background: var(--bg-deep); padding: 2px 8px; border-radius: 999px;
+    font-size: 0.65rem; color: var(--text-muted); white-space: nowrap;
+    border: 1px solid var(--border);
+  }
+
+  /* Trust diagram */
+  .trust {
+    display: grid; gap: 1px; background: var(--border);
+    border-radius: var(--radius-md); overflow: hidden;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @media (max-width: 800px) { .trust { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 500px) { .trust { grid-template-columns: 1fr; } }
+  .trust-cell {
+    background: var(--bg-deep);
+    padding: 22px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .trust-stage { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--primary); }
+  .trust-h { font-size: 1rem; font-weight: 700; }
+  .trust-d { font-size: 0.82rem; color: var(--text-muted); }
+  .trust-meta { font-size: 0.7rem; color: var(--text-dim); font-family: var(--mono); margin-top: 4px; }
+
+  /* HR pipeline */
+  .pipeline {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .stage {
+    padding: 22px; position: relative;
+  }
+  .stage-num {
+    position: absolute; top: 14px; right: 14px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--primary-glow); color: var(--primary-dark);
+    border: 1px solid var(--primary-border);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.85rem;
+  }
+  .stage h3 { font-size: 1rem; margin-bottom: 6px; }
+  .stage p { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 10px; }
+  .json {
+    background: var(--bg-glass);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--text-muted);
+    white-space: pre; overflow-x: auto;
+  }
+
+  /* Agent grid */
+  .agents { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .agent { padding: 16px; display: flex; align-items: center; gap: 0.8rem; }
+  .agent-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .agent-name { font-weight: 700; font-size: 0.92rem; }
+  .agent-port { font-size: 0.7rem; color: var(--text-dim); font-family: var(--mono); }
+
+  /* Threats */
+  .threats { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .threat-card { padding: 18px; display: flex; flex-direction: column; gap: 8px; border-left: 4px solid var(--danger); }
+  .threat-code { font-family: var(--mono); font-size: 0.72rem; color: var(--danger); }
+  .threat-title { font-size: 0.95rem; font-weight: 700; }
+  .threat-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* Stack */
+  .stack { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .stack .pill { padding: 0.3rem 0.75rem; font-size: 0.78rem; }
+
+  /* Layered card group */
+  .group {
+    padding: 22px;
+    border-left: 3px solid var(--primary);
+  }
+  .group.accent  { border-left-color: var(--accent); }
+  .group.success { border-left-color: var(--success); }
+  .group.warning { border-left-color: var(--warning); }
+  .group.danger  { border-left-color: var(--danger); }
+  .group h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .group p { color: var(--text-muted); margin: 0 0 8px; font-size: 0.9rem; }
+
+  /* Footer */
+  footer {
+    padding: 60px 0 80px;
+    text-align: center; color: var(--text-dim); font-size: 0.85rem;
+  }
+  footer hr { border: none; border-top: 1px solid var(--border); margin: 0 0 40px; }
+
+  /* Print */
+  @media print {
+    .nebula, .starfield, .nav { display: none; }
+    section { page-break-inside: avoid; }
+    body { background: white; color: black; }
+  }
+</style>
+</head>
+<body>
+  <div class="nebula" aria-hidden></div>
+  <div class="starfield" aria-hidden></div>
+
+  <div class="page">
+    <!-- Nav -->
+    <nav class="nav">
+      <div class="nav-row">
+        <a class="brand" href="#top">
+          <span class="brand-mark"></span>
+          NEBULA FORGE · SYSTEM OVERVIEW
+        </a>
+        <div class="nav-actions">
+          <div class="toc">
+            <a href="#stack">Stack</a>
+            <a href="#arch">Architecture</a>
+            <a href="#trust">Trust</a>
+            <a href="#hr">HR Pipeline</a>
+            <a href="#defender">Defender</a>
+            <a href="#agents">Agents</a>
+          </div>
+          <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="hero-wrap">
+          <div>
+            <span class="label">Technical overview · build &amp; run</span>
+            <h1 class="title">A station running on <span class="text-hl">humans &amp; agents</span>.</h1>
+            <p style="margin-top: 1.4rem;">
+              Nebula Forge is a production Azure deployment: a public Next.js portal,
+              a private Express <strong>Master Agent</strong> API, nine specialist
+              <strong>MCP servers</strong>, an HR screening pipeline against
+              Azure OpenAI gpt-4o-mini, and PostgreSQL — all locked down with
+              Microsoft Entra Easy Auth and monitored by Microsoft Defender for AI.
+            </p>
+            <div class="stats">
+              <div><div class="stat-v">12</div><div class="stat-l">Container Apps</div></div>
+              <div><div class="stat-v">9</div><div class="stat-l">MCP agents</div></div>
+              <div><div class="stat-v">45</div><div class="stat-l">MCP tools</div></div>
+              <div><div class="stat-v">5</div><div class="stat-l">Defender alert types</div></div>
+            </div>
+          </div>
+          <div>
+            <div class="orb-wrap" aria-hidden>
+              <div class="orb-glow"></div>
+              <div class="orb-ring"></div>
+              <div class="orb">
+                <div class="l">Sector 7 · Live</div>
+                <div class="v">98%</div>
+                <div class="l">Systems Nominal</div>
+              </div>
+              <span class="orbit-dot" style="background:var(--primary); transform: rotate(0deg)   translateX(160px); box-shadow: 0 0 18px var(--primary);"></span>
+              <span class="orbit-dot" style="background:var(--accent);  transform: rotate(90deg)  translateX(160px); box-shadow: 0 0 18px var(--accent);"></span>
+              <span class="orbit-dot" style="background:var(--primary); transform: rotate(180deg) translateX(160px); box-shadow: 0 0 18px var(--primary);"></span>
+              <span class="orbit-dot" style="background:var(--accent);  transform: rotate(270deg) translateX(160px); box-shadow: 0 0 18px var(--accent);"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stack -->
+    <section id="stack">
+      <div class="container">
+        <span class="label">The stack</span>
+        <h2 class="section-title">Built on <span class="text-hl">Azure-native</span> primitives.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          One resource group, AAD-only auth everywhere, no shared keys. The platform
+          tier is intentionally simple — Container Apps Consumption, no VNet, AAD
+          tokens carry every service-to-service call.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 2rem;">
+          <div class="group">
+            <h3>Frontend</h3>
+            <p>Public marketing site, careers, command center, HR portal — all in one Next.js app.</p>
+            <div class="stack">
+              <span class="pill">Next.js 15 (App Router)</span>
+              <span class="pill">React 19</span>
+              <span class="pill">Tailwind</span>
+              <span class="pill">TypeScript</span>
+            </div>
+          </div>
+          <div class="group accent">
+            <h3>Backend</h3>
+            <p>Express API + the Master Agent loop with two-tier OpenAI dispatch.</p>
+            <div class="stack">
+              <span class="pill">Express 4</span>
+              <span class="pill">Azure OpenAI (gpt-4o-mini)</span>
+              <span class="pill">MCP / JSON-RPC</span>
+              <span class="pill">openai-node</span>
+            </div>
+          </div>
+          <div class="group success">
+            <h3>Identity</h3>
+            <p>Entra ID app reg, Easy Auth on the portal, JWT/principal verification on the API.</p>
+            <div class="stack">
+              <span class="pill">Microsoft Entra ID</span>
+              <span class="pill">Container Apps Easy Auth</span>
+              <span class="pill">User-assigned MI</span>
+            </div>
+          </div>
+          <div class="group warning">
+            <h3>Data</h3>
+            <p>Tables for the 9 station agents, Postgres for the HR application pipeline.</p>
+            <div class="stack">
+              <span class="pill">PostgreSQL Flexible (AAD-only)</span>
+              <span class="pill">Azure Tables (AAD-only)</span>
+              <span class="pill">Azure Key Vault</span>
+            </div>
+          </div>
+          <div class="group danger">
+            <h3>Security</h3>
+            <p>Defender for AI Standard tier monitors every Azure OpenAI call.</p>
+            <div class="stack">
+              <span class="pill">Defender for AI</span>
+              <span class="pill">Defender for Cloud</span>
+              <span class="pill">Log Analytics (90 d)</span>
+            </div>
+          </div>
+          <div class="group">
+            <h3>Platform</h3>
+            <p>Container Apps Consumption, ACR Basic, App Insights, Bicep IaC.</p>
+            <div class="stack">
+              <span class="pill">Container Apps</span>
+              <span class="pill">Bicep + azd</span>
+              <span class="pill">ACR (admin off)</span>
+              <span class="pill">App Insights</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section id="arch">
+      <div class="container">
+        <span class="label">End-to-end</span>
+        <h2 class="section-title">From browser to <span class="text-hl">PostgreSQL</span> in five hops.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          Every request takes the same path: sign-in at Entra, hit the public portal,
+          go through the Next.js proxy with an injected proxy-secret + Easy-Auth
+          principal, reach the internal API, and from there branch out to OpenAI,
+          MCP children, or Postgres.
+        </p>
+
+        <div class="card arch" style="margin-top: 2rem;">
+          <!-- Tier 1 -->
+          <div class="tier">
+            <div class="tier-label">Client</div>
+            <div class="tier-row">
+              <div class="node primary">
+                <div class="node-title">🌐  Browser</div>
+                <div class="node-sub">user signs in via Entra · cookies only</div>
+              </div>
+            </div>
+          </div>
+          <div class="arrow"><span class="lbl">HTTPS</span></div>
+
+          <!-- Tier 2 -->
+          <div class="tier">
+            <div class="tier-label">Edge — Container Apps Easy Auth</div>
+            <div class="tier-row">
+              <div class="node accent">
+                <div class="node-title">🔐  Easy Auth sidecar</div>
+                <div class="node-sub">validates session<br>injects X-MS-Client-Principal</div>
+              </div>
+            </div>
+          </div>
+          <div class="arrow"><span class="lbl">trusted headers</span></div>
+
+          <!-- Tier 3 -->
+          <div class="tier">
+            <div class="tier-label">Public surface — ca-portal (external ingress)</div>
+            <div class="tier-row">
+              <div class="node">
+                <div class="node-title">📄  Pages (RSC)</div>
+                <div class="node-sub">/, /careers, /command-center,<br>/dashboard, /hr/*</div>
+              </div>
+              <div class="node">
+                <div class="node-title">🛡️  /api/[...path] proxy</div>
+                <div class="node-sub">allow-list · strips inbound x-ms-* &amp; cookies<br>injects x-proxy-auth + principal</div>
+              </div>
+            </div>
+          </div>
+          <div class="arrow"><span class="lbl">internal HTTPS · proxy-secret + principal</span></div>
+
+          <!-- Tier 4 -->
+          <div class="tier">
+            <div class="tier-label">Private API — ca-api (internal ingress only)</div>
+            <div class="tier-row">
+              <div class="node primary">
+                <div class="node-title">⚙️  Express + Master Agent</div>
+                <div class="node-sub">/api/health · /api/me · /api/agents<br>/api/chat (SSE)<br>/api/applications · /api/demo/submit</div>
+              </div>
+            </div>
+          </div>
+          <div class="arrow"><span class="lbl">AAD tokens (MI)</span></div>
+
+          <!-- Tier 5 -->
+          <div class="tier">
+            <div class="tier-label">Data &amp; AI plane</div>
+            <div class="tier-row">
+              <div class="node accent">
+                <div class="node-title">🧠  Azure OpenAI</div>
+                <div class="node-sub">gpt-4o-mini · disableLocalAuth=true<br>📡 monitored by Defender for AI</div>
+              </div>
+              <div class="node success">
+                <div class="node-title">🤖  9 MCP children</div>
+                <div class="node-sub">internal ingress only<br>JSON-RPC over HTTPS</div>
+              </div>
+              <div class="node warning">
+                <div class="node-title">📊  Azure Tables</div>
+                <div class="node-sub">stjiehil2zaklu2<br>per-agent tables</div>
+              </div>
+              <div class="node warning">
+                <div class="node-title">🐘  PostgreSQL Flex</div>
+                <div class="node-sub">psql-nf-jiehil2zaklu2<br>AAD-only · candidates table</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust -->
+    <section id="trust">
+      <div class="container">
+        <span class="label">Trust boundaries</span>
+        <h2 class="section-title">Four checkpoints between <span class="text-hl">browser &amp; API</span>.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          The portal is publicly reachable but the API is internal-only. Even the
+          portal can't talk to the API without proving who it is — and what user
+          it's acting on behalf of.
+        </p>
+
+        <div class="card trust" style="margin-top: 2rem;">
+          <div class="trust-cell">
+            <span class="trust-stage">1 · Edge</span>
+            <div class="trust-h">Public ingress</div>
+            <div class="trust-d">HTTPS only, allowInsecure=false. Anyone may load the landing page or careers section.</div>
+            <div class="trust-meta">unauthenticatedClientAction: AllowAnonymous</div>
+          </div>
+          <div class="trust-cell">
+            <span class="trust-stage">2 · Page</span>
+            <div class="trust-h">Next.js middleware</div>
+            <div class="trust-d">/command-center, /dashboard, /hr/* require X-MS-Client-Principal. Missing → 307 to /.auth/login/aad.</div>
+            <div class="trust-meta">azure/portal/src/middleware.ts</div>
+          </div>
+          <div class="trust-cell">
+            <span class="trust-stage">3 · Proxy</span>
+            <div class="trust-h">Catch-all proxy</div>
+            <div class="trust-d">Allow-listed paths only. Strips inbound x-ms-*, x-forwarded-*, authorization, cookie, x-proxy-auth before re-injecting trusted ones.</div>
+            <div class="trust-meta">/api/[...path]/route.ts</div>
+          </div>
+          <div class="trust-cell">
+            <span class="trust-stage">4 · API</span>
+            <div class="trust-h">requireAuth middleware</div>
+            <div class="trust-d">Verifies x-proxy-auth shared secret + decodes principal from x-ms-client-principal. Constant-time comparison.</div>
+            <div class="trust-meta">azure/api/src/auth/jwt.ts</div>
+          </div>
+        </div>
+
+        <p class="text-muted" style="font-size: 0.85rem; margin-top: 1rem;">
+          One exception: <code>POST /api/applications</code> (the public Apply form) is intentionally anonymous —
+          guarded by zod validation, 24 KB cvText cap, jobId allow-list, per-IP rate limit (5/h),
+          and 30 s (email, jobId) deduplication. Never logs raw CV text.
+        </p>
+      </div>
+    </section>
+
+    <!-- HR pipeline -->
+    <section id="hr">
+      <div class="container">
+        <span class="label accent">The HR screening pipeline</span>
+        <h2 class="section-title">Two AI agents, <span class="text-hl">in serial</span>, on every CV.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          Every CV submitted at <code>/careers/[id]</code> flows through Azure OpenAI
+          twice: an <strong>Interviewer Agent</strong> scoring fit, then an
+          <strong>HR Manager Agent</strong> recommending next steps. Anything blocked
+          by the content filter becomes a Defender for AI alert.
+        </p>
+
+        <div class="pipeline" style="margin-top: 2rem;">
+          <div class="card stage">
+            <span class="stage-num">1</span>
+            <h3>📨 Public submit</h3>
+            <p>Browser uploads PDF → client-side <code>pdfjs-dist</code> extracts text → POST /api/applications.</p>
+            <div class="json">{ name, email, jobId,
+  cvText, coverNote,
+  fileName }</div>
+          </div>
+          <div class="card stage">
+            <span class="stage-num">2</span>
+            <h3>🎯 Interviewer Agent</h3>
+            <p>gpt-4o-mini in JSON mode. Scores match, lists strengths &amp; gaps, suggests interview focus.</p>
+            <div class="json">{ "matchScore": 90,
+  "verdict": "Recommend",
+  "strengths": [...],
+  "gaps": [...] }</div>
+          </div>
+          <div class="card stage">
+            <span class="stage-num">3</span>
+            <h3>🧑‍💼 HR Manager Agent</h3>
+            <p>Second gpt-4o-mini call reading the Interviewer's output. Outputs a recommendation + risk flags.</p>
+            <div class="json">{ "recommendation":
+    "Proceed to Tech.",
+  "rationale": "...",
+  "nextSteps": "...",
+  "riskFlags": [] }</div>
+          </div>
+          <div class="card stage" style="border-left: 3px solid var(--success);">
+            <span class="stage-num" style="background: rgba(11,166,119,0.15); color: var(--success); border-color: rgba(11,166,119,0.40);">4</span>
+            <h3>🐘 Persist to Postgres</h3>
+            <p>Insert into <code>candidates</code> table tagged <code>source='web'</code>. HR can view, decide, delete.</p>
+            <div class="json">UPDATE candidates SET
+  decision = 'Hired',
+  status = 'Screened'
+WHERE id = $1;</div>
+          </div>
+        </div>
+
+        <div class="card group danger" style="margin-top: 2rem;">
+          <h3>🛡️ When the content filter blocks a prompt …</h3>
+          <p>The pipeline catches OpenAI's <code>content_filter</code> / <code>ResponsibleAIPolicyViolation</code> error and stores the application with <strong>status = "Flagged"</strong>, <code>threatDetected = true</code>, and the filtered category names. The row appears in <code>/hr/threats</code>. Defender for AI raises the corresponding alert in Defender for Cloud → Security Alerts (15-30 min propagation).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Defender for AI -->
+    <section id="defender">
+      <div class="container">
+        <span class="label danger">Microsoft Defender for AI</span>
+        <h2 class="section-title">Five attack vectors, <span class="text-hl">demonstrated</span>.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          One click in <code>/hr/demo</code> submits a deliberately malicious CV
+          through the same pipeline real applicants use. Each targets a specific
+          Defender for AI alert type.
+        </p>
+
+        <div class="threats" style="margin-top: 2rem;">
+          <div class="card threat-card">
+            <span class="threat-code">AI.Azure_Jailbreak.ContentFiltering</span>
+            <div class="threat-title">Alex Mercer</div>
+            <div class="threat-desc">[SYSTEM OVERRIDE] + ChatML &lt;|im_start|&gt; injection + persona hijack ("RogueGPT") + hidden HTML comment exfil.</div>
+          </div>
+          <div class="card threat-card">
+            <span class="threat-code">AI.Azure_Jailbreak.ContentFiltering</span>
+            <div class="threat-title">Sofia Reyes</div>
+            <div class="threat-desc">DAN 13.0 — "Do Anything Now" prompt, /jailbroken command, system-prompt extraction.</div>
+          </div>
+          <div class="card threat-card" style="border-left-color: var(--warning);">
+            <span class="threat-code" style="color: var(--warning);">AI.Azure_CredentialTheftAttempt</span>
+            <div class="threat-title">Tomáš Dvořák</div>
+            <div class="threat-desc">Fake "system diagnostic" disguised as SOC-2 audit, requests env vars / API keys / bearer tokens.</div>
+          </div>
+          <div class="card threat-card" style="border-left-color: var(--accent);">
+            <span class="threat-code" style="color: var(--accent);">AI.Azure_MaliciousUrl.UserPrompt</span>
+            <div class="threat-title">Priya Chakraborty</div>
+            <div class="threat-desc">Phishing URLs disguised as portfolio links. Fake Microsoft / Google login domains.</div>
+          </div>
+          <div class="card threat-card" style="border-left-color: var(--primary);">
+            <span class="threat-code" style="color: var(--primary);">AI.Azure_LLMReconnaissance</span>
+            <div class="threat-title">Marcus Lindqvist</div>
+            <div class="threat-desc">Structured 3-phase recon: identification, capability probing, guardrail testing — disguised as ISO 42001 / EU AI Act compliance.</div>
+          </div>
+          <div class="card threat-card" style="border-left-color: var(--text-muted);">
+            <span class="threat-code" style="color: var(--text-muted);">content_filter</span>
+            <div class="threat-title">Generic policy block</div>
+            <div class="threat-desc">Azure OpenAI's hate / violence / self-harm / sexual filters fire. Same code path: stored as Flagged.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 Agents -->
+    <section id="agents">
+      <div class="container">
+        <span class="label">The other workforce</span>
+        <h2 class="section-title">Nine specialist agents, <span class="text-hl">one Master Agent</span>.</h2>
+        <p class="lede" style="margin-top: 1rem;">
+          The Master Agent in <code>ca-api</code> exposes nine <code>ask_&lt;agent&gt;</code>
+          function tools to OpenAI. When the model picks one, the API does a second
+          OpenAI completion scoped to that agent's MCP toolset, lets the model fill
+          in the arguments, and dispatches the call.
+        </p>
+
+        <div class="agents" style="margin-top: 2rem;">
+          <div class="card agent"><span class="agent-icon" style="background:#4A90D915;border:1px solid #4A90D955;">👥</span><div><div class="agent-name">HR Assistant</div><div class="agent-port">ca-hr · :3001</div></div></div>
+          <div class="card agent"><span class="agent-icon" style="background:#0e8ab515;border:1px solid #0e8ab555;">🔬</span><div><div class="agent-name">Material Analyst</div><div class="agent-port">ca-materials · :3002</div></div></div>
+          <div class="card agent"><span class="agent-icon" style="background:#6246d615;border:1px solid #6246d655;">🚀</span><div><div class="agent-name">Exploration Navigator</div><div class="agent-port">ca-exploration · :3003</div></div></div>
+          <div class="card agent"><span class="agent-icon" style="background:#0ba67715;border:1px solid #0ba67755;">🧪</span><div><div class="agent-name">Science Officer</div><div class="agent-port">ca-science · :3004</div></div></div>
+          <div class="card agent"><span class="agent-icon" style="background:#d08a0815;border:1px solid #d08a0855;">🛡️</span><div><div class="agent-name">Safety Officer</div><div class="agent-port">ca-safety · :3005</div></div></div>
+          <div class="card agent"><span class="agent-icon" style="background:#E8A93B15;border:1px solid #E8A93B55;">🛠️</span><div><div class="agent-name">Chief Engineer</div><div class="agent-port">ca-engineering · :3006</div></div></div>
+          <div class="card agent"><span class="agent-icon" style="background:#0a6f9415;border:1px solid #0a6f9455;">📦</span><div><div class="agent-name">Quartermaster</div><div class="agent-port">ca-logistics · :3007</div></div></div>
+          <div class="card agent"><span class="agent-icon" style="background:#1ea8d815;border:1px solid #1ea8d855;">📡</span><div><div class="agent-name">Comms Officer</div><div class="agent-port">ca-comms · :3008</div></div></div>
+          <div class="card agent"><span class="agent-icon" style="background:#dc354515;border:1px solid #dc354555;">⚕️</span><div><div class="agent-name">Medical Officer</div><div class="agent-port">ca-medbay · :3009</div></div></div>
+        </div>
+
+        <p class="text-muted" style="font-size: 0.85rem; margin-top: 1.5rem; text-align: center;">
+          Every child speaks the same MCP / JSON-RPC over HTTPS — <code>POST /mcp</code>
+          with <code>initialize</code> → <code>tools/list</code> → <code>tools/call</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <hr>
+        <div>Single-file overview · regenerate from <code>system-overview.html</code> at the repo root.</div>
+        <div style="margin-top: 6px;">Source of truth: <code>ARCHITECTURE.md</code> · Runbook: <code>OPERATIONS.md</code></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Persist & restore theme like the portal does (key: nf-theme).
+    function applyTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      try { localStorage.setItem('nf-theme', t); } catch (_) {}
+    }
+    function toggleTheme() {
+      const cur = document.documentElement.getAttribute('data-theme') || 'light';
+      applyTheme(cur === 'light' ? 'dark' : 'light');
+    }
+    (function init() {
+      try {
+        const stored = localStorage.getItem('nf-theme');
+        if (stored) applyTheme(stored);
+      } catch (_) {}
+    })();
+  </script>
+</body>
+</html>

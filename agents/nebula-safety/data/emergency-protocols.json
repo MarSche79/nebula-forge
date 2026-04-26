@@ -1,0 +1,111 @@
+[
+  {
+    "id": "PROTO-001",
+    "name": "Protocol Omega - Hull Breach",
+    "triggerCondition": "Detected hull breach or rapid depressurization in any station sector",
+    "severity": "critical",
+    "steps": [
+      "Sound station-wide hull breach alarm (Code Omega)",
+      "Seal all bulkhead doors in affected section automatically",
+      "Evacuate personnel from affected and adjacent sections",
+      "Deploy emergency pressure barriers and hull sealant drones",
+      "Activate backup life support for isolated sections",
+      "Dispatch damage control team in EVA suits to breach location",
+      "Confirm atmospheric integrity before re-opening sealed sections"
+    ],
+    "requiredPersonnel": ["Damage Control Team", "EVA Specialists", "Medical Response Unit", "Command Bridge Officer"],
+    "estimatedDuration": "45-90 minutes",
+    "lastDrillDate": "2187-10-05"
+  },
+  {
+    "id": "PROTO-002",
+    "name": "Protocol Delta - Radiation Surge",
+    "triggerCondition": "Radiation levels exceed safe threshold by 150% in any sector or reactor anomaly detected",
+    "severity": "critical",
+    "steps": [
+      "Trigger radiation surge alarm (Code Delta)",
+      "Automatically seal radiation-hardened bulkheads around affected zone",
+      "Evacuate all non-essential personnel to shielded safe zones",
+      "Deploy portable radiation shielding to adjacent sectors",
+      "Issue RadiShield compound to all personnel within exposure radius",
+      "Engineering team to identify and isolate radiation source",
+      "Medical team to begin exposure screening for affected crew",
+      "Monitor radiation levels continuously until below safe threshold for 30 minutes"
+    ],
+    "requiredPersonnel": ["Radiation Safety Officer", "Engineering Team", "Medical Response Unit", "Security Detail"],
+    "estimatedDuration": "60-180 minutes",
+    "lastDrillDate": "2187-09-20"
+  },
+  {
+    "id": "PROTO-003",
+    "name": "Protocol Sigma - Fire Containment",
+    "triggerCondition": "Confirmed fire detection in any station compartment",
+    "severity": "high",
+    "steps": [
+      "Activate fire suppression system in affected compartment",
+      "Seal ventilation ducts to prevent smoke spread",
+      "Evacuate personnel from compartment and adjacent areas",
+      "Deploy fire response team with portable extinguishers",
+      "Monitor atmospheric composition for toxic gases",
+      "Restore ventilation only after fire is confirmed extinguished and air quality verified"
+    ],
+    "requiredPersonnel": ["Fire Response Team", "Life Support Technician", "Medical Standby Unit"],
+    "estimatedDuration": "30-60 minutes",
+    "lastDrillDate": "2187-11-01"
+  },
+  {
+    "id": "PROTO-004",
+    "name": "Protocol Tau - Biological Containment",
+    "triggerCondition": "Detection of unknown biological agent, pathogen release, or xenobiological contamination",
+    "severity": "critical",
+    "steps": [
+      "Activate biohazard alarm (Code Tau)",
+      "Engage full quarantine lockdown of affected section",
+      "Activate negative pressure ventilation in quarantine zone",
+      "Deploy decontamination teams in Level-4 biosafety suits",
+      "Identify biological agent through emergency lab analysis",
+      "Administer prophylactic treatments to exposed personnel",
+      "Maintain quarantine until three consecutive clear bioassays"
+    ],
+    "requiredPersonnel": ["Chief Medical Officer", "Xenobiology Team", "Decontamination Unit", "Security Detail"],
+    "estimatedDuration": "120-480 minutes",
+    "lastDrillDate": "2187-08-15"
+  },
+  {
+    "id": "PROTO-005",
+    "name": "Protocol Epsilon - Station Evacuation",
+    "triggerCondition": "Catastrophic station failure imminent or multiple critical system failures",
+    "severity": "critical",
+    "steps": [
+      "Sound station-wide evacuation alarm (Code Epsilon)",
+      "All personnel report to designated evacuation assembly points",
+      "Activate all escape pods and emergency shuttle pre-flight sequences",
+      "Department heads conduct personnel headcount at assembly points",
+      "Priority boarding: medical patients, then civilians, then crew by deck order",
+      "Transmit distress beacon on all frequencies including deep-space relay",
+      "Command staff evacuate last after confirming all sections clear",
+      "Engage station autopilot for orbital stability if possible"
+    ],
+    "requiredPersonnel": ["All Station Personnel", "Command Staff", "Shuttle Pilots", "Medical Transport Team"],
+    "estimatedDuration": "20-45 minutes",
+    "lastDrillDate": "2187-07-30"
+  },
+  {
+    "id": "PROTO-006",
+    "name": "Protocol Kappa - Intruder Alert",
+    "triggerCondition": "Unauthorized access detected, hostile boarding, or unknown entity identified on station",
+    "severity": "high",
+    "steps": [
+      "Activate intruder alert (Code Kappa)",
+      "Lock down all sensitive areas including armory, command bridge, and research labs",
+      "Security teams deploy to last known intruder location",
+      "Activate internal sensor sweep to track movement",
+      "Non-security personnel shelter in place in nearest secure compartment",
+      "Establish communication blackout on non-secure channels",
+      "Neutralize or contain threat before lifting lockdown"
+    ],
+    "requiredPersonnel": ["Security Team Alpha", "Security Team Bravo", "Command Bridge Officer", "Communications Officer"],
+    "estimatedDuration": "30-120 minutes",
+    "lastDrillDate": "2187-10-22"
+  }
+]

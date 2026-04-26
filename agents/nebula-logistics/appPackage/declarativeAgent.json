@@ -1,0 +1,30 @@
+{
+    "version": "v1.6",
+    "name": "Nebula Forge Quartermaster",
+    "description": "Nebula Forge Quartermaster — supply chain and logistics, cargo tracking, inventory management, supply ordering, and storage capacity monitoring for space station operations.",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Track a Shipment",
+            "text": "Track shipment SHP-001 and give me its current status, transit progress, and cargo manifest."
+        },
+        {
+            "title": "Check Inventory Levels",
+            "text": "Show me all medical supply inventory levels. Flag anything below minimum stock."
+        },
+        {
+            "title": "Create a Supply Order",
+            "text": "Create an emergency supply order for fuel — we need 100 Deuterium Fuel Rods and 500 liters of Reactor Coolant ZR-9 from Jupiter Station Io Fuel Depot."
+        },
+        {
+            "title": "Storage Capacity Report",
+            "text": "What's our current storage capacity across all bays? Show utilization percentages and flag any bays that are critically full."
+        }
+    ],
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

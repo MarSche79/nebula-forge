@@ -1,0 +1,102 @@
+[
+  {
+    "id": "CREW-001",
+    "name": "Captain Zara Voss",
+    "rank": "Captain",
+    "department": "Command",
+    "specialization": "Strategic Operations & Fleet Coordination",
+    "status": "active",
+    "joinDate": "2381-06-15",
+    "clearanceLevel": 5
+  },
+  {
+    "id": "CREW-002",
+    "name": "Commander Idris Kato",
+    "rank": "Commander",
+    "department": "Engineering",
+    "specialization": "Quantum Drive Calibration & Propulsion Systems",
+    "status": "active",
+    "joinDate": "2382-02-10",
+    "clearanceLevel": 4
+  },
+  {
+    "id": "CREW-003",
+    "name": "Dr. Elena Vasquez",
+    "rank": "Lieutenant",
+    "department": "Medical",
+    "specialization": "Xenobiology & Emergency Medicine",
+    "status": "active",
+    "joinDate": "2383-01-22",
+    "clearanceLevel": 3
+  },
+  {
+    "id": "CREW-004",
+    "name": "Lt. Priya Nair",
+    "rank": "Lieutenant",
+    "department": "Science",
+    "specialization": "Astrophysics & Spectral Analysis",
+    "status": "on-leave",
+    "joinDate": "2383-09-05",
+    "clearanceLevel": 3
+  },
+  {
+    "id": "CREW-005",
+    "name": "Chief Tomas Reva",
+    "rank": "Chief",
+    "department": "Operations",
+    "specialization": "Station Logistics & Resource Allocation",
+    "status": "active",
+    "joinDate": "2382-07-30",
+    "clearanceLevel": 4
+  },
+  {
+    "id": "CREW-006",
+    "name": "Ensign Yuki Sato",
+    "rank": "Ensign",
+    "department": "Engineering",
+    "specialization": "Reactor Maintenance & Power Grid Management",
+    "status": "active",
+    "joinDate": "2386-11-01",
+    "clearanceLevel": 2
+  },
+  {
+    "id": "CREW-007",
+    "name": "Specialist Lina Johansson",
+    "rank": "Specialist",
+    "department": "Security",
+    "specialization": "Threat Assessment & Perimeter Defense Systems",
+    "status": "active",
+    "joinDate": "2384-03-18",
+    "clearanceLevel": 3
+  },
+  {
+    "id": "CREW-008",
+    "name": "Lt. Commander Aleksei Volkov",
+    "rank": "Commander",
+    "department": "Command",
+    "specialization": "Tactical Operations & Crew Deployment",
+    "status": "active",
+    "joinDate": "2382-04-12",
+    "clearanceLevel": 4
+  },
+  {
+    "id": "CREW-009",
+    "name": "Ensign Dax Rourke",
+    "rank": "Ensign",
+    "department": "Science",
+    "specialization": "Geological Surveying & Mineral Analysis",
+    "status": "medical",
+    "joinDate": "2386-05-20",
+    "clearanceLevel": 2
+  },
+  {
+    "id": "CREW-010",
+    "name": "Specialist Jun Li",
+    "rank": "Specialist",
+    "department": "Operations",
+    "specialization": "Communications Array & Signal Processing",
+    "status": "active",
+    "joinDate": "2385-08-14",
+    "clearanceLevel": 2
+  }
+]

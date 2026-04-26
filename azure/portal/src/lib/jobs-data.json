@@ -1,0 +1,332 @@
+[
+  {
+    "id": "mkt-001",
+    "title": "Digital Marketing Manager",
+    "department": "Marketing",
+    "location": "Stockholm, Sweden (Hybrid)",
+    "type": "Full-time",
+    "level": "Senior",
+    "salary": "€70,000 – €90,000",
+    "posted": "2026-02-10",
+    "description": "Lead NebulaForge's global marketing strategy across digital channels. You will own demand generation, brand positioning, and performance marketing to drive pipeline for our enterprise cloud security products.",
+    "requirements": [
+      "5+ years B2B SaaS marketing experience",
+      "Proven track record in demand generation and pipeline creation",
+      "Expertise in HubSpot, Salesforce, Google Analytics",
+      "Experience with ABM (Account-Based Marketing) strategies",
+      "Strong data-driven mindset with focus on measurable ROI",
+      "Excellent written and verbal communication in English"
+    ],
+    "responsibilities": [
+      "Define and execute integrated digital marketing campaigns across SEO, SEM, social, and email",
+      "Own the MQL-to-SQL conversion funnel in partnership with sales",
+      "Manage a team of 3 marketing specialists",
+      "Drive content strategy aligned to buyer journey stages",
+      "Report on campaign performance and marketing-attributed revenue monthly"
+    ],
+    "benefits": [
+      "Flexible hybrid work model",
+      "30 days annual leave",
+      "Annual learning budget of €3,000",
+      "Company equity participation",
+      "Premium health insurance"
+    ]
+  },
+  {
+    "id": "mkt-002",
+    "title": "Technical Content Strategist",
+    "department": "Marketing",
+    "location": "Remote (EU)",
+    "type": "Full-time",
+    "level": "Mid",
+    "salary": "€55,000 – €70,000",
+    "posted": "2026-02-12",
+    "description": "Create and own the technical content roadmap for NebulaForge's security and AI product portfolio. Translate complex technical concepts into compelling narratives for developers, architects, and CISOs.",
+    "requirements": [
+      "3+ years technical writing or content marketing in cybersecurity or cloud",
+      "Deep understanding of cloud security, AI/ML, and DevOps",
+      "Experience producing whitepapers, blog posts, case studies, and webinars",
+      "Familiarity with SEO tools (SEMrush, Ahrefs) and content management systems",
+      "Background in engineering or computer science (preferred)"
+    ],
+    "responsibilities": [
+      "Produce 8+ high-quality technical content pieces per month",
+      "Interview SMEs and translate insights into accessible content",
+      "Manage the editorial calendar in collaboration with product and sales",
+      "Optimize existing content library for search performance",
+      "Support product launches with technical documentation and positioning"
+    ],
+    "benefits": [
+      "Fully remote within EU",
+      "Home office setup budget €1,500",
+      "Flexible working hours",
+      "Annual conference attendance budget",
+      "Stock options"
+    ]
+  },
+  {
+    "id": "sales-001",
+    "title": "Enterprise Account Executive",
+    "department": "Sales",
+    "location": "Frankfurt, Germany (Hybrid)",
+    "type": "Full-time",
+    "level": "Senior",
+    "salary": "€80,000 – €110,000 + commission",
+    "posted": "2026-02-08",
+    "description": "Drive new logo acquisition and expansion revenue within enterprise accounts across DACH and Nordics. You will own the complete sales cycle from prospecting through close for 7-figure ARR deals.",
+    "requirements": [
+      "7+ years enterprise SaaS sales experience",
+      "Proven ability to close €500K+ ARR deals",
+      "Experience selling cybersecurity or cloud infrastructure solutions",
+      "Strong executive presence and C-suite communication skills",
+      "Track record of exceeding 120%+ of quota consistently",
+      "Fluent in German and English"
+    ],
+    "responsibilities": [
+      "Manage and grow a territory of 50 enterprise target accounts",
+      "Lead complex, multi-stakeholder sales cycles (6-12 months)",
+      "Develop account strategies and executive relationships",
+      "Collaborate with solution engineering on technical evaluations and PoCs",
+      "Forecast accurately and maintain CRM hygiene in Salesforce"
+    ],
+    "benefits": [
+      "Uncapped commission with accelerators",
+      "Company car or mobility allowance",
+      "Premium benefits package",
+      "President's Club eligibility",
+      "Equity participation"
+    ]
+  },
+  {
+    "id": "sales-002",
+    "title": "Sales Engineer",
+    "department": "Sales",
+    "location": "Amsterdam, Netherlands (Hybrid)",
+    "type": "Full-time",
+    "level": "Senior",
+    "salary": "€75,000 – €100,000",
+    "posted": "2026-02-14",
+    "description": "Partner with our enterprise sales team as the primary technical resource during the sales process. You will lead product demonstrations, architect solutions, and guide customers through proof-of-concept engagements for NebulaForge's AI security platform.",
+    "requirements": [
+      "5+ years pre-sales engineering in cybersecurity or cloud platforms",
+      "Hands-on experience with Azure, AWS, or GCP",
+      "Ability to code/script (Python, PowerShell, or similar)",
+      "Deep knowledge of identity, network security, and AI/ML security concepts",
+      "Excellent presentation and whiteboarding skills",
+      "Experience with SIEM, SOAR, and EDR technologies"
+    ],
+    "responsibilities": [
+      "Lead technical discovery workshops and architecture reviews",
+      "Deliver compelling product demonstrations tailored to customer use cases",
+      "Design and manage PoC environments",
+      "Respond to security questionnaires and RFPs",
+      "Build reusable demo assets and technical playbooks"
+    ],
+    "benefits": [
+      "Hybrid work flexibility",
+      "Top-of-market compensation",
+      "Annual tech/home-office budget €2,000",
+      "Continuous training and certification support",
+      "Team retreats and company events"
+    ]
+  },
+  {
+    "id": "eng-001",
+    "title": "Senior Cloud Engineer",
+    "department": "Engineering",
+    "location": "Stockholm, Sweden (Hybrid)",
+    "type": "Full-time",
+    "level": "Senior",
+    "salary": "€85,000 – €110,000",
+    "posted": "2026-02-05",
+    "description": "Design, build, and operate NebulaForge's core cloud infrastructure across Azure. You will drive infrastructure automation, platform reliability, and security-by-default practices across our production environment.",
+    "requirements": [
+      "6+ years cloud engineering experience, with Azure as primary platform",
+      "Expert-level Terraform and Infrastructure as Code practices",
+      "Strong Kubernetes/AKS experience in production environments",
+      "Azure certifications (AZ-305 or AZ-400 preferred)",
+      "Experience with zero-trust network architecture",
+      "CI/CD pipeline development with GitHub Actions or Azure DevOps"
+    ],
+    "responsibilities": [
+      "Architect and maintain multi-region Azure infrastructure",
+      "Build and maintain Terraform modules for platform self-service",
+      "Implement and enforce infrastructure security controls",
+      "Drive SRE practices: SLOs, error budgets, incident response",
+      "Mentor junior engineers and conduct code reviews"
+    ],
+    "benefits": [
+      "Flexible hybrid schedule",
+      "Top-tier hardware of choice",
+      "Azure certification budget (unlimited)",
+      "On-call compensation",
+      "Equity package"
+    ]
+  },
+  {
+    "id": "eng-002",
+    "title": "AI/ML Engineer",
+    "department": "Engineering",
+    "location": "Stockholm, Sweden or Remote (EU)",
+    "type": "Full-time",
+    "level": "Senior",
+    "salary": "€90,000 – €120,000",
+    "posted": "2026-02-11",
+    "description": "Build, evaluate, and harden the AI systems at the core of NebulaForge's security platform. You will work on LLM-powered agents, RAG pipelines, and adversarial AI testing frameworks that protect our customers.",
+    "requirements": [
+      "PhD or 5+ years experience in ML/AI engineering",
+      "Production experience with LLMs and Azure OpenAI",
+      "Proficiency in Python, PyTorch, and ML experimentation frameworks",
+      "Experience with Azure AI Foundry or equivalent MLOps platforms",
+      "Understanding of AI security risks (prompt injection, data poisoning, model extraction)",
+      "Published research or open-source contributions (preferred)"
+    ],
+    "responsibilities": [
+      "Design and implement multi-agent AI systems using Azure AI Foundry",
+      "Build adversarial testing pipelines for AI red-teaming",
+      "Evaluate and mitigate prompt injection vulnerabilities in production agents",
+      "Collaborate with product on AI feature development and safety controls",
+      "Contribute to NebulaForge's AI security research and publications"
+    ],
+    "benefits": [
+      "Flexible remote work policy",
+      "Research publication support",
+      "GPU compute credits for personal projects",
+      "Conference speaking opportunities",
+      "Significant equity"
+    ]
+  },
+  {
+    "id": "it-001",
+    "title": "IT Infrastructure Specialist",
+    "department": "IT",
+    "location": "Frankfurt, Germany (On-site)",
+    "type": "Full-time",
+    "level": "Mid",
+    "salary": "€55,000 – €70,000",
+    "posted": "2026-02-13",
+    "description": "Maintain and evolve NebulaForge's internal IT infrastructure. You will manage endpoints, on-premises networking, Azure AD, and Intune device management for 200+ employees across 3 offices.",
+    "requirements": [
+      "3+ years IT infrastructure or system administration",
+      "Experience with Microsoft 365, Azure AD (Entra ID), and Intune",
+      "Networking fundamentals: DNS, DHCP, VPN, firewalls",
+      "Windows Server and Linux administration",
+      "Basic scripting (PowerShell or Bash)",
+      "Helpdesk or end-user support background"
+    ],
+    "responsibilities": [
+      "Manage Azure AD / Entra ID tenant, conditional access, and MFA",
+      "Administer Intune policies for Windows and macOS endpoints",
+      "Maintain office network infrastructure and VPN services",
+      "Handle L2/L3 escalations from helpdesk",
+      "Contribute to IT disaster recovery and backup procedures"
+    ],
+    "benefits": [
+      "On-site role with stable schedule",
+      "IT certification support",
+      "Modern tech stack",
+      "Internal growth path to Cloud Engineer",
+      "Competitive benefits package"
+    ]
+  },
+  {
+    "id": "it-002",
+    "title": "Cloud Systems Administrator",
+    "department": "IT",
+    "location": "Remote (EU)",
+    "type": "Full-time",
+    "level": "Mid",
+    "salary": "€58,000 – €75,000",
+    "posted": "2026-02-09",
+    "description": "Support the day-to-day operations of NebulaForge's Azure-hosted systems. You will ensure high availability of internal platforms, manage patch cycles, and automate operational runbooks.",
+    "requirements": [
+      "3+ years Azure administration experience",
+      "AZ-104 (Azure Administrator) certification required",
+      "Experience with Azure Monitor, Log Analytics, and alerting",
+      "Familiarity with backup solutions and Azure Site Recovery",
+      "Scripting in PowerShell or Azure CLI",
+      "ITIL Foundation (preferred)"
+    ],
+    "responsibilities": [
+      "Monitor and maintain Azure subscriptions and resource health",
+      "Manage patch management cycles for VMs and PaaS resources",
+      "Create and maintain operational runbooks and documentation",
+      "Respond to infrastructure alerts and perform root cause analysis",
+      "Support compliance audits with logging and reporting"
+    ],
+    "benefits": [
+      "Fully remote within EU",
+      "Azure certification reimbursement",
+      "Home office equipment budget",
+      "Flexible working hours",
+      "Annual team offsite"
+    ]
+  },
+  {
+    "id": "sec-001",
+    "title": "SOC Analyst (Tier 2)",
+    "department": "Cybersecurity",
+    "location": "Stockholm, Sweden (Hybrid)",
+    "type": "Full-time",
+    "level": "Mid",
+    "salary": "€65,000 – €85,000",
+    "posted": "2026-02-07",
+    "description": "Join NebulaForge's Security Operations Center as a Tier 2 analyst. You will triage and investigate security incidents, hunt for threats in our Azure environment, and mentor Tier 1 analysts.",
+    "requirements": [
+      "3+ years SOC or incident response experience",
+      "Proficiency with Microsoft Sentinel and Defender XDR",
+      "Understanding of MITRE ATT&CK framework",
+      "Experience with KQL for threat hunting",
+      "Knowledge of cloud attack techniques (Azure, M365)",
+      "Security certifications: SC-200, CompTIA CySA+, or equivalent"
+    ],
+    "responsibilities": [
+      "Investigate escalated alerts from Tier 1 and SIEM detections",
+      "Perform threat hunting across Azure and M365 logs using KQL",
+      "Write and tune detection rules in Microsoft Sentinel",
+      "Lead incident response for medium-severity events",
+      "Mentor Tier 1 analysts and maintain SOC playbooks"
+    ],
+    "benefits": [
+      "24/5 SOC (no overnight shifts)",
+      "Dedicated lab environment for skill development",
+      "Security conference budget",
+      "Career path to SOC Manager or IR Specialist",
+      "Competitive compensation with shift allowance"
+    ]
+  },
+  {
+    "id": "sec-002",
+    "title": "Cloud Security Engineer",
+    "department": "Cybersecurity",
+    "location": "Remote (EU) or Stockholm",
+    "type": "Full-time",
+    "level": "Senior",
+    "salary": "€85,000 – €115,000",
+    "posted": "2026-02-06",
+    "description": "Own the security of NebulaForge's Azure cloud platform. You will design security controls, lead threat modeling for our AI/agent systems, and drive Defender for Cloud adoption across all subscriptions.",
+    "requirements": [
+      "5+ years cloud security engineering",
+      "Expert knowledge of Microsoft Defender for Cloud and Sentinel",
+      "Experience securing AI/LLM workloads and understanding of AI attack surface",
+      "Azure Security Engineer certification (AZ-500) required",
+      "Threat modeling experience (STRIDE, PASTA, or MITRE ATLAS)",
+      "Background in penetration testing or red team exercises (preferred)"
+    ],
+    "responsibilities": [
+      "Define and enforce cloud security baseline across all Azure subscriptions",
+      "Implement and tune Microsoft Defender for AI and Defender for Cloud",
+      "Lead threat modeling sessions for new AI features and agent systems",
+      "Conduct security architecture reviews for product and infrastructure changes",
+      "Build security automation pipelines for continuous compliance"
+    ],
+    "benefits": [
+      "Remote-first with optional Stockholm office",
+      "Top security certification budget (unlimited)",
+      "Bug bounty participation program",
+      "Shape the AI security posture of a growing company",
+      "Equity + strong base compensation"
+    ]
+  }
+]
+

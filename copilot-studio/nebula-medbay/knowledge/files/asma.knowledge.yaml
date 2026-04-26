@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: Aerospace Medical Association
+description: Aerospace Medical Association — aviation and space medicine
+siteUrl: https://www.asma.org
+maxResultCount: 5

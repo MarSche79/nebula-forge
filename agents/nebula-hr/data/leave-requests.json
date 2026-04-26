@@ -1,0 +1,42 @@
+[
+  {
+    "id": "LR-001",
+    "crewMemberId": "CREW-004",
+    "crewMemberName": "Lt. Priya Nair",
+    "type": "shore-leave",
+    "startDate": "2387-04-10",
+    "endDate": "2387-04-24",
+    "status": "approved",
+    "reason": "Visiting family on Titan Colony during scheduled supply transport window."
+  },
+  {
+    "id": "LR-002",
+    "crewMemberId": "CREW-009",
+    "crewMemberName": "Ensign Dax Rourke",
+    "type": "medical",
+    "startDate": "2387-03-28",
+    "endDate": "2387-04-11",
+    "status": "pending",
+    "reason": "Recovery from radiation exposure sustained during Sector 7 survey. Medbay recommendation for extended rest."
+  },
+  {
+    "id": "LR-003",
+    "crewMemberId": "CREW-006",
+    "crewMemberName": "Ensign Yuki Sato",
+    "type": "training",
+    "startDate": "2387-05-01",
+    "endDate": "2387-05-15",
+    "status": "pending",
+    "reason": "Advanced Quantum Drive Certification course at Proxima Centauri Engineering Institute."
+  },
+  {
+    "id": "LR-004",
+    "crewMemberId": "CREW-010",
+    "crewMemberName": "Specialist Jun Li",
+    "type": "personal",
+    "startDate": "2387-04-20",
+    "endDate": "2387-04-25",
+    "status": "pending",
+    "reason": "Attending memorial service for former crew member at Earth Orbital Station."
+  }
+]

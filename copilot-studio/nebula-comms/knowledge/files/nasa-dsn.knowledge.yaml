@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: NASA Deep Space Network
+description: NASA's Deep Space Network — deep-space communications infrastructure
+siteUrl: https://www.nasa.gov/communicating-with-missions/dsn/
+maxResultCount: 5

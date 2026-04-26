@@ -1,0 +1,110 @@
+name: nebula-forge
+metadata:
+  template: nebula-forge@1.0.0
+services:
+  portal:
+    project: ./portal
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+  api:
+    project: ./api
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+  hr:
+    project: ../agents/nebula-hr
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-hr
+  materials:
+    project: ../agents/nebula-materials
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-materials
+  exploration:
+    project: ../agents/nebula-exploration
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-exploration
+  science:
+    project: ../agents/nebula-science
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-science
+  safety:
+    project: ../agents/nebula-safety
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-safety
+  engineering:
+    project: ../agents/nebula-engineering
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-engineering
+  logistics:
+    project: ../agents/nebula-logistics
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-logistics
+  comms:
+    project: ../agents/nebula-comms
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-comms
+  medbay:
+    project: ../agents/nebula-medbay
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-medbay
+hooks:
+  postprovision:
+    shell: pwsh
+    run: ./infra/post-provision.ps1

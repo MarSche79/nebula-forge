@@ -1,0 +1,30 @@
+{
+    "version": "v1.6",
+    "name": "Nebula Forge Safety Officer",
+    "description": "Safety & compliance — incident reporting, radiation monitoring, safety audits, and emergency protocol management for Nebula Forge station.",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "View Open Incidents",
+            "text": "Show all open safety incidents"
+        },
+        {
+            "title": "Report an Incident",
+            "text": "Report a coolant leak in Engineering"
+        },
+        {
+            "title": "Check Radiation Levels",
+            "text": "Check radiation levels on the Command Bridge"
+        },
+        {
+            "title": "Emergency Protocol Lookup",
+            "text": "What's the protocol for a hull breach?"
+        }
+    ],
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

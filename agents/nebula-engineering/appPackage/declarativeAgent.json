@@ -1,0 +1,30 @@
+{
+    "version": "v1.6",
+    "name": "Nebula Forge Chief Engineer",
+    "description": "Nebula Forge Chief Engineer — station systems monitoring, repair scheduling, diagnostics, and power grid management for space station operations.",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Station System Status",
+            "text": "Show me the current status of all station systems."
+        },
+        {
+            "title": "Schedule a Repair",
+            "text": "I need to schedule a repair for the Atmospheric Recycler Unit Alpha. Help me set up the repair task."
+        },
+        {
+            "title": "Run System Diagnostics",
+            "text": "Run a full diagnostic on the Primary Fusion Reactor and give me the health report."
+        },
+        {
+            "title": "Power Grid Overview",
+            "text": "Give me a full overview of the station power grid — output, consumption, and any alerts."
+        }
+    ],
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

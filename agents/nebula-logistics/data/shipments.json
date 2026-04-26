@@ -1,0 +1,92 @@
+[
+  {
+    "id": "SHP-001",
+    "manifest": "Emergency medical supplies and ration packs",
+    "origin": "Earth Orbital Station",
+    "destination": "Nebula Forge",
+    "status": "in-transit",
+    "departureDate": "2187-03-12",
+    "estimatedArrival": "2187-03-19",
+    "weight": 4200,
+    "items": [
+      { "name": "Med-Kit Type III", "quantity": 120, "unit": "crates" },
+      { "name": "Ration Pack Alpha", "quantity": 500, "unit": "units" },
+      { "name": "Surgical Instruments", "quantity": 15, "unit": "kits" }
+    ]
+  },
+  {
+    "id": "SHP-002",
+    "manifest": "Refined titanium alloy and hull plating",
+    "origin": "Titan Refinery",
+    "destination": "Nebula Forge",
+    "status": "loading",
+    "departureDate": "2187-03-18",
+    "estimatedArrival": "2187-03-28",
+    "weight": 18500,
+    "items": [
+      { "name": "Titanium Alloy Sheets", "quantity": 200, "unit": "panels" },
+      { "name": "Hull Plating Grade-A", "quantity": 80, "unit": "sections" },
+      { "name": "Welding Compound X7", "quantity": 50, "unit": "barrels" }
+    ]
+  },
+  {
+    "id": "SHP-003",
+    "manifest": "Scientific equipment and lab consumables",
+    "origin": "Mars Colony Ares",
+    "destination": "Nebula Forge",
+    "status": "arrived",
+    "departureDate": "2187-03-05",
+    "estimatedArrival": "2187-03-14",
+    "weight": 3100,
+    "items": [
+      { "name": "Spectrometer Module", "quantity": 3, "unit": "units" },
+      { "name": "Chemical Reagent Set", "quantity": 40, "unit": "kits" },
+      { "name": "Cryo-Storage Cells", "quantity": 25, "unit": "units" }
+    ]
+  },
+  {
+    "id": "SHP-004",
+    "manifest": "Fuel rods and reactor coolant",
+    "origin": "Jupiter Station Io",
+    "destination": "Nebula Forge",
+    "status": "in-transit",
+    "departureDate": "2187-03-10",
+    "estimatedArrival": "2187-03-22",
+    "weight": 9800,
+    "items": [
+      { "name": "Deuterium Fuel Rods", "quantity": 60, "unit": "rods" },
+      { "name": "Reactor Coolant ZR-9", "quantity": 300, "unit": "liters" },
+      { "name": "Plasma Conduit Spares", "quantity": 12, "unit": "units" }
+    ]
+  },
+  {
+    "id": "SHP-005",
+    "manifest": "Crew personal effects and comfort supplies",
+    "origin": "Nebula Forge",
+    "destination": "Mars Colony Ares",
+    "status": "completed",
+    "departureDate": "2187-02-20",
+    "estimatedArrival": "2187-03-01",
+    "weight": 1400,
+    "items": [
+      { "name": "Personal Cargo Containers", "quantity": 45, "unit": "units" },
+      { "name": "Recreation Equipment", "quantity": 8, "unit": "crates" },
+      { "name": "Mail Parcels", "quantity": 120, "unit": "parcels" }
+    ]
+  },
+  {
+    "id": "SHP-006",
+    "manifest": "Ammunition and defense system components",
+    "origin": "Earth Orbital Station",
+    "destination": "Nebula Forge",
+    "status": "unloading",
+    "departureDate": "2187-03-01",
+    "estimatedArrival": "2187-03-08",
+    "weight": 6700,
+    "items": [
+      { "name": "Kinetic Rounds M40", "quantity": 2000, "unit": "rounds" },
+      { "name": "Point Defense Cells", "quantity": 24, "unit": "units" },
+      { "name": "Targeting Array Chips", "quantity": 6, "unit": "modules" }
+    ]
+  }
+]

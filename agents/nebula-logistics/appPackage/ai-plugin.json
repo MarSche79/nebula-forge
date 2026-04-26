@@ -1,0 +1,23 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Nebula Forge Quartermaster",
+  "description_for_human": "Nebula Forge supply chain & logistics — cargo tracking, inventory management, supply ordering, and storage capacity monitoring.",
+  "description_for_model": "This plugin provides tools for supply chain and logistics operations aboard the Nebula Forge station. It can list and track cargo shipments, query inventory levels with low-stock warnings, create supply orders, and check storage bay capacity utilization. Use it when users ask about shipments, inventory, supplies, storage, or cargo.",
+  "contact_email": "ops@nebulaforge.station",
+  "namespace": "nebula_logistics",
+  "runtimes": [
+    {
+      "type": "McpServer",
+      "url": "http://localhost:3007/mcp"
+    }
+  ],
+  "capabilities": {
+    "conversation_starters": [
+      { "text": "Track shipment SHP-001" },
+      { "text": "Show inventory levels for medical supplies" },
+      { "text": "Create an emergency supply order for fuel" },
+      { "text": "What's our storage capacity?" }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+    "version": "v1.6",
+    "name": "Nebula Forge HR Assistant",
+    "description": "HR & Personnel management for Nebula Forge space station",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "View Crew Roster",
+            "text": "Show me the current crew roster"
+        },
+        {
+            "title": "Screen a Candidate",
+            "text": "Screen candidate CAND-001 for the open position"
+        },
+        {
+            "title": "Process Leave Requests",
+            "text": "Process the pending leave requests"
+        },
+        {
+            "title": "Onboard New Crew Member",
+            "text": "Onboard candidate CAND-003 to the station"
+        }
+    ],
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

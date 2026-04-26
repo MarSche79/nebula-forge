@@ -1,0 +1,12 @@
+mcs.metadata:
+  componentName: Nebula Forge Exploration Navigator
+<<<<<<< 
+kind: GptComponentMetadata=======
+kind: GptComponentMetadata
+instructions:
+gptCapabilities:
+  webBrowsing: true
+
+aISettings:
+  model:
+    modelNameHint: Sonnet46>>>>>>> 

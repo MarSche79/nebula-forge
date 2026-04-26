@@ -1,0 +1,135 @@
+{
+  "$schema": "https://aka.ms/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Nebula Forge Medical Officer",
+  "description_for_human": "Medical bay operations for Nebula Forge station — health records, checkup scheduling, medication inventory, and incident reporting.",
+  "description_for_model": "This plugin manages all medical bay operations aboard Nebula Forge station. It can retrieve crew health summaries, schedule medical checkups, query medical records, report medical incidents, and check medication inventory levels. Use it whenever a user asks about crew health, medical history, medications, or needs to report a medical emergency.",
+  "contact_email": "medbay@nebulaforge.station",
+  "namespace": "nebula-medbay",
+  "logo_url": "",
+  "legal_info_url": "",
+  "privacy_url": "",
+  "runtimes": [
+    {
+      "type": "MCP",
+      "spec": {
+        "url": "http://localhost:3009/mcp"
+      },
+      "run_for_functions": [
+        "get_crew_health",
+        "schedule_checkup",
+        "get_medical_records",
+        "report_medical_incident",
+        "get_medication_inventory"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_crew_health",
+      "description": "Get a crew member's health summary including medical history and upcoming checkups. If no crewMemberId is provided, returns a summary for all crew members.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "description": "Crew member ID (e.g. CREW-001)"
+          }
+        }
+      }
+    },
+    {
+      "name": "schedule_checkup",
+      "description": "Schedule a medical checkup for a crew member.",
+      "parameters": {
+        "type": "object",
+        "required": ["crewMemberId", "crewMemberName", "type", "scheduledDate", "physician"],
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "description": "Crew member ID (e.g. CREW-001)"
+          },
+          "crewMemberName": {
+            "type": "string",
+            "description": "Crew member full name"
+          },
+          "type": {
+            "type": "string",
+            "description": "Checkup type (e.g. quarterly-physical, psychological-followup, radiation-screening)"
+          },
+          "scheduledDate": {
+            "type": "string",
+            "description": "Scheduled date (YYYY-MM-DD)"
+          },
+          "physician": {
+            "type": "string",
+            "description": "Attending physician name"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_medical_records",
+      "description": "Retrieve medical records. Optionally filter by crew member ID or record type.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "description": "Filter by crew member ID"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["checkup", "treatment", "emergency", "vaccination", "psychological"],
+            "description": "Filter by record type"
+          }
+        }
+      }
+    },
+    {
+      "name": "report_medical_incident",
+      "description": "Report an urgent medical incident for a crew member. Creates an emergency medical record.",
+      "parameters": {
+        "type": "object",
+        "required": ["crewMemberId", "crewMemberName", "description", "severity", "physician"],
+        "properties": {
+          "crewMemberId": {
+            "type": "string",
+            "description": "Crew member ID"
+          },
+          "crewMemberName": {
+            "type": "string",
+            "description": "Crew member full name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the medical incident"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Incident severity"
+          },
+          "physician": {
+            "type": "string",
+            "description": "Responding physician"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_medication_inventory",
+      "description": "Get current medication inventory. Optionally filter by category. Flags items below minimum stock levels.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": ["antibiotic", "analgesic", "radiation", "psychological", "surgical", "nutritional"],
+            "description": "Filter by medication category"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: NASA Logistics Reduction
+description: NASA Logistics Reduction Project — space logistics research
+siteUrl: https://www.nasa.gov/centers-and-facilities/glenn/
+maxResultCount: 5

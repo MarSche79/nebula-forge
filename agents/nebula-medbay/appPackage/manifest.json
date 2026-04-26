@@ -1,0 +1,39 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Nebula Forge Station Operations",
+        "websiteUrl": "https://nebulaforge.station",
+        "privacyUrl": "https://nebulaforge.station/privacy",
+        "termsOfUseUrl": "https://nebulaforge.station/terms"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "NF Medical Officer",
+        "full": "Nebula Forge Medical Officer"
+    },
+    "description": {
+        "short": "Medical bay operations — crew health, checkups, medical records, and medication inventory.",
+        "full": "Nebula Forge Medical Officer — your AI assistant for medical bay operations. Monitor crew health status, schedule medical checkups, manage medical records with strict confidentiality, report and triage medical incidents, and track medication inventory."
+    },
+    "accentColor": "#E91E63",
+    "composeExtensions": [],
+    "copilotAgents": {
+        "declarativeAgents": [
+            {
+                "id": "declarativeAgent",
+                "file": "declarativeAgent.json"
+            }
+        ]
+    },
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}

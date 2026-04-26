@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: ESA Space Exploration
+description: European Space Agency — exploration missions and resources
+siteUrl: https://www.esa.int/Science_Exploration
+maxResultCount: 5

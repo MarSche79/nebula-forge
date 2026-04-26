@@ -1,0 +1,23 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Exploration Navigator",
+  "description_for_human": "Nebula Forge space exploration — mission planning, route optimization, celestial body queries, and mission tracking.",
+  "description_for_model": "This plugin provides tools for space exploration operations aboard the Nebula Forge station. It can list and create missions, query a database of celestial bodies (asteroids, planets, moons, nebulae, comets, stations), calculate routes between celestial bodies with fuel and risk estimates, and update mission statuses. Use it when users ask about missions, destinations, routes, or celestial body data.",
+  "contact_email": "ops@nebulaforge.station",
+  "namespace": "nebula_exploration",
+  "runtimes": [
+    {
+      "type": "McpServer",
+      "url": "http://localhost:3003/mcp"
+    }
+  ],
+  "capabilities": {
+    "conversation_starters": [
+      { "text": "Show all active missions" },
+      { "text": "Plan a survey mission to Asteroid Theta-7" },
+      { "text": "Calculate route to Europa Deep Trench" },
+      { "text": "What celestial bodies are near sector 7?" }
+    ]
+  }
+}

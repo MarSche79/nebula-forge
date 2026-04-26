@@ -1,0 +1,39 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.23/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.23",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "developer": {
+        "name": "Nebula Forge Station Operations",
+        "websiteUrl": "https://nebulaforge.station",
+        "privacyUrl": "https://nebulaforge.station/privacy",
+        "termsOfUseUrl": "https://nebulaforge.station/terms"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "NF Science Officer",
+        "full": "Nebula Forge Science Officer"
+    },
+    "description": {
+        "short": "Space science research — experiment tracking, observations, and publication management",
+        "full": "Nebula Forge Science Officer assists with experiment tracking, observation logging, cross-domain research data queries, publication management, and hypothesis submission for all scientific research conducted aboard Nebula Forge station."
+    },
+    "accentColor": "#9B59B6",
+    "composeExtensions": [],
+    "copilotAgents": {
+        "declarativeAgents": [
+            {
+                "id": "declarativeAgent",
+                "file": "declarativeAgent.json"
+            }
+        ]
+    },
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": []
+}

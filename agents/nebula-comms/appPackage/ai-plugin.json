@@ -1,0 +1,137 @@
+{
+  "$schema": "https://aka.ms/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Nebula Forge Comms Officer",
+  "description_for_human": "Communications operations for Nebula Forge station — message routing, signal relay management, deep-space transmissions, and communication logs.",
+  "description_for_model": "This plugin manages all communications operations aboard Nebula Forge station. It can list and filter messages, send station-wide broadcasts, check communication relay status, schedule deep-space transmissions, and retrieve communication logs. Use it whenever a user asks about messages, relay status, broadcasts, transmissions, or communication history.",
+  "contact_email": "comms@nebulaforge.station",
+  "namespace": "nebula-comms",
+  "logo_url": "",
+  "legal_info_url": "",
+  "privacy_url": "",
+  "runtimes": [
+    {
+      "type": "MCP",
+      "spec": {
+        "url": "http://localhost:3008/mcp"
+      },
+      "run_for_functions": [
+        "get_messages",
+        "send_broadcast",
+        "check_signal_status",
+        "schedule_transmission",
+        "get_comm_logs"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_messages",
+      "description": "List communication messages. Optionally filter by channel or priority.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "enum": ["internal", "deep-space", "emergency", "command"],
+            "description": "Filter by communication channel"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["routine", "priority", "urgent", "flash"],
+            "description": "Filter by message priority"
+          }
+        }
+      }
+    },
+    {
+      "name": "send_broadcast",
+      "description": "Send a station-wide broadcast message to all personnel. Creates a message with channel 'internal' and addressed to ALL-STATION.",
+      "parameters": {
+        "type": "object",
+        "required": ["from", "subject", "body", "priority"],
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Sender name or role (e.g. 'Cdr. Elena Vasquez')"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Broadcast subject line"
+          },
+          "body": {
+            "type": "string",
+            "description": "Broadcast message body"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["routine", "priority", "urgent", "flash"],
+            "description": "Message priority level"
+          }
+        }
+      }
+    },
+    {
+      "name": "check_signal_status",
+      "description": "Check the status of communication relay stations. Provide a relayId for a specific relay, or omit to get the status of all relays.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "relayId": {
+            "type": "string",
+            "description": "Relay ID (e.g. RELAY-001) for a specific relay"
+          }
+        }
+      }
+    },
+    {
+      "name": "schedule_transmission",
+      "description": "Schedule a deep-space transmission. Automatically calculates the relay path based on available online relays.",
+      "parameters": {
+        "type": "object",
+        "required": ["targetStation", "message", "scheduledTime", "priority"],
+        "properties": {
+          "targetStation": {
+            "type": "string",
+            "description": "Name of the target station or outpost"
+          },
+          "message": {
+            "type": "string",
+            "description": "Transmission message content"
+          },
+          "scheduledTime": {
+            "type": "string",
+            "description": "Scheduled transmission time (ISO 8601 format)"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["routine", "priority", "urgent", "flash"],
+            "description": "Transmission priority level"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_comm_logs",
+      "description": "Get communication logs. Optionally filter by date range or channel.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "description": "Start date for filtering (ISO 8601 format, e.g. 2287-03-15)"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "End date for filtering (ISO 8601 format, e.g. 2287-03-16)"
+          },
+          "channel": {
+            "type": "string",
+            "enum": ["internal", "deep-space", "emergency", "command"],
+            "description": "Filter by communication channel"
+          }
+        }
+      }
+    }
+  ]
+}

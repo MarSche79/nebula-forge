@@ -1,0 +1,114 @@
+[
+  {
+    "id": "MSN-001",
+    "name": "Operation Deep Nebula",
+    "type": "exploration",
+    "status": "in-progress",
+    "commander": "Captain Zara Voss",
+    "crew": ["Lt. Kael Orin", "Dr. Mira Chen", "Ensign Tova Marsh", "Sgt. Renn Dax"],
+    "destination": "Nebula Frontier Sector 7",
+    "departureDate": "2387-03-12",
+    "returnDate": "2387-06-18",
+    "objectives": [
+      "Map gravitational anomalies within the Frontier Sector 7 perimeter",
+      "Collect spectral data from the Veil Nebula remnant",
+      "Establish a long-range communication relay at waypoint Sigma-14"
+    ]
+  },
+  {
+    "id": "MSN-002",
+    "name": "Titan Survey Alpha",
+    "type": "survey",
+    "status": "planned",
+    "commander": "Commander Idris Kato",
+    "crew": ["Dr. Lena Vos", "Lt. Priya Nair", "Tech Sgt. Boris Kern"],
+    "destination": "Titan Subsurface Ocean",
+    "departureDate": "2387-04-01",
+    "returnDate": "2387-04-28",
+    "objectives": [
+      "Perform sonar mapping of Titan's northern subsurface ocean basin",
+      "Deploy three autonomous mineral-analysis drones",
+      "Assess viability for a permanent research outpost"
+    ]
+  },
+  {
+    "id": "MSN-003",
+    "name": "Sigma-9 Resource Extraction",
+    "type": "supply-run",
+    "status": "completed",
+    "commander": "Lt. Commander Freya Holm",
+    "crew": ["Ensign Dax Rourke", "Specialist Jun Li", "Crewman Aisha Yilmaz"],
+    "destination": "Asteroid Belt Sigma-9",
+    "departureDate": "2387-01-05",
+    "returnDate": "2387-02-02",
+    "objectives": [
+      "Extract 12 metric tons of rare-earth minerals from designated mining sites",
+      "Retrieve automated cargo pods left during Mission MSN-000",
+      "Survey asteroid drift patterns for future extraction windows"
+    ]
+  },
+  {
+    "id": "MSN-004",
+    "name": "Europa Deep Descent",
+    "type": "research",
+    "status": "in-progress",
+    "commander": "Dr. Soren Haak",
+    "crew": ["Lt. Yuki Tanaka", "Marine Biologist Elara Quinn", "Pilot Nico Vasquez", "Engineer Tomás Reva"],
+    "destination": "Europa Deep Trench",
+    "departureDate": "2387-02-20",
+    "returnDate": "2387-05-15",
+    "objectives": [
+      "Descend to the Europan hydrothermal vent field at 14 km depth",
+      "Collect biological samples from chemosynthetic ecosystems",
+      "Test new pressure-rated habitat modules for extended deep-ocean stays"
+    ]
+  },
+  {
+    "id": "MSN-005",
+    "name": "Helix Comet Intercept",
+    "type": "exploration",
+    "status": "planned",
+    "commander": "Captain Zara Voss",
+    "crew": ["Dr. Mira Chen", "Specialist Jun Li", "Ensign Tova Marsh"],
+    "destination": "Comet Helix-7 (Perihelion Window)",
+    "departureDate": "2387-05-10",
+    "returnDate": "2387-05-30",
+    "objectives": [
+      "Match velocity with Comet Helix-7 during its perihelion approach",
+      "Deploy surface probes to analyze volatile outgassing composition",
+      "Capture high-resolution imagery of the nucleus surface features"
+    ]
+  },
+  {
+    "id": "MSN-006",
+    "name": "Obsidian Outpost Rescue",
+    "type": "rescue",
+    "status": "completed",
+    "commander": "Commander Idris Kato",
+    "crew": ["Sgt. Renn Dax", "Medic Elara Quinn", "Pilot Nico Vasquez"],
+    "destination": "Obsidian Station (Asteroid Kappa-12)",
+    "departureDate": "2387-02-10",
+    "returnDate": "2387-02-14",
+    "objectives": [
+      "Evacuate 7 stranded researchers from Obsidian Outpost after hull breach",
+      "Stabilize station reactor to prevent meltdown",
+      "Retrieve critical xenobiology samples before station decommission"
+    ]
+  },
+  {
+    "id": "MSN-007",
+    "name": "Phantom Rift Survey",
+    "type": "survey",
+    "status": "aborted",
+    "commander": "Lt. Commander Freya Holm",
+    "crew": ["Dr. Lena Vos", "Tech Sgt. Boris Kern", "Ensign Dax Rourke"],
+    "destination": "Phantom Rift (Dark Matter Anomaly Zone)",
+    "departureDate": "2387-01-20",
+    "returnDate": "2387-01-25",
+    "objectives": [
+      "Chart boundaries of the Phantom Rift gravitational distortion",
+      "Deploy quantum-shielded sensor buoys at 5 AU intervals",
+      "Test experimental dark-matter detection array"
+    ]
+  }
+]

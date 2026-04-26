@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: NASA Astronaut Selection
+description: NASA astronaut selection criteria and crew assignment information
+siteUrl: https://www.nasa.gov/humans-in-space/astronauts/
+maxResultCount: 5

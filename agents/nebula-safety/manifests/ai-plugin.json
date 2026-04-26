@@ -1,0 +1,120 @@
+{
+  "$schema": "https://aka.ms/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Nebula Forge Safety Officer",
+  "description_for_human": "Safety & compliance for Nebula Forge station — incident reporting, radiation monitoring, safety audits, and emergency protocols.",
+  "description_for_model": "This plugin manages all safety and compliance operations aboard Nebula Forge station. It can list and report safety incidents, check radiation levels across station sectors, run safety audits combining incident and radiation data, and retrieve emergency response protocols. Use it whenever a user asks about safety incidents, radiation readings, safety audits, or emergency procedures.",
+  "contact_email": "safety@nebulaforge.station",
+  "namespace": "nebula-safety",
+  "logo_url": "",
+  "legal_info_url": "",
+  "privacy_url": "",
+  "runtimes": [
+    {
+      "type": "MCP",
+      "spec": {
+        "url": "http://localhost:3005/mcp"
+      },
+      "run_for_functions": [
+        "get_incidents",
+        "report_incident",
+        "check_radiation_levels",
+        "run_safety_audit",
+        "get_emergency_protocols"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_incidents",
+      "description": "List safety incidents. Optionally filter by severity or status.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Filter incidents by severity level"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["open", "investigating", "resolved", "closed"],
+            "description": "Filter incidents by status"
+          }
+        }
+      }
+    },
+    {
+      "name": "report_incident",
+      "description": "Report a new safety incident. Creates a new incident record with an auto-generated ID and today's date.",
+      "parameters": {
+        "type": "object",
+        "required": ["title", "severity", "location", "reportedBy", "description"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Short title of the incident"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Incident severity level"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location on the station where the incident occurred"
+          },
+          "reportedBy": {
+            "type": "string",
+            "description": "Name and rank of the person reporting"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the incident"
+          }
+        }
+      }
+    },
+    {
+      "name": "check_radiation_levels",
+      "description": "Get current radiation readings across the station. Optionally filter by a specific sector ID to get a single reading.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sectorId": {
+            "type": "string",
+            "description": "Sector ID to check (e.g. SEC-CMD, SEC-ENG). Omit for all sectors."
+          }
+        }
+      }
+    },
+    {
+      "name": "run_safety_audit",
+      "description": "Run a safety audit for a specific sector. Combines incident history and radiation data for the given area into an audit report.",
+      "parameters": {
+        "type": "object",
+        "required": ["sectorId"],
+        "properties": {
+          "sectorId": {
+            "type": "string",
+            "description": "Sector ID to audit (e.g. SEC-CMD, SEC-ENG)"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_emergency_protocols",
+      "description": "List emergency protocols. Optionally filter by severity level.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "severity": {
+            "type": "string",
+            "enum": ["high", "critical"],
+            "description": "Filter protocols by severity level"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+# ─── Dependencies / build output ──────────────────────────
+node_modules/
+dist/
+.next/
+out/
+build/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# ─── Local dev / runtime ───────────────────────────────────
+.azurite/
+*.log
+npm-debug.log*
+
+# ─── azd / Azure ───────────────────────────────────────────
+# This dir contains per-environment .env files with SECRETS
+# (AAD_CLIENT_SECRET etc.). Never commit.
+.azure/
+*.azurePubxml
+*.pubxml
+*.publishproj
+
+# ─── Bicep generated ARM ──────────────────────────────────
+azure/infra/main.json
+
+# ─── Environment variables ─────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.secret
+
+# ─── IDE / OS noise ───────────────────────────────────────
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# ─── Test artifacts ───────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── Keep .env.example files (they're templates, no secrets) ─
+!.env.example

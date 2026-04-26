@@ -1,0 +1,58 @@
+# Repo-root .dockerignore
+# Used when azd builds containers with context: ../..
+
+# Dependencies
+node_modules
+**/node_modules
+**/dist
+**/.next
+**/build
+**/out
+
+# Local data
+.azurite
+.azure
+**/.azurite
+**/.mcs
+
+# Editor & VCS
+.git
+.github
+.vscode
+.idea
+*.suo
+*.user
+
+# Logs & temp
+*.log
+*.tmp
+**/*.log
+**/.cache
+
+# Docker / azd internals
+.dockerignore
+azd-config-cache.json
+
+# Project-specific (not needed in MCP container)
+azure/portal
+azure/api
+azure/infra
+azure/scripts
+azure/README.md
+copilot-studio
+Copilot-Studio-Clones
+dist/packages
+dist/stage
+
+# Markdown / docs
+*.md
+!packages/shared/README.md
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Env files
+.env
+.env.local
+.env.*.local

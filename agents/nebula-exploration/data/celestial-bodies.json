@@ -1,0 +1,122 @@
+[
+  {
+    "id": "CB-001",
+    "name": "Asteroid Belt Sigma-9",
+    "type": "asteroid",
+    "coordinates": { "x": 2.4, "y": -0.3, "z": 0.1 },
+    "distance": 3.2,
+    "knownResources": ["iridium", "platinum", "helium-3"],
+    "dangerLevel": "moderate",
+    "notes": "Dense asteroid field with predictable drift patterns. Rich in rare-earth minerals. Navigable with standard deflector arrays."
+  },
+  {
+    "id": "CB-002",
+    "name": "Europa",
+    "type": "moon",
+    "coordinates": { "x": 5.2, "y": 0.0, "z": -0.1 },
+    "distance": 5.2,
+    "knownResources": ["water-ice", "silicates", "organic-compounds"],
+    "dangerLevel": "moderate",
+    "notes": "Subsurface ocean confirmed. Hydrothermal vents detected at 14 km depth. Radiation from Jupiter requires shielded approach corridors."
+  },
+  {
+    "id": "CB-003",
+    "name": "Nebula Frontier Sector 7",
+    "type": "nebula",
+    "coordinates": { "x": 12.8, "y": 3.5, "z": 7.2 },
+    "distance": 15.4,
+    "knownResources": ["ionized-hydrogen", "exotic-particles", "dark-matter-traces"],
+    "dangerLevel": "hazardous",
+    "notes": "Emission nebula with extreme electromagnetic interference. Sensor range reduced to 40%. Contains uncharted gravitational anomalies."
+  },
+  {
+    "id": "CB-004",
+    "name": "Titan",
+    "type": "moon",
+    "coordinates": { "x": 9.5, "y": 0.2, "z": -0.4 },
+    "distance": 9.5,
+    "knownResources": ["methane", "nitrogen", "water-ice", "tholins"],
+    "dangerLevel": "moderate",
+    "notes": "Dense atmosphere of nitrogen and methane. Subsurface ocean beneath ice crust. Viable candidate for permanent outpost."
+  },
+  {
+    "id": "CB-005",
+    "name": "Comet Helix-7",
+    "type": "comet",
+    "coordinates": { "x": -4.1, "y": 6.3, "z": 2.0 },
+    "distance": 7.8,
+    "knownResources": ["water-ice", "ammonia", "carbon-dioxide", "dust-particulates"],
+    "dangerLevel": "hazardous",
+    "notes": "Highly eccentric orbit. Volatile outgassing intensifies near perihelion. Approach only during calculated intercept windows."
+  },
+  {
+    "id": "CB-006",
+    "name": "Obsidian Station",
+    "type": "station",
+    "coordinates": { "x": 1.8, "y": -1.2, "z": 0.5 },
+    "distance": 2.3,
+    "knownResources": ["salvageable-tech", "fuel-reserves"],
+    "dangerLevel": "hazardous",
+    "notes": "Decommissioned research outpost on Asteroid Kappa-12. Structural integrity compromised after hull breach incident. Reactor in standby mode."
+  },
+  {
+    "id": "CB-007",
+    "name": "Phantom Rift",
+    "type": "nebula",
+    "coordinates": { "x": -8.3, "y": 1.7, "z": -3.9 },
+    "distance": 9.5,
+    "knownResources": ["dark-matter-traces", "exotic-particles"],
+    "dangerLevel": "extreme",
+    "notes": "Anomalous dark matter concentration. Gravitational lensing distorts navigation systems. Two survey probes lost in this region. Extreme caution advised."
+  },
+  {
+    "id": "CB-008",
+    "name": "Kepler's Remnant",
+    "type": "nebula",
+    "coordinates": { "x": 18.0, "y": -2.4, "z": 5.6 },
+    "distance": 19.2,
+    "knownResources": ["heavy-elements", "neutron-star-fragments", "exotic-particles"],
+    "dangerLevel": "extreme",
+    "notes": "Supernova remnant with intense radiation bursts. Contains rare heavy elements. Approach requires Class-V radiation shielding."
+  },
+  {
+    "id": "CB-009",
+    "name": "Veridia Prime",
+    "type": "planet",
+    "coordinates": { "x": 7.1, "y": 2.9, "z": -1.3 },
+    "distance": 7.9,
+    "knownResources": ["silicates", "iron", "trace-organics", "geothermal-energy"],
+    "dangerLevel": "safe",
+    "notes": "Rocky terrestrial world with thin atmosphere. Stable geothermal activity. Strong candidate for forward exploration base."
+  },
+  {
+    "id": "CB-010",
+    "name": "Glacius",
+    "type": "planet",
+    "coordinates": { "x": -3.5, "y": -4.8, "z": 0.9 },
+    "distance": 6.1,
+    "knownResources": ["water-ice", "ammonia", "deuterium"],
+    "dangerLevel": "safe",
+    "notes": "Ice giant with extensive ring system. Deuterium-rich atmosphere makes it a potential fuel depot. Calm orbital environment."
+  },
+  {
+    "id": "CB-011",
+    "name": "Asteroid Theta-7",
+    "type": "asteroid",
+    "coordinates": { "x": 0.8, "y": 1.5, "z": -0.2 },
+    "distance": 1.7,
+    "knownResources": ["nickel", "cobalt", "platinum"],
+    "dangerLevel": "safe",
+    "notes": "Slow-rotating metallic asteroid. Ideal for automated mining operations. Close proximity to Nebula Forge makes regular supply runs feasible."
+  },
+  {
+    "id": "CB-012",
+    "name": "Nebula Forge Station",
+    "type": "station",
+    "coordinates": { "x": 0.0, "y": 0.0, "z": 0.0 },
+    "distance": 0.0,
+    "knownResources": ["fuel-reserves", "fabrication-materials", "medical-supplies"],
+    "dangerLevel": "safe",
+    "notes": "Home base. Primary space station and command hub for all exploration operations in this sector."
+  }
+]

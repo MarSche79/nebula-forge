@@ -1,0 +1,63 @@
+[
+  {
+    "id": "INC-001",
+    "title": "Micro-meteorite impact on Hull Section C",
+    "severity": "high",
+    "location": "Hull Section C - Outer Ring",
+    "reportedBy": "Lt. Cmdr. Elara Voss",
+    "reportedDate": "2187-11-15",
+    "status": "investigating",
+    "description": "A micro-meteorite struck the outer hull of Section C at 0347 hours. Sensors detected a minor pressure drop in the adjacent corridor. Emergency sealant was deployed automatically. Structural integrity at 94%. Full inspection required."
+  },
+  {
+    "id": "INC-002",
+    "title": "Airlock pressure anomaly - Bay 7",
+    "severity": "medium",
+    "location": "Docking Bay 7",
+    "reportedBy": "Ensign Riko Tanaka",
+    "reportedDate": "2187-11-18",
+    "status": "open",
+    "description": "Airlock cycling system in Bay 7 reported intermittent pressure fluctuations during routine cargo transfer. Pressure oscillated between 98.2 and 101.7 kPa over a 12-minute window. No personnel were at risk but EVA operations from Bay 7 have been suspended."
+  },
+  {
+    "id": "INC-003",
+    "title": "Coolant leak in Engineering Deck",
+    "severity": "high",
+    "location": "Engineering Deck - Sublevel 2",
+    "reportedBy": "Chief Engineer Marcus Webb",
+    "reportedDate": "2187-11-20",
+    "status": "investigating",
+    "description": "A hairline fracture in coolant conduit ENG-C47 caused a slow leak of cryogenic coolant. Approximately 3.2 liters lost before automated shutoff engaged. Temperature in the reactor cooling loop rose 2.1°C above nominal. Repair crew dispatched."
+  },
+  {
+    "id": "INC-004",
+    "title": "Unauthorized access attempt - Research Lab Omega",
+    "severity": "critical",
+    "location": "Research Lab Omega - Restricted Zone",
+    "reportedBy": "Security Officer Jax Harmon",
+    "reportedDate": "2187-11-22",
+    "status": "open",
+    "description": "Biometric access logs show three failed entry attempts to Research Lab Omega between 0200-0215 hours using a revoked credential badge (ID: NF-7742). Lab contains hazardous xenobiological samples. Security footage under review. Lab placed on lockdown."
+  },
+  {
+    "id": "INC-005",
+    "title": "Fire suppression false alarm - Hydroponics Bay",
+    "severity": "low",
+    "location": "Hydroponics Bay - Section 4",
+    "reportedBy": "Dr. Lydia Chen",
+    "reportedDate": "2187-11-10",
+    "status": "resolved",
+    "description": "Smoke detectors triggered fire suppression system due to elevated humidity and particulate matter from nutrient misting cycle. No actual fire detected. Sensor calibration adjusted to account for agricultural operations.",
+    "resolution": "Smoke detector sensitivity recalibrated for Hydroponics Bay environmental parameters. Firmware update applied to all Section 4 sensors."
+  },
+  {
+    "id": "INC-006",
+    "title": "Gravity generator fluctuation - Crew Quarters Alpha",
+    "severity": "medium",
+    "location": "Crew Quarters Alpha - Deck 3",
+    "reportedBy": "Lt. Soren Patel",
+    "reportedDate": "2187-11-25",
+    "status": "open",
+    "description": "Artificial gravity in Crew Quarters Alpha experienced brief fluctuations between 0.85g and 1.12g over a 45-second period at 2230 hours. Three crew members reported mild disorientation. Gravity stabilizers running diagnostic cycle."
+  }
+]

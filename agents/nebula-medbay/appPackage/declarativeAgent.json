@@ -1,0 +1,30 @@
+{
+    "version": "v1.6",
+    "name": "Nebula Forge Medical Officer",
+    "description": "Medical bay operations — crew health monitoring, checkup scheduling, medical records, and medication inventory for Nebula Forge station.",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Check Crew Health Status",
+            "text": "Show health status for crew member CREW-001"
+        },
+        {
+            "title": "Schedule a Checkup",
+            "text": "Schedule a checkup for Lt. Kenji Tanaka"
+        },
+        {
+            "title": "Medication Inventory",
+            "text": "Check medication inventory"
+        },
+        {
+            "title": "Report Medical Emergency",
+            "text": "Report a medical emergency in Engineering"
+        }
+    ],
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ]
+}

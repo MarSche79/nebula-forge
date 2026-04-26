@@ -1,0 +1,23 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Chief Engineer",
+  "description_for_human": "Nebula Forge engineering & maintenance — station systems monitoring, repair scheduling, diagnostics, and power grid management.",
+  "description_for_model": "This plugin provides tools for engineering and maintenance operations aboard the Nebula Forge station. It can retrieve station system statuses, schedule repair tasks, list and filter existing repairs, run diagnostics on individual systems to produce health reports, and provide a full power grid overview with sector-level output, consumption, and efficiency data. Use it when users ask about system health, repairs, diagnostics, or power grid status.",
+  "contact_email": "ops@nebulaforge.station",
+  "namespace": "nebula_engineering",
+  "runtimes": [
+    {
+      "type": "McpServer",
+      "url": "http://localhost:3006/mcp"
+    }
+  ],
+  "capabilities": {
+    "conversation_starters": [
+      { "text": "Show station system status" },
+      { "text": "Schedule repair for the atmospheric recycler" },
+      { "text": "Run diagnostics on the fusion reactor" },
+      { "text": "How's the power grid looking?" }
+    ]
+  }
+}

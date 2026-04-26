@@ -1,0 +1,10 @@
+**/node_modules
+.azurite
+dist
+**/dist
+*.log
+.git
+.vscode
+Copilot-Studio-Clones
+copilot-studio
+azure

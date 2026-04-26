@@ -1,0 +1,62 @@
+[
+  {
+    "id": "OBS-001",
+    "experimentId": "EXP-001",
+    "observer": "Dr. Yuki Tanaka",
+    "timestamp": "2026-03-10T14:30:00Z",
+    "category": "chemical",
+    "data": { "crystalSize_mm": 12.4, "defectRate_percent": 8.1, "growthRate_mmPerHour": 0.52, "temperature_K": 293 },
+    "significance": "notable",
+    "notes": "Largest defect-free crystal grown to date. Growth chamber pressure held steady at 10^-6 torr."
+  },
+  {
+    "id": "OBS-002",
+    "experimentId": "EXP-002",
+    "observer": "Prof. Amara Osei",
+    "timestamp": "2026-02-22T08:15:00Z",
+    "category": "astrophysical",
+    "data": { "gravitonFlux_units": 0.0047, "sensorArray": "QS-Alpha-7", "distanceFromBoundary_AU": 3.2, "backgroundNoise_dB": -142 },
+    "significance": "breakthrough",
+    "notes": "First confirmed graviton emission spike correlated with dark energy density gradient. Signal-to-noise ratio 4.7σ."
+  },
+  {
+    "id": "OBS-003",
+    "experimentId": "EXP-003",
+    "observer": "Dr. Marcus Chen",
+    "timestamp": "2026-01-18T11:00:00Z",
+    "category": "biological",
+    "data": { "viability_percent": 78, "exposureDuration_hours": 96, "metabolicRate_relative": 0.12, "sampleCount": 24 },
+    "significance": "notable",
+    "notes": "Final viability count completed. Survivors showed dormant but recoverable metabolic signatures."
+  },
+  {
+    "id": "OBS-004",
+    "experimentId": "EXP-004",
+    "observer": "Dr. Sofia Alvarez",
+    "timestamp": "2026-03-01T16:45:00Z",
+    "category": "quantum",
+    "data": { "coherenceDistance_AU": 487, "fidelity_percent": 92.3, "decoherenceRate_perAU": 0.016, "mhdShieldStrength_T": 0.8 },
+    "significance": "breakthrough",
+    "notes": "Record-setting entanglement distance achieved. MHD shielding at 0.8 Tesla proved critical for maintaining fidelity above 200 AU."
+  },
+  {
+    "id": "OBS-005",
+    "experimentId": "EXP-006",
+    "observer": "Dr. Elena Vasquez",
+    "timestamp": "2026-04-01T09:30:00Z",
+    "category": "biological",
+    "data": { "boneDensity_percentBaseline": 96.2, "muscleMass_percentBaseline": 97.1, "subjectCount": 32, "avgExposure_months": 8 },
+    "significance": "notable",
+    "notes": "Month 8 assessment complete. Results continue to support hypothesis. Next assessment scheduled month 10."
+  },
+  {
+    "id": "OBS-006",
+    "experimentId": "EXP-005",
+    "observer": "Lt. Kenji Tanaka",
+    "timestamp": "2026-03-15T20:00:00Z",
+    "category": "geological",
+    "data": { "sampleSector": "Forge-Nebula-Q7", "spectrumBands": 2048, "transuranicSignals": 3, "confidenceLevel": 0.67 },
+    "significance": "routine",
+    "notes": "Initial spectroscopic sweep of sector Q7. Three candidate transuranic signatures detected but below confirmation threshold."
+  }
+]

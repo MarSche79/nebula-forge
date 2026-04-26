@@ -1,0 +1,55 @@
+[
+  {
+    "id": "ORD-001",
+    "items": [
+      { "name": "Med-Kit Type III", "quantity": 100, "unit": "kits" },
+      { "name": "Cryo-Bandage Packs", "quantity": 80, "unit": "packs" }
+    ],
+    "supplier": "Earth Orbital Station Medical Division",
+    "status": "shipped",
+    "priority": "high",
+    "requestedBy": "Dr. Elara Voss",
+    "requestDate": "2187-03-10",
+    "estimatedDelivery": "2187-03-19"
+  },
+  {
+    "id": "ORD-002",
+    "items": [
+      { "name": "Deuterium Fuel Rods", "quantity": 80, "unit": "rods" },
+      { "name": "Reactor Coolant ZR-9", "quantity": 500, "unit": "liters" }
+    ],
+    "supplier": "Jupiter Station Io Fuel Depot",
+    "status": "approved",
+    "priority": "critical",
+    "requestedBy": "Chief Engineer Rask",
+    "requestDate": "2187-03-14",
+    "estimatedDelivery": "2187-03-26"
+  },
+  {
+    "id": "ORD-003",
+    "items": [
+      { "name": "Ration Pack Alpha", "quantity": 600, "unit": "units" },
+      { "name": "Purified Water Concentrate", "quantity": 2000, "unit": "liters" },
+      { "name": "Vitamin Supplement Packs", "quantity": 300, "unit": "packs" }
+    ],
+    "supplier": "Mars Colony Ares Agricultural Hub",
+    "status": "submitted",
+    "priority": "medium",
+    "requestedBy": "Quartermaster Briggs",
+    "requestDate": "2187-03-15",
+    "estimatedDelivery": "2187-04-01"
+  },
+  {
+    "id": "ORD-004",
+    "items": [
+      { "name": "Plasma Conduit Spares", "quantity": 20, "unit": "units" },
+      { "name": "Welding Compound X7", "quantity": 30, "unit": "barrels" }
+    ],
+    "supplier": "Titan Refinery Industrial Supply",
+    "status": "delivered",
+    "priority": "low",
+    "requestedBy": "Engineering Dept",
+    "requestDate": "2187-02-28",
+    "estimatedDelivery": "2187-03-12"
+  }
+]

@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: APICS / ASCM Supply Chain
+description: Association for Supply Chain Management — supply chain best practices
+siteUrl: https://www.ascm.org/learning-development
+maxResultCount: 5

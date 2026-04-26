@@ -1,0 +1,82 @@
+[
+  {
+    "id": "PG-001",
+    "sectorName": "Command & Operations Hub",
+    "powerOutput": 120,
+    "powerConsumption": 105,
+    "efficiency": 94,
+    "status": "optimal",
+    "connectedSystems": ["SYS-001", "SYS-003", "SYS-004"],
+    "lastMaintenance": "2387-03-10"
+  },
+  {
+    "id": "PG-002",
+    "sectorName": "Life-Support Ring Alpha",
+    "powerOutput": 95,
+    "powerConsumption": 89,
+    "efficiency": 91,
+    "status": "nominal",
+    "connectedSystems": ["SYS-002", "SYS-008"],
+    "lastMaintenance": "2387-03-05"
+  },
+  {
+    "id": "PG-003",
+    "sectorName": "Propulsion Engineering Bay",
+    "powerOutput": 200,
+    "powerConsumption": 185,
+    "efficiency": 88,
+    "status": "nominal",
+    "connectedSystems": ["SYS-006", "SYS-007"],
+    "lastMaintenance": "2387-03-08"
+  },
+  {
+    "id": "PG-004",
+    "sectorName": "Habitat Decks 1-5",
+    "powerOutput": 80,
+    "powerConsumption": 78,
+    "efficiency": 96,
+    "status": "optimal",
+    "connectedSystems": ["SYS-005", "SYS-010"],
+    "lastMaintenance": "2387-03-09"
+  },
+  {
+    "id": "PG-005",
+    "sectorName": "Science & Research Wing",
+    "powerOutput": 110,
+    "powerConsumption": 107,
+    "efficiency": 85,
+    "status": "strained",
+    "connectedSystems": ["SYS-003", "SYS-010"],
+    "lastMaintenance": "2387-02-28"
+  },
+  {
+    "id": "PG-006",
+    "sectorName": "Defense Grid Perimeter",
+    "powerOutput": 150,
+    "powerConsumption": 130,
+    "efficiency": 92,
+    "status": "nominal",
+    "connectedSystems": ["SYS-004", "SYS-009"],
+    "lastMaintenance": "2387-03-12"
+  },
+  {
+    "id": "PG-007",
+    "sectorName": "Cargo & Logistics Bay",
+    "powerOutput": 60,
+    "powerConsumption": 58,
+    "efficiency": 93,
+    "status": "optimal",
+    "connectedSystems": ["SYS-007"],
+    "lastMaintenance": "2387-03-11"
+  },
+  {
+    "id": "PG-008",
+    "sectorName": "Medical & Environmental Wing",
+    "powerOutput": 70,
+    "powerConsumption": 69,
+    "efficiency": 78,
+    "status": "critical",
+    "connectedSystems": ["SYS-002", "SYS-005"],
+    "lastMaintenance": "2387-02-20"
+  }
+]

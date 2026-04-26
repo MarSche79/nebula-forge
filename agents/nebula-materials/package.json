@@ -1,0 +1,8 @@
+{
+  "name": "@nebula-forge/nebula-materials",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@nebula-forge/shared": "*"
+  }
+}

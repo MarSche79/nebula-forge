@@ -1,0 +1,37 @@
+{
+  "$schema": "https://aka.ms/json-schemas/copilot/plugin/v2.2/schema.json",
+  "schema_version": "v2.2",
+  "name_for_human": "Nebula Forge Material Analyst",
+  "description_for_human": "Analyze space materials, classify minerals, compare sample compositions, and retrieve analysis reports.",
+  "description_for_model": "This plugin provides tools to catalog and analyze space material samples collected by Nebula Forge station crews. It can list samples with optional filters, perform detailed composition analysis, compare two samples side-by-side, classify unknown minerals based on physical properties, and retrieve full analysis reports.",
+  "contact_email": "nebula-forge@station.local",
+  "namespace": "nebula_materials",
+  "runtimes": [
+    {
+      "type": "McpServer",
+      "url": "http://localhost:3002/mcp"
+    }
+  ],
+  "functions": [
+    {
+      "name": "get_samples",
+      "description": "List all material samples in the station catalog. Optionally filter by material type (mineral, organic, metallic, gaseous, unknown) or analysis status (pending-analysis, analyzed, archived)."
+    },
+    {
+      "name": "analyze_sample",
+      "description": "Analyze a specific material sample by ID. Returns a detailed composition breakdown with element percentages, dominant element identification, risk level assessment, and any notes from the collection team."
+    },
+    {
+      "name": "compare_materials",
+      "description": "Compare two material samples side-by-side. Takes two sample IDs and returns a detailed comparison of their composition, origin, type, shared elements, and key differences."
+    },
+    {
+      "name": "classify_mineral",
+      "description": "Classify an unknown mineral specimen based on its physical and chemical properties. Accepts composition (element percentages), hardness (Mohs scale 1-10), luster type, and crystal structure. Returns a classification with mineral group and confidence score."
+    },
+    {
+      "name": "get_analysis_report",
+      "description": "Retrieve the full analysis report for a material sample by its sample ID. Returns the analyst, methodology, detailed findings, risk assessment, potential applications, and recommendations."
+    }
+  ]
+}

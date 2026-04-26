@@ -1,0 +1,52 @@
+[
+  {
+    "id": "RT-001",
+    "name": "Sigma Mining Corridor",
+    "waypoints": ["CB-012", "CB-011", "CB-001"],
+    "totalDistance": 3.2,
+    "estimatedDuration": 4,
+    "fuelRequired": 820,
+    "riskLevel": "low",
+    "lastTraversed": "2387-02-02"
+  },
+  {
+    "id": "RT-002",
+    "name": "Europa Express Lane",
+    "waypoints": ["CB-012", "CB-009", "CB-002"],
+    "totalDistance": 5.2,
+    "estimatedDuration": 7,
+    "fuelRequired": 1450,
+    "riskLevel": "moderate",
+    "lastTraversed": "2387-02-20"
+  },
+  {
+    "id": "RT-003",
+    "name": "Deep Nebula Transit",
+    "waypoints": ["CB-012", "CB-009", "CB-004", "CB-003"],
+    "totalDistance": 15.4,
+    "estimatedDuration": 22,
+    "fuelRequired": 4200,
+    "riskLevel": "high",
+    "lastTraversed": "2387-03-12"
+  },
+  {
+    "id": "RT-004",
+    "name": "Obsidian Quick-Reach",
+    "waypoints": ["CB-012", "CB-006"],
+    "totalDistance": 2.3,
+    "estimatedDuration": 3,
+    "fuelRequired": 580,
+    "riskLevel": "moderate",
+    "lastTraversed": "2387-02-14"
+  },
+  {
+    "id": "RT-005",
+    "name": "Outer Rim Survey Arc",
+    "waypoints": ["CB-012", "CB-010", "CB-007", "CB-008"],
+    "totalDistance": 24.8,
+    "estimatedDuration": 35,
+    "fuelRequired": 6800,
+    "riskLevel": "extreme",
+    "lastTraversed": "2386-11-30"
+  }
+]

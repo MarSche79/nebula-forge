@@ -1,0 +1,92 @@
+[
+  {
+    "id": "SYS-001",
+    "name": "Primary Fusion Reactor",
+    "category": "power",
+    "status": "operational",
+    "healthPercent": 94,
+    "lastInspection": "2387-03-10",
+    "nextInspection": "2387-04-10"
+  },
+  {
+    "id": "SYS-002",
+    "name": "Atmospheric Recycler Unit Alpha",
+    "category": "life-support",
+    "status": "degraded",
+    "healthPercent": 72,
+    "lastInspection": "2387-03-05",
+    "nextInspection": "2387-03-19"
+  },
+  {
+    "id": "SYS-003",
+    "name": "Quantum Comm Array",
+    "category": "communications",
+    "status": "operational",
+    "healthPercent": 98,
+    "lastInspection": "2387-03-12",
+    "nextInspection": "2387-04-12"
+  },
+  {
+    "id": "SYS-004",
+    "name": "Graviton Shield Generator",
+    "category": "defense",
+    "status": "operational",
+    "healthPercent": 88,
+    "lastInspection": "2387-02-28",
+    "nextInspection": "2387-03-28"
+  },
+  {
+    "id": "SYS-005",
+    "name": "Water Purification System",
+    "category": "environmental",
+    "status": "maintenance",
+    "healthPercent": 61,
+    "lastInspection": "2387-03-14",
+    "nextInspection": "2387-03-21"
+  },
+  {
+    "id": "SYS-006",
+    "name": "Ion Drive Cluster Bravo",
+    "category": "propulsion",
+    "status": "operational",
+    "healthPercent": 91,
+    "lastInspection": "2387-03-08",
+    "nextInspection": "2387-04-08"
+  },
+  {
+    "id": "SYS-007",
+    "name": "Secondary Backup Reactor",
+    "category": "power",
+    "status": "operational",
+    "healthPercent": 85,
+    "lastInspection": "2387-03-01",
+    "nextInspection": "2387-04-01"
+  },
+  {
+    "id": "SYS-008",
+    "name": "CO2 Scrubber Network",
+    "category": "life-support",
+    "status": "operational",
+    "healthPercent": 96,
+    "lastInspection": "2387-03-11",
+    "nextInspection": "2387-04-11"
+  },
+  {
+    "id": "SYS-009",
+    "name": "Subspace Relay Antenna",
+    "category": "communications",
+    "status": "degraded",
+    "healthPercent": 67,
+    "lastInspection": "2387-02-25",
+    "nextInspection": "2387-03-18"
+  },
+  {
+    "id": "SYS-010",
+    "name": "Thermal Regulation Grid",
+    "category": "environmental",
+    "status": "operational",
+    "healthPercent": 90,
+    "lastInspection": "2387-03-09",
+    "nextInspection": "2387-04-09"
+  }
+]

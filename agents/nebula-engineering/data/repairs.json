@@ -1,0 +1,63 @@
+[
+  {
+    "id": "RPR-001",
+    "system": "Atmospheric Recycler Unit Alpha",
+    "subsystem": "Carbon filter assembly",
+    "priority": "high",
+    "status": "scheduled",
+    "assignedTo": "Lt. Cmdr. Torres",
+    "scheduledDate": "2387-03-18",
+    "description": "Replace worn plasma conduit in the primary carbon filter loop. Output efficiency has dropped below 75%."
+  },
+  {
+    "id": "RPR-002",
+    "system": "Graviton Shield Generator",
+    "subsystem": "Gravity plating - Deck 3",
+    "priority": "medium",
+    "status": "in-progress",
+    "assignedTo": "Ensign Park",
+    "scheduledDate": "2387-03-15",
+    "description": "Recalibrate gravity plating - Deck 3. Crew reports intermittent 0.2g fluctuations in the mess hall corridor."
+  },
+  {
+    "id": "RPR-003",
+    "system": "Primary Fusion Reactor",
+    "subsystem": "Containment field emitters",
+    "priority": "emergency",
+    "status": "scheduled",
+    "assignedTo": "Chief Eng. Nakamura",
+    "scheduledDate": "2387-03-16",
+    "description": "Patch hull microfracture - Section J7. Micro-leak detected near reactor coolant junction; emergency sealant applied pending permanent repair."
+  },
+  {
+    "id": "RPR-004",
+    "system": "Water Purification System",
+    "subsystem": "Reverse-osmosis membrane bank 2",
+    "priority": "high",
+    "status": "deferred",
+    "assignedTo": "PO2 Singh",
+    "scheduledDate": "2387-03-20",
+    "description": "Swap out degraded osmosis membranes in bank 2. Mineral buildup is reducing throughput by 30%."
+  },
+  {
+    "id": "RPR-005",
+    "system": "Subspace Relay Antenna",
+    "subsystem": "Phase alignment coils",
+    "priority": "medium",
+    "status": "completed",
+    "assignedTo": "Lt. Okafor",
+    "scheduledDate": "2387-03-12",
+    "description": "Realign phase coils on the subspace relay. Signal drift causing intermittent packet loss on deep-space channels.",
+    "completedDate": "2387-03-13"
+  },
+  {
+    "id": "RPR-006",
+    "system": "Ion Drive Cluster Bravo",
+    "subsystem": "Fuel injector manifold",
+    "priority": "low",
+    "status": "scheduled",
+    "assignedTo": "Crewman Li",
+    "scheduledDate": "2387-03-25",
+    "description": "Preventive replacement of fuel injector seals. Current seals at 60% rated life — replacing ahead of next burn window."
+  }
+]

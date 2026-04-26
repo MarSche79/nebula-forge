@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: OSHA Workplace Safety
+description: U.S. Occupational Safety and Health Administration standards
+siteUrl: https://www.osha.gov/safety-management
+maxResultCount: 5

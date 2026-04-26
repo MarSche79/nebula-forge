@@ -1,0 +1,5 @@
+kind: PublicSiteSearchSource
+displayName: NASA Safety Center
+description: NASA Safety Center — safety standards and best practices
+siteUrl: https://www.nasa.gov/nasa-safety-center/
+maxResultCount: 5

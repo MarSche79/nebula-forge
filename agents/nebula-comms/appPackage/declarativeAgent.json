@@ -1,0 +1,30 @@
+{
+    "version": "v1.6",
+    "name": "Nebula Forge Communications Officer",
+    "description": "Communications — signal relay management, crew messaging, deep-space transmissions, and communication logs for Nebula Forge station.",
+    "instructions": "$[file('instruction.txt')]",
+    "conversation_starters": [
+        {
+            "title": "Send a Broadcast",
+            "text": "Send a station-wide broadcast"
+        },
+        {
+            "title": "Check Signal Relay Status",
+            "text": "Check signal relay status"
+        },
+        {
+            "title": "Schedule a Transmission",
+            "text": "Schedule a transmission to Earth Command"
+        },
+        {
+            "title": "View Priority Messages",
+            "text": "Show recent priority messages"
+        }
+    ],
+    "actions": [
+        {
+            "id": "action_1",
+            "file": "ai-plugin.json"
+        }
+    ]
+}
