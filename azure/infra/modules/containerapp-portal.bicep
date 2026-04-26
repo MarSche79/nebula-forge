@@ -45,6 +45,9 @@ param aadClientSecret string = ''
 @secure()
 param proxySharedSecret string = ''
 
+@description('Optional custom hostname bindings (e.g. www.nebula-forge.at) with their managed-cert names.')
+param customDomains array = []
+
 resource app 'Microsoft.App/containerApps@2024-03-01' = {
   name: name
   location: location
@@ -79,6 +82,15 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
         targetPort: 3000
         transport: 'auto'
         allowInsecure: false
+        // Custom hostname bindings (e.g. www.nebula-forge.at). The managed
+        // certificates themselves are created out-of-band (the apex needs DNS
+        // to propagate first); we only declare the binding here so subsequent
+        // azd provisions don't strip it.
+        customDomains: [for d in customDomains: {
+          name: d.hostname
+          bindingType: 'SniEnabled'
+          certificateId: d.certificateId
+        }]
         traffic: [
           {
             latestRevision: true

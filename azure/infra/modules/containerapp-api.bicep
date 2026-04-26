@@ -46,6 +46,9 @@ param entraClientId string
 @description('Portal FQDN — used to lock CORS to the portal origin.')
 param portalFqdn string
 
+@description('Optional list of additional allowed CORS origins (e.g. custom domains). Each must be a full https:// URL.')
+param extraAllowedOrigins array = []
+
 @description('Whether portal authentication (Easy Auth) is enabled. Enables AUTH_ENABLED on the API.')
 param authEnabled bool = false
 
@@ -120,7 +123,7 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
         transport: 'auto'
         allowInsecure: false
         corsPolicy: {
-          allowedOrigins: [ 'https://${portalFqdn}' ]
+          allowedOrigins: union([ 'https://${portalFqdn}' ], extraAllowedOrigins)
           allowedMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
           allowedHeaders: ['*']
           allowCredentials: true

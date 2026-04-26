@@ -34,6 +34,12 @@ param aadClientSecret string = ''
 @secure()
 param proxySharedSecret string = newGuid()
 
+@description('Custom domain hostnames bound to the portal (e.g. ["www.nebula-forge.at"]). Used to widen API CORS.')
+param customDomainHostnames array = []
+
+@description('Custom hostname -> managed-certificate-id bindings for the portal ingress.')
+param portalCustomDomains array = []
+
 var placeholderImage = 'mcr.microsoft.com/k8se/quickstart:latest'
 
 var mcpAgents = [
@@ -187,6 +193,7 @@ module apiApp 'modules/containerapp-api.bicep' = {
     entraTenantId: subscription().tenantId
     entraClientId: effectiveEntraClientId
     portalFqdn: portalFqdn
+    extraAllowedOrigins: [for h in customDomainHostnames: 'https://${h}']
     authEnabled: authEnabled
     proxySharedSecret: proxySharedSecret
     caEnvDefaultDomain: caEnvDomain
@@ -218,6 +225,7 @@ module portalApp 'modules/containerapp-portal.bicep' = {
     authEnabled: authEnabled
     aadClientSecret: aadClientSecret
     proxySharedSecret: proxySharedSecret
+    customDomains: portalCustomDomains
   }
 }
 

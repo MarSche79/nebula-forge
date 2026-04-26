@@ -28,6 +28,12 @@
     },
     "aadClientSecret": {
       "value": "${AAD_CLIENT_SECRET=}"
+    },
+    "customDomainHostnames": {
+      "value": "${PORTAL_CUSTOM_HOSTNAMES_JSON=[]}"
+    },
+    "portalCustomDomains": {
+      "value": "${PORTAL_CUSTOM_DOMAINS_JSON=[]}"
     }
   }
 }

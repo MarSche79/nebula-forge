@@ -32,6 +32,12 @@ param aadClientId string = ''
 @secure()
 param aadClientSecret string = ''
 
+@description('Custom hostnames bound to the portal (e.g. ["www.nebula-forge.at"]).')
+param customDomainHostnames array = []
+
+@description('Per-hostname managed-cert resource IDs. Same length and order as customDomainHostnames.')
+param portalCustomDomains array = []
+
 var resourceToken = uniqueString(subscription().subscriptionId, environmentName, location)
 var tags = {
   'azd-env-name': environmentName
@@ -58,6 +64,8 @@ module resources 'resources.bicep' = {
     authEnabled: toLower(authEnabled) == 'true'
     aadClientId: aadClientId
     aadClientSecret: aadClientSecret
+    customDomainHostnames: customDomainHostnames
+    portalCustomDomains: portalCustomDomains
   }
 }
 
