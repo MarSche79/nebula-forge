@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { LayoutDashboard, MessageSquare, LogOut, Menu, X, UserCircle2, Globe2, Briefcase } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import Logo from './Logo';
 
 interface AppNavProps {
   displayName?: string;
@@ -37,11 +38,8 @@ export default function AppNav({ displayName }: AppNavProps) {
       }}
     >
       <div className="container-nf flex items-center justify-between" style={{ height: 68 }}>
-        <Link href="/command-center" className="flex items-center gap-2 font-extrabold tracking-widest text-sm">
-          <span
-            className="inline-block w-7 h-7 rounded-md"
-            style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))' }}
-          />
+        <Link href="/command-center" className="flex items-center gap-2.5 font-extrabold tracking-widest text-sm">
+          <Logo size={32} />
           <span style={{ color: 'var(--primary)' }}>NEBULA FORGE</span>
           <span className="hidden sm:inline ml-2 pill" style={{ fontSize: '0.65rem' }}>
             CREW · ACTIVE

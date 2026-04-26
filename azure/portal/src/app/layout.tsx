@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: 'Nebula Forge — Beyond the Frontier',
   description:
     'Nebula Forge — a deep-space research and mining station operated by humans and AI agents. Sign in as crew to access the Command Center.',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

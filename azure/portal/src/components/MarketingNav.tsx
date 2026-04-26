@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, LogIn } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import Logo from './Logo';
 
 const links = [
   { href: '/#mission',   label: 'Mission' },
@@ -26,11 +27,8 @@ export default function MarketingNav() {
       }}
     >
       <div className="container-nf flex items-center justify-between" style={{ height: 68 }}>
-        <Link href="/" className="flex items-center gap-2 font-extrabold tracking-widest text-sm">
-          <span
-            className="inline-block w-7 h-7 rounded-md"
-            style={{ background: 'linear-gradient(135deg, var(--primary), var(--accent))' }}
-          />
+        <Link href="/" className="flex items-center gap-2.5 font-extrabold tracking-widest text-sm">
+          <Logo size={32} />
           <span style={{ color: 'var(--primary)' }}>NEBULA FORGE</span>
         </Link>
 
