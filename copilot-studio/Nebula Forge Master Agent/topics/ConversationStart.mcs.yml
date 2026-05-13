@@ -10,6 +10,6 @@ beginDialog:
       id: sendMessage_M0LuhV
       activity:
         text:
-          - Hello, I'm {System.Bot.Name}. How can I help?
+          - "Hello, I'm {System.Bot.Name} — the central concierge for the Nebula Forge station. I can route you to one of nine specialist agents, answer general station questions, or analyse any document you upload (PDF, Word, Excel, PowerPoint, CSV, text). Files you share are governed by your tenant's Microsoft Purview policies — sensitivity labels, DLP, and DSPM for AI all apply. How can I help?"
         speak:
-          - Hello and thank you for calling {System.Bot.Name}, powered by generative AI. How may I help you today?
+          - Hello and thank you for calling {System.Bot.Name}, powered by generative AI. You can ask me a question or attach a document for analysis. How may I help you today?

@@ -1,6 +1,49 @@
 # 🌟 Nebula Forge Master Agent — Deployment Guide
 
-The Master Agent acts as the **central concierge** for all 9 specialized Nebula Forge agents. It routes user questions to the right agent and serves as a fallback when users don't know who to ask.
+The Master Agent acts as the **central concierge** for all 9 specialized Nebula Forge agents. It routes user questions to the right agent, serves as a fallback when users don't know who to ask, and is the **secure document intake** that powers the Microsoft Purview / Compliance / DSPM-for-AI demos.
+
+## 🛡️ Microsoft Purview demo surface
+
+The Master Agent's `instructions` (in `agent.mcs.yml`) and its `settings.mcs.yml` (`isFileAnalysisEnabled: true`) make it a first-class target for Purview policies that already exist in your tenant.
+
+| Purview capability | What the demo shows |
+|---|---|
+| **Sensitivity labels** | Upload a labeled file (e.g. `Confidential`, `Highly Confidential / Crew-Eyes-Only`). The agent reads the label and adapts its behavior. |
+| **DLP for M365 Copilot / agents** | Upload (or prompt with) content matching a DLP rule — PII, source code, "Project Orion" keyword, etc. The agent acknowledges the policy and adapts its response. |
+| **Encryption / Rights Management** | Upload a rights-protected `.docx` the user can't decrypt — the agent reports that Purview protection is doing its job (this is a **valid demo outcome**, not a bug). |
+| **DSPM for AI** | Every prompt, response, file reference and label hit is captured in the DSPM-for-AI activity explorer / Audit logs. |
+| **Insider Risk / eDiscovery** | Sessions are discoverable and policy-evaluable like any other M365 Copilot interaction. |
+
+### Demo file ideas
+
+Drop these into a shared OneDrive / SharePoint folder ahead of the demo, labeled appropriately in the Purview portal:
+
+- `crew-roster.xlsx` — labeled **Confidential** → "who's due for renewal next month?" (routes to HR Assistant)
+- `incident-log.csv` — labeled **Internal** → "summarize Sev-1 events from the last 30 days" (routes to Safety Officer)
+- `sample-report.pdf` — labeled **General** → "flag minerals matching the rare-earth profile" (routes to Material Analyst)
+- `synthetic-pii.txt` — labeled **Highly Confidential** containing fake SSNs / credit-card numbers → triggers DLP
+- `restricted-mission.docx` — labeled **Highly Confidential / Encrypted** → triggers encryption-block behavior
+
+### Channel constraints
+
+The Microsoft 365 platform's file-upload paperclip is **not available in the SharePoint channel.** Demo in:
+
+- the **Copilot Studio test pane**, or
+- **Microsoft 365 Copilot** (chat with the agent there), or
+- **Microsoft Teams**.
+
+All three surface Purview / DLP / DSPM-for-AI signals identically.
+
+### What you do **not** need to change
+
+The Purview policies live in the **Purview portal**, not in this repo. The agent YAML only needs:
+
+- `isFileAnalysisEnabled: true` in `settings.mcs.yml` (already set), and
+- the file-aware instructions in `agent.mcs.yml` (already set).
+
+Purview DLP / DSPM-for-AI / Sensitivity Labels are evaluated by the M365 service when a prompt or file flows through the agent — there is no per-agent toggle to "enable" them.
+
+---
 
 ## 📂 What's prepared
 
