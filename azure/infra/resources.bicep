@@ -30,7 +30,7 @@ param aadClientId string = ''
 @secure()
 param aadClientSecret string = ''
 
-@description('Shared secret between portal and API for the proxy trust boundary. Generated fresh each provision if not supplied.')
+@description('Shared secret between portal and API for the proxy trust boundary. Generated fresh each provision if not supplied. **Pin via `azd env set PROXY_SHARED_SECRET ...` so it does not change between provisions.**')
 @secure()
 param proxySharedSecret string = newGuid()
 

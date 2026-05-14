@@ -72,6 +72,10 @@ param paSaveDocWebhook string = ''
 @description('SharePoint site URL for NebulaGPT uploads + generated docs')
 param nebulaGptSharepointSiteUrl string = 'https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint'
 
+@description('Sticky shared secret between portal and API. Set via `azd env set PROXY_SHARED_SECRET <guid>` so it does not change between provisions.')
+@secure()
+param proxySharedSecret string = newGuid()
+
 @description('Power Automate webhook (Teams post message)')
 @secure()
 param paTeamsWebhook string = ''
@@ -150,6 +154,7 @@ module resources 'resources.bicep' = {
     paSpLabelWebhook: paSpLabelWebhook
     deployGpt4o: deployGpt4o
     agentTickCron: agentTickCron
+    proxySharedSecret: proxySharedSecret
   }
 }
 
