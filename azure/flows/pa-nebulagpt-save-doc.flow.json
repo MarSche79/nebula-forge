@@ -1,0 +1,83 @@
+{
+  "$comment": "NebulaGPT save-doc / upload flow. Accepts either Markdown text (content) OR base64-encoded binary (contentBase64), creates a file in the NebulaGPT-Uploads library on the agent SharePoint site, returns the webUrl. Runs as agentops service-account user.",
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "triggers": {
+      "manual": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "folder":         { "type": "string" },
+              "fileName":       { "type": "string" },
+              "content":        { "type": "string" },
+              "contentBase64":  { "type": "string" },
+              "contentType":    { "type": "string" },
+              "uploadedBy":     { "type": "string" }
+            },
+            "required": [ "fileName" ]
+          }
+        }
+      }
+    },
+    "actions": {
+      "Decide_binary_or_text": {
+        "type": "If",
+        "expression": { "and": [ { "not": { "equals": [ "@triggerBody()?['contentBase64']", "" ] } } ] },
+        "actions": {
+          "Create_binary_file": {
+            "type": "OpenApiConnection",
+            "inputs": {
+              "host": {
+                "connectionName": "shared_sharepointonline",
+                "operationId": "CreateFile",
+                "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+              },
+              "parameters": {
+                "dataset": "https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint",
+                "folderPath": "@{concat('Shared Documents/', triggerBody()?['folder'])}",
+                "name": "@{triggerBody()?['fileName']}",
+                "body": "@{base64ToBinary(triggerBody()?['contentBase64'])}"
+              }
+            }
+          }
+        },
+        "else": {
+          "actions": {
+            "Create_text_file": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline",
+                  "operationId": "CreateFile",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint",
+                  "folderPath": "@{concat('Shared Documents/', triggerBody()?['folder'])}",
+                  "name": "@{triggerBody()?['fileName']}",
+                  "body": "@{triggerBody()?['content']}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Respond": {
+        "runAfter": { "Decide_binary_or_text": [ "Succeeded" ] },
+        "type": "Response",
+        "kind": "Http",
+        "inputs": {
+          "statusCode": 200,
+          "body": {
+            "ok": true,
+            "fileName": "@{triggerBody()?['fileName']}"
+          }
+        }
+      }
+    }
+  }
+}

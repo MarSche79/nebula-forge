@@ -76,6 +76,21 @@ param sentinelImageName string = ''
 param auditorImageName string = ''
 param whispererImageName string = ''
 param agentTickImageName string = ''
+param gptImageName string = ''
+
+@description('Power Automate save-doc webhook for NebulaGPT (uploads + generated docs)')
+@secure()
+param paSaveDocWebhook string = ''
+
+@description('Dedicated NebulaGPT Entra app reg client ID (for OBO flow)')
+param gptAppClientId string = ''
+
+@description('Dedicated NebulaGPT Entra app client secret (for OBO flow)')
+@secure()
+param gptAppClientSecret string = ''
+
+@description('SharePoint site URL for NebulaGPT uploads + generated docs')
+param nebulaGptSharepointSiteUrl string = 'https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint'
 
 @description('Whether to deploy the gpt-4o (full) model alongside gpt-4o-mini for richer document generation by the new agents')
 param deployGpt4o bool = true
@@ -300,6 +315,7 @@ module portalApp 'modules/containerapp-portal.bicep' = {
     managedIdentityClientId: identity.outputs.managedIdentityClientId
     registryServer: registry.outputs.loginServer
     apiBaseUrl: 'https://${apiApp.outputs.fqdn}'
+    gptBaseUrl: 'https://${gptApp.outputs.fqdn}'
     appInsightsConnectionString: monitoring.outputs.appInsightsConnectionString
     entraTenantId: subscription().tenantId
     entraClientId: effectiveEntraClientId
@@ -343,8 +359,6 @@ var newMcpUrls = {
   whisperer: 'https://ca-whisperer-${resourceToken}.internal.${caEnvDomain}'
 }
 
-// Container Apps Job: agent-tick. Runs every `agentTickCron` and asks each
-// new agent's autonomous_tick tool to do something themed.
 module agentTick 'modules/containerapps-job.bicep' = {
   name: 'agent-tick'
   params: {
@@ -364,6 +378,38 @@ module agentTick 'modules/containerapps-job.bicep' = {
   dependsOn: [
     mcpApps
   ]
+}
+
+// ===== NebulaGPT (Phase 2) ============================================
+module gptApp 'modules/containerapp-gpt.bicep' = {
+  name: 'gpt-app'
+  params: {
+    location: location
+    tags: union(tags, { 'azd-service-name': 'gpt' })
+    name: 'ca-gpt-${resourceToken}'
+    image: !empty(gptImageName) ? gptImageName : placeholderImage
+    containerAppsEnvId: containerAppsEnv.outputs.environmentId
+    managedIdentityId: identity.outputs.managedIdentityId
+    managedIdentityClientId: identity.outputs.managedIdentityClientId
+    managedIdentityName: identity.outputs.managedIdentityName
+    registryServer: registry.outputs.loginServer
+    appInsightsConnectionString: monitoring.outputs.appInsightsConnectionString
+    openAiEndpoint: openai.outputs.endpoint
+    openAiDeploymentName: !empty(openai.outputs.gpt4oDeploymentName) ? openai.outputs.gpt4oDeploymentName : openai.outputs.deploymentName
+    entraTenantId: subscription().tenantId
+    entraClientId: effectiveEntraClientId
+    gptAppClientId: !empty(gptAppClientId) ? gptAppClientId : effectiveEntraClientId
+    gptAppClientSecret: gptAppClientSecret
+    allowedTenantId: subscription().tenantId
+    portalFqdn: portalFqdn
+    proxySharedSecret: proxySharedSecret
+    postgresHost: !empty(principalId) ? postgres!.outputs.serverFqdn : ''
+    postgresDatabase: !empty(principalId) ? postgres!.outputs.databaseName : ''
+    paSaveDocWebhook: paSaveDocWebhook
+    sharepointSiteUrl: nebulaGptSharepointSiteUrl
+    uploadsLibrary: 'NebulaGPT-Uploads'
+    workiqEnabled: true
+  }
 }
 
 // PostgreSQL Flexible Server for the HR screening pipeline (`candidates` table).
@@ -415,3 +461,7 @@ output DEFENDER_INGEST_WORKFLOW_NAME string = defenderIngest.outputs.workflowNam
 output DEFENDER_INGEST_CALLBACK_URL string = defenderIngest.outputs.triggerCallbackUrl
 output AGENT_TICK_JOB_NAME string = agentTick.outputs.jobName
 output AGENT_CALLBACK_SECRET string = agentCallbackSecret
+
+// ----- NebulaGPT outputs (Phase 2) -----
+output GPT_FQDN string = gptApp.outputs.fqdn
+output GPT_BASE_URL string = 'https://${gptApp.outputs.fqdn}'

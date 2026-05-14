@@ -2,9 +2,11 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 // Routes that require an authenticated crew member.
 const PROTECTED_PATHS = [
+  '/nebula-gpt',
   '/command-center',
   '/dashboard',
   '/agents-board',
+  '/security-alerts',
   '/hr',
 ];
 
@@ -29,5 +31,5 @@ export function middleware(req: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ['/command-center/:path*', '/dashboard/:path*', '/agents-board/:path*', '/hr/:path*'],
+  matcher: ['/nebula-gpt/:path*', '/command-center/:path*', '/dashboard/:path*', '/agents-board/:path*', '/security-alerts/:path*', '/hr/:path*'],
 };
