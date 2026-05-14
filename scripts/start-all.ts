@@ -24,6 +24,11 @@ const agents: AgentInfo[] = [
   { name: "nebula-logistics", port: 3007 },
   { name: "nebula-comms", port: 3008 },
   { name: "nebula-medbay", port: 3009 },
+  { name: "nebula-scribe", port: 3010 },
+  { name: "nebula-herald", port: 3011 },
+  { name: "nebula-sentinel", port: 3012 },
+  { name: "nebula-auditor", port: 3013 },
+  { name: "nebula-whisperer", port: 3014 },
 ];
 
 console.log("🌌 Nebula Forge — Starting all MCP servers...\n");

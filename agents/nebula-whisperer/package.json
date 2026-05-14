@@ -1,0 +1,10 @@
+{
+  "name": "@nebula-forge/nebula-whisperer",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@nebula-forge/shared": "*",
+    "openai": "^4.77.0",
+    "@azure/identity": "^4.13.1"
+  }
+}

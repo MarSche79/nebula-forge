@@ -104,6 +104,62 @@ services:
       context: ../..
       buildArgs:
         - AGENT_NAME=nebula-medbay
+  scribe:
+    project: ../agents/nebula-scribe
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-scribe
+  herald:
+    project: ../agents/nebula-herald
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-herald
+  sentinel:
+    project: ../agents/nebula-sentinel
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-sentinel
+  auditor:
+    project: ../agents/nebula-auditor
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-auditor
+  whisperer:
+    project: ../agents/nebula-whisperer
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
+      path: ../../azure/mcp-shared/Dockerfile
+      context: ../..
+      buildArgs:
+        - AGENT_NAME=nebula-whisperer
+  agent-tick:
+    project: ./jobs/agent-tick
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
 hooks:
   postprovision:
     shell: pwsh

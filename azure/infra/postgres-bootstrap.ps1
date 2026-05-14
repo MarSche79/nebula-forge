@@ -142,6 +142,70 @@ SECURITY LABEL FOR "pgaadauth" ON ROLE "$miName" IS 'aadauth,oid=$miPrincipalId,
 GRANT CONNECT ON DATABASE "$dbName" TO "$miName";
 GRANT USAGE ON SCHEMA public TO "$miName";
 GRANT SELECT, INSERT, UPDATE, DELETE ON candidates TO "$miName";
+
+-- ============================================================
+-- Agent army (Kanban board + activity feed) — added 2026-05.
+-- ============================================================
+CREATE SCHEMA IF NOT EXISTS agents;
+
+CREATE TABLE IF NOT EXISTS agents.agent (
+    id              TEXT PRIMARY KEY,
+    display_name    TEXT NOT NULL,
+    description     TEXT NOT NULL,
+    mcp_url         TEXT,
+    default_tool    TEXT NOT NULL,
+    enabled         BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS agents.task (
+    id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title           TEXT NOT NULL,
+    body            TEXT,
+    agent_id        TEXT REFERENCES agents.agent(id) ON DELETE SET NULL,
+    status          TEXT NOT NULL DEFAULT 'backlog'
+                    CHECK (status IN ('backlog','in_progress','blocked','done')),
+    priority        INT  NOT NULL DEFAULT 2,
+    source          TEXT NOT NULL DEFAULT 'user',
+    created_by      TEXT,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    due_at          TIMESTAMPTZ,
+    last_result     JSONB
+);
+
+CREATE TABLE IF NOT EXISTS agents.activity (
+    id              BIGSERIAL PRIMARY KEY,
+    task_id         UUID REFERENCES agents.task(id) ON DELETE SET NULL,
+    agent_id        TEXT NOT NULL,
+    surface         TEXT NOT NULL,
+    action          TEXT NOT NULL,
+    detail          JSONB NOT NULL DEFAULT '{}'::jsonb,
+    external_url    TEXT,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_agents_task_status_pri  ON agents.task (status, priority DESC, created_at);
+CREATE INDEX IF NOT EXISTS idx_agents_task_agent       ON agents.task (agent_id);
+CREATE INDEX IF NOT EXISTS idx_agents_activity_agent   ON agents.activity (agent_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_agents_activity_task    ON agents.activity (task_id);
+
+-- Seed the 5 new agents (idempotent — display_name kept up to date on conflict).
+INSERT INTO agents.agent (id, display_name, description, default_tool) VALUES
+  ('scribe',    'Nebula Scribe',    'Drafts documents and publishes them to SharePoint via the agentops Power Automate flow.',     'autonomous_tick'),
+  ('herald',    'Pulsar Herald',    'Posts crew updates and CC-trigger phrases into the Nebula Forge agent Teams channel.',         'autonomous_tick'),
+  ('sentinel',  'Quasar Sentinel',  'Opens compliance investigations and applies Purview sensitivity labels.',                       'autonomous_tick'),
+  ('auditor',   'Astra Auditor',    'Emits synthetic Defender / Entra audit signals into a Log Analytics custom table.',             'autonomous_tick'),
+  ('whisperer', 'Void Whisperer',   'Continuously fires adversarial prompts at the demo OpenAI endpoint to keep Defender for AI alerts flowing.', 'autonomous_tick')
+ON CONFLICT (id) DO UPDATE SET
+  display_name = EXCLUDED.display_name,
+  description  = EXCLUDED.description,
+  default_tool = EXCLUDED.default_tool;
+
+GRANT USAGE ON SCHEMA agents TO "$miName";
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA agents TO "$miName";
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA agents TO "$miName";
+ALTER DEFAULT PRIVILEGES IN SCHEMA agents GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO "$miName";
+ALTER DEFAULT PRIVILEGES IN SCHEMA agents GRANT USAGE, SELECT ON SEQUENCES TO "$miName";
 "@
 
 $tmp = New-TemporaryFile

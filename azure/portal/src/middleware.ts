@@ -4,6 +4,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 const PROTECTED_PATHS = [
   '/command-center',
   '/dashboard',
+  '/agents-board',
   '/hr',
 ];
 
@@ -28,5 +29,5 @@ export function middleware(req: NextRequest): NextResponse {
 }
 
 export const config = {
-  matcher: ['/command-center/:path*', '/dashboard/:path*', '/hr/:path*'],
+  matcher: ['/command-center/:path*', '/dashboard/:path*', '/agents-board/:path*', '/hr/:path*'],
 };

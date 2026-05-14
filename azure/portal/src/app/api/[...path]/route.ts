@@ -20,10 +20,15 @@ const STATIC_ALLOWED_PATHS = new Set<string>([
   'applications/counts',
   'applications/cleanup-demo',
   'demo/submit',
+  'board/agents',
+  'board/tasks',
+  'board/activity',
 ]);
 const ALLOWED_PATH_PATTERNS: RegExp[] = [
   /^applications\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
   /^applications\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/decision$/i,
+  /^board\/tasks\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+  /^board\/tasks\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/dispatch$/i,
 ];
 function isAllowedPath(p: string): boolean {
   if (STATIC_ALLOWED_PATHS.has(p)) return true;

@@ -1,0 +1,44 @@
+{
+  "$comment": "Creates a file in NebulaForgeAgentSharePoint > Shared Documents > {folder}. The flow runs as the agentops service account so 'Created by' on the file shows that user.",
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "triggers": {
+      "manual": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "folder":      { "type": "string" },
+              "fileName":    { "type": "string" },
+              "content":     { "type": "string" },
+              "contentType": { "type": "string" },
+              "title":       { "type": "string" }
+            },
+            "required": [ "folder", "fileName", "content" ]
+          }
+        }
+      }
+    },
+    "actions": {
+      "Create_file": {
+        "type": "OpenApiConnection",
+        "inputs": {
+          "host": {
+            "connectionName": "shared_sharepointonline",
+            "operationId": "CreateFile",
+            "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+          },
+          "parameters": {
+            "dataset": "https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint",
+            "folderPath": "@{concat('Shared Documents/', triggerBody()?['folder'])}",
+            "name": "@{triggerBody()?['fileName']}",
+            "body": "@{triggerBody()?['content']}"
+          }
+        }
+      }
+    }
+  }
+}

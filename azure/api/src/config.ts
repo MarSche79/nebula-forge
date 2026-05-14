@@ -7,6 +7,7 @@ export const config = {
   entraTenantId: process.env.ENTRA_TENANT_ID!,
   entraClientId: process.env.ENTRA_CLIENT_ID!,
   authEnabled: process.env.AUTH_ENABLED !== "false",
+  agentCallbackSecret: process.env.AGENT_CALLBACK_SECRET || "",
   postgres: {
     host: process.env.PSQL_HOST || "",
     database: process.env.PSQL_DATABASE || "nebulaforge",
@@ -23,7 +24,12 @@ export const config = {
     engineering: process.env.MCP_ENGINEERING_URL || "http://localhost:3006",
     logistics: process.env.MCP_LOGISTICS_URL || "http://localhost:3007",
     comms: process.env.MCP_COMMS_URL || "http://localhost:3008",
-    medbay: process.env.MCP_MEDBAY_URL || "http://localhost:3009"
+    medbay: process.env.MCP_MEDBAY_URL || "http://localhost:3009",
+    scribe: process.env.MCP_SCRIBE_URL || "http://localhost:3010",
+    herald: process.env.MCP_HERALD_URL || "http://localhost:3011",
+    sentinel: process.env.MCP_SENTINEL_URL || "http://localhost:3012",
+    auditor: process.env.MCP_AUDITOR_URL || "http://localhost:3013",
+    whisperer: process.env.MCP_WHISPERER_URL || "http://localhost:3014"
   }
 };
 

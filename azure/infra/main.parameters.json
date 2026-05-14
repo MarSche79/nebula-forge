@@ -45,6 +45,18 @@
     "engineeringImageName": { "value": "${SERVICE_ENGINEERING_IMAGE_NAME=}" },
     "logisticsImageName":   { "value": "${SERVICE_LOGISTICS_IMAGE_NAME=}" },
     "commsImageName":       { "value": "${SERVICE_COMMS_IMAGE_NAME=}" },
-    "medbayImageName":      { "value": "${SERVICE_MEDBAY_IMAGE_NAME=}" }
+    "medbayImageName":      { "value": "${SERVICE_MEDBAY_IMAGE_NAME=}" },
+    "scribeImageName":      { "value": "${SERVICE_SCRIBE_IMAGE_NAME=}" },
+    "heraldImageName":      { "value": "${SERVICE_HERALD_IMAGE_NAME=}" },
+    "sentinelImageName":    { "value": "${SERVICE_SENTINEL_IMAGE_NAME=}" },
+    "auditorImageName":     { "value": "${SERVICE_AUDITOR_IMAGE_NAME=}" },
+    "whispererImageName":   { "value": "${SERVICE_WHISPERER_IMAGE_NAME=}" },
+    "agentTickImageName":   { "value": "${SERVICE_AGENT_TICK_IMAGE_NAME=}" },
+    "paTeamsWebhook":       { "value": "${PA_TEAMS_WEBHOOK=}" },
+    "paCcWebhook":          { "value": "${PA_CC_WEBHOOK=}" },
+    "paSpCreateWebhook":    { "value": "${PA_SP_CREATE_WEBHOOK=}" },
+    "paSpLabelWebhook":     { "value": "${PA_SP_LABEL_WEBHOOK=}" },
+    "deployGpt4o":          { "value": "${DEPLOY_GPT_4O=true}" },
+    "agentTickCron":        { "value": "${AGENT_TICK_CRON=*/30 * * * *}" }
   }
 }
