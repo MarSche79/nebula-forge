@@ -64,7 +64,7 @@ export default async function SecurityAlertsPage() {
             Security <span className="text-highlight">Alerts</span>
           </h1>
           <p className="mt-2 text-sm text-muted max-w-2xl">
-            Defender XDR + Microsoft Purview alerts surfaced via the Graph Security API. Reflects the signed-in user's permissions.
+            Defender XDR + Microsoft Purview alerts surfaced via the Graph Security API. Reflects the signed-in user&apos;s permissions.
           </p>
         </header>
 
