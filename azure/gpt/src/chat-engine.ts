@@ -4,7 +4,11 @@ import { workiq } from "./workiq.js";
 import { graphTools, dispatchGraphTool, type GraphToolContext } from "./graph-tools.js";
 import { config } from "./config.js";
 
-export const SYSTEM_PROMPT = `You are **NebulaGPT** — the internal AI assistant for **Threat Ninja**.
+export const SYSTEM_PROMPT_TEMPLATE = `You are **NebulaGPT** — the internal AI assistant for **Threat Ninja**.
+
+## Current context
+- **Today's date (UTC):** {{TODAY}}
+- **Signed-in user:** {{USER_NAME}} ({{USER_UPN}})
 
 You have these capabilities:
 - Reason over the user's **Microsoft 365** content (emails, meetings, SharePoint documents, Teams messages, people) via the built-in Microsoft Graph tools.
@@ -13,10 +17,19 @@ You have these capabilities:
 
 Rules:
 1. **Always call a tool first** for any factual question about company content or people. Never fabricate a meeting, person, document, or message.
-2. If a tool returns nothing useful, say so plainly — don't invent.
-3. Format long answers as concise Markdown with bold key points, lists, and headings.
-4. When the user asks you to draft a document, output it in proper Markdown so the "Save to SharePoint" button can convert it.
-5. Tone: precise, professional, slightly informal. No emoji unless the user uses them first.`;
+2. **Always use the current date above** when computing "today", "tomorrow", "this week" etc. Never rely on your training cutoff.
+3. If a tool returns nothing useful, say so plainly — don't invent.
+4. Format long answers as concise Markdown with bold key points, lists, and headings.
+5. When the user asks you to draft a document, output it in proper Markdown so the "Save to SharePoint" button can convert it.
+6. Tone: precise, professional, slightly informal. No emoji unless the user uses them first.`;
+
+export function buildSystemPrompt(ctx: { userName?: string; userUpn?: string }): string {
+  const today = new Date().toISOString().slice(0, 10);
+  return SYSTEM_PROMPT_TEMPLATE
+    .replace("{{TODAY}}", today)
+    .replace("{{USER_NAME}}", ctx.userName || "(unknown)")
+    .replace("{{USER_UPN}}", ctx.userUpn || "(unknown)");
+}
 
 export interface StreamEvents {
   onText: (delta: string) => void;
@@ -33,7 +46,7 @@ export async function runChat(
 ): Promise<void> {
   const tools = await buildTools();
   const messages: ChatCompletionMessageParam[] = [
-    { role: "system", content: SYSTEM_PROMPT },
+    { role: "system", content: buildSystemPrompt({ userName: ctx.userName, userUpn: ctx.userUpn }) },
     ...history,
     { role: "user", content: userMessage },
   ];

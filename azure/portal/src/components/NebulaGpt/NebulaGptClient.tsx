@@ -277,7 +277,7 @@ export default function NebulaGptClient({ initialSessions, initialUser }: ChatPr
           <div className="min-w-0 flex-1">
             <div className="text-base font-bold tracking-tight" style={{ color: 'var(--text)' }}>NebulaGPT</div>
             <div className="text-[11px] text-dim">
-              Internal assistant · grounded in your Threat Ninja Microsoft 365 data via WorkIQ
+              Internal assistant · grounded in your Threat Ninja Microsoft 365 data
             </div>
           </div>
           <span className="pill" style={{ fontSize: '0.65rem' }}>
