@@ -160,6 +160,12 @@ services:
     host: containerapp
     docker:
       remoteBuild: true
+  gpt:
+    project: ./gpt
+    language: ts
+    host: containerapp
+    docker:
+      remoteBuild: true
 hooks:
   postprovision:
     shell: pwsh

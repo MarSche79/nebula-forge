@@ -56,6 +56,21 @@ param sentinelImageName string = ''
 param auditorImageName string = ''
 param whispererImageName string = ''
 param agentTickImageName string = ''
+param gptImageName string = ''
+
+@description('Dedicated NebulaGPT Entra app reg client ID (for OBO flow)')
+param gptAppClientId string = ''
+
+@description('Dedicated NebulaGPT Entra app client secret (for OBO flow)')
+@secure()
+param gptAppClientSecret string = ''
+
+@description('Power Automate webhook for NebulaGPT save-doc / upload flow')
+@secure()
+param paSaveDocWebhook string = ''
+
+@description('SharePoint site URL for NebulaGPT uploads + generated docs')
+param nebulaGptSharepointSiteUrl string = 'https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint'
 
 @description('Power Automate webhook (Teams post message)')
 @secure()
@@ -124,6 +139,11 @@ module resources 'resources.bicep' = {
     auditorImageName: auditorImageName
     whispererImageName: whispererImageName
     agentTickImageName: agentTickImageName
+    gptImageName: gptImageName
+    gptAppClientId: gptAppClientId
+    gptAppClientSecret: gptAppClientSecret
+    paSaveDocWebhook: paSaveDocWebhook
+    nebulaGptSharepointSiteUrl: nebulaGptSharepointSiteUrl
     paTeamsWebhook: paTeamsWebhook
     paCcWebhook: paCcWebhook
     paSpCreateWebhook: paSpCreateWebhook
@@ -169,3 +189,6 @@ output DEFENDER_INGEST_WORKFLOW_NAME string = resources.outputs.DEFENDER_INGEST_
 output DEFENDER_INGEST_CALLBACK_URL string = resources.outputs.DEFENDER_INGEST_CALLBACK_URL
 output AGENT_TICK_JOB_NAME string = resources.outputs.AGENT_TICK_JOB_NAME
 output AGENT_CALLBACK_SECRET string = resources.outputs.AGENT_CALLBACK_SECRET
+
+output GPT_FQDN string = resources.outputs.GPT_FQDN
+output GPT_BASE_URL string = resources.outputs.GPT_BASE_URL

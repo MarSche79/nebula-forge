@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 const API_BASE = (process.env.API_BASE_URL || '').replace(/\/$/, '');
+const GPT_BASE = (process.env.GPT_BASE_URL || '').replace(/\/$/, '');
 const PROXY_SHARED_SECRET = process.env.PROXY_SHARED_SECRET || '';
 
 // Allow-list of API paths the portal will proxy. Anything else returns 404.
@@ -23,16 +24,29 @@ const STATIC_ALLOWED_PATHS = new Set<string>([
   'board/agents',
   'board/tasks',
   'board/activity',
+  // NebulaGPT
+  'gpt/health',
+  'gpt/sessions',
+  'gpt/uploads',
+  'gpt/alerts',
+  'gpt/generate/save-doc',
 ]);
 const ALLOWED_PATH_PATTERNS: RegExp[] = [
   /^applications\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
   /^applications\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/decision$/i,
   /^board\/tasks\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
   /^board\/tasks\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/dispatch$/i,
+  /^gpt\/sessions\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+  /^gpt\/chat\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/message$/i,
 ];
 function isAllowedPath(p: string): boolean {
   if (STATIC_ALLOWED_PATHS.has(p)) return true;
   return ALLOWED_PATH_PATTERNS.some((rx) => rx.test(p));
+}
+
+function upstreamBaseFor(p: string): string {
+  if (p.startsWith('gpt/')) return GPT_BASE;
+  return API_BASE;
 }
 
 // Headers we strip from the *incoming* browser request before forwarding,
@@ -73,13 +87,6 @@ async function proxy(
   req: NextRequest,
   params: { path?: string[] },
 ): Promise<Response> {
-  if (!API_BASE) {
-    return new Response(
-      JSON.stringify({ error: 'API_BASE_URL not configured on portal container' }),
-      { status: 503, headers: { 'content-type': 'application/json' } },
-    );
-  }
-
   const subPath = (params.path || []).join('/');
   if (!isAllowedPath(subPath)) {
     return new Response(
@@ -88,13 +95,24 @@ async function proxy(
     );
   }
 
+  const upstreamBase = upstreamBaseFor(subPath);
+  if (!upstreamBase) {
+    return new Response(
+      JSON.stringify({ error: `${subPath.startsWith('gpt/') ? 'GPT_BASE_URL' : 'API_BASE_URL'} not configured on portal container` }),
+      { status: 503, headers: { 'content-type': 'application/json' } },
+    );
+  }
+
   const search = req.nextUrl.search || '';
-  const targetUrl = `${API_BASE}/api/${subPath}${search}`;
+  const targetUrl = `${upstreamBase}/api/${subPath}${search}`;
 
   // Capture trusted headers BEFORE we filter incoming headers — this is safe
   // because Easy Auth adds them server-side; in production a malicious browser
   // value would be one we discard anyway.
   const easyAuth = readEasyAuthHeaders(req);
+  // NebulaGPT requires the user's access token for OBO; the Easy Auth sidecar
+  // exposes it via X-MS-TOKEN-AAD-ACCESS-TOKEN. We forward it ONLY for /gpt/*.
+  const aadAccessToken = req.headers.get('x-ms-token-aad-access-token');
 
   // Build the outbound header set: keep only safe content-type / accept / etc.
   const headers: Record<string, string> = {};
@@ -113,6 +131,9 @@ async function proxy(
   if (easyAuth.principal) headers['x-ms-client-principal'] = easyAuth.principal;
   if (easyAuth.principalName) headers['x-ms-client-principal-name'] = easyAuth.principalName;
   if (easyAuth.principalId) headers['x-ms-client-principal-id'] = easyAuth.principalId;
+  if (subPath.startsWith('gpt/') && aadAccessToken) {
+    headers['x-ms-token-aad-access-token'] = aadAccessToken;
+  }
 
   const init: RequestInit = {
     method: req.method,

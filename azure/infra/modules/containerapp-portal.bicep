@@ -25,6 +25,9 @@ param registryServer string
 @description('Public base URL of the Backend API (e.g. https://ca-api-xxx.westeurope.azurecontainerapps.io)')
 param apiBaseUrl string
 
+@description('Internal GPT base URL (https://ca-gpt-…internal.<env>)')
+param gptBaseUrl string = ''
+
 @description('App Insights connection string')
 param appInsightsConnectionString string
 
@@ -119,6 +122,7 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
               { name: 'PORT',                                  value: '3000' }
               { name: 'AZURE_CLIENT_ID',                       value: managedIdentityClientId }
               { name: 'API_BASE_URL',                          value: apiBaseUrl }
+              { name: 'GPT_BASE_URL',                          value: gptBaseUrl }
               // Intentionally empty: forces the browser to use same-origin /api/* via the Next.js proxy.
               // Public exposure of API_BASE_URL would let clients bypass the proxy + Easy Auth.
               { name: 'NEXT_PUBLIC_API_URL',                   value: '' }
@@ -167,6 +171,15 @@ resource auth 'Microsoft.App/containerApps/authConfigs@2024-03-01' = if (authEna
           clientSecretSettingName: 'aad-client-secret'
           openIdIssuer: 'https://login.microsoftonline.com/${entraTenantId}/v2.0'
         }
+        login: {
+          // Request a Microsoft Graph access token at sign-in so the portal's
+          // Easy Auth sidecar exposes it via X-MS-TOKEN-AAD-ACCESS-TOKEN.
+          // NebulaGPT consumes that token directly to query Graph on the
+          // user's behalf — no OBO swap needed.
+          loginParameters: [
+            'scope=openid profile email offline_access https://graph.microsoft.com/.default'
+          ]
+        }
         validation: {
           allowedAudiences: [
             'api://${entraClientId}'
@@ -177,7 +190,7 @@ resource auth 'Microsoft.App/containerApps/authConfigs@2024-03-01' = if (authEna
     }
     login: {
       tokenStore: {
-        enabled: false
+        enabled: true
       }
       preserveUrlFragmentsForLogins: false
     }

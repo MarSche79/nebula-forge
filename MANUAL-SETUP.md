@@ -283,3 +283,106 @@ If any row in the table is missing, check the agent's container app log:
 ```pwsh
 az containerapp logs show -g rg-nebula-forge-<env> -n ca-scribe-<token> --tail 50
 ```
+
+---
+
+# Phase 2 — NebulaGPT (added 2026-05-14)
+
+NebulaGPT is the internal Threat-Ninja employee assistant. It uses Azure OpenAI gpt-4o plus the Microsoft WorkIQ MCP server, grounds answers in your M365 data, can generate documents, save them to SharePoint, and surfaces Microsoft Defender + Purview alerts at `/security-alerts`.
+
+## A. Entra app reg + admin consent (one-off)
+
+NebulaGPT signs users in via the **same Entra app reg used by the rest of the portal** (Easy Auth). You only need to add Microsoft Graph delegated permissions and grant admin consent.
+
+1. https://entra.microsoft.com → **Applications → App registrations → "NebulaForge Portal (Container Apps)"** (or whatever you named it).
+2. **API permissions → + Add a permission → Microsoft Graph → Delegated**, add:
+   - `User.Read`
+   - `Sites.Read.All`
+   - `Files.ReadWrite.All`
+   - `Mail.Read`
+   - `ChannelMessage.Read.All`
+   - `Calendars.Read`
+   - `SecurityEvents.Read.All`
+   - `SecurityAlert.Read.All`
+3. Click **Grant admin consent for <tenant>**. Everyone in your tenant can now sign in to NebulaGPT and the Graph API will accept their tokens.
+4. **Authentication → Single-page application** redirect URIs — verify `https://<your-portal>/.auth/login/aad/callback` is listed (it should be from Phase 1).
+
+## B. WorkIQ admin consent (one-off)
+
+WorkIQ is a Microsoft-published MCP server that needs admin consent against its own multi-tenant app reg before it can read tenant M365 data.
+
+1. As a tenant **Global Admin**, open the consent URL from the [WorkIQ tenant admin guide](https://github.com/microsoft/work-iq/blob/main/ADMIN-INSTRUCTIONS.md):
+   `https://login.microsoftonline.com/<your-tenant-id>/adminconsent?client_id=<workiq-app-id>`
+   (the repo has a one-click URL — read the latest version of the doc; the client_id is the Microsoft-published WorkIQ app.)
+2. Approve the requested permissions (these are read-only Graph scopes covering Mail, Files, Sites, Teams, Calendar, People).
+3. On the NebulaGPT container's *first* MCP request, WorkIQ caches a token in the container's tmp dir. If you suspect the cache went stale, `az containerapp revision restart` cycles it.
+
+> Note: WorkIQ runs **inside** the `ca-gpt-…` container as a subprocess (`workiq mcp`). It is installed globally in the Docker image. There is nothing extra to deploy.
+
+## C. SharePoint "NebulaGPT-Uploads" library
+
+Where user-uploaded files and generated `.md` docs land. Tenant DLP scans this library because it's a normal SharePoint document library.
+
+1. Open https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint
+2. **+ New → Document library**, name it **`NebulaGPT-Uploads`**.
+3. Optional: apply a default sensitivity label of `Internal` so DLP fires only on the explicitly sensitive content NebulaGPT/Scribe drop in.
+
+## D. Save-doc Power Automate flow
+
+Recreate as the **agentops** service account (same identity that runs the Phase 1 flows):
+
+1. In https://make.powerautomate.com (signed in as `agentops`), **+ Create → Instant cloud flow → "When an HTTP request is received"**.
+2. Trigger schema — paste:
+   ```json
+   {
+     "type": "object",
+     "properties": {
+       "folder":        { "type": "string" },
+       "fileName":      { "type": "string" },
+       "content":       { "type": "string" },
+       "contentBase64": { "type": "string" },
+       "contentType":   { "type": "string" },
+       "uploadedBy":    { "type": "string" }
+     },
+     "required": [ "fileName" ]
+   }
+   ```
+3. Add a **Condition**: `triggerBody()?['contentBase64']` is **not equal to** empty string.
+4. **If yes** — SharePoint *Create file* action:
+   - Site: `https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint`
+   - Folder Path: `Shared Documents/` + dynamic `folder`
+   - File Name: dynamic `fileName`
+   - File Content: expression `base64ToBinary(triggerBody()?['contentBase64'])`
+5. **If no** — same Create file action, but File Content = dynamic `content` (plain text path).
+6. **Response** action (after the condition): status 200, body `{ "ok": true, "fileName": "@{triggerBody()?['fileName']}" }`.
+7. Save, open the trigger, copy the HTTP POST URL, then:
+   ```pwsh
+   azd env set PA_SAVE_DOC_WEBHOOK '<paste url here>'
+   azd provision      # wires the URL into ca-gpt as a Container App secret
+   ```
+
+The full template JSON is checked in at `azure/flows/pa-nebulagpt-save-doc.flow.json` for reference.
+
+## E. Microsoft Agent 365 (Entra Agent ID preview)
+
+To make NebulaGPT show up in **https://entra.microsoft.com → Agents** for governance:
+
+1. https://entra.microsoft.com → **Identity → Applications → Agent ID (Preview) → + New agent**.
+2. Name: `NebulaGPT`, Description: `Internal Threat Ninja AI assistant grounded in M365 data via WorkIQ`.
+3. Assigned identity: pick the existing **NebulaForge Portal** app reg.
+4. Owner: yourself.
+5. Save.
+
+This registers NebulaGPT as a workload identity that Entra governs. From Agent Center you can disable / re-consent / rotate secrets.
+
+## F. Verify
+
+After provision + deploy:
+
+1. Open **https://ca-portal-jiehil2zaklu2.../nebula-gpt** signed in as a `*@threatninja.at` user.
+2. Ask "What's on my calendar tomorrow?" — should see tool activity (WorkIQ tool call) and a grounded answer.
+3. Ask "Draft a status update for project X" — copy or click **Save to SharePoint** — file should land in `NebulaGPT-Uploads`.
+4. Upload a PDF using the paperclip icon — should appear in **Uploads** drawer + in `NebulaGPT-Uploads`.
+5. Open **/security-alerts** — should list recent Defender/Purview alerts (limited by what your account can see).
+6. From a `*@somethingelse.example` account, signing in should fail / be redirected — tenant lock is at the Easy Auth app reg + a redundant `tid` check at the API.
+

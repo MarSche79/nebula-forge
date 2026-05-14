@@ -206,6 +206,48 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA agents TO "$miName"
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA agents TO "$miName";
 ALTER DEFAULT PRIVILEGES IN SCHEMA agents GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO "$miName";
 ALTER DEFAULT PRIVILEGES IN SCHEMA agents GRANT USAGE, SELECT ON SEQUENCES TO "$miName";
+
+-- ============================================================
+-- NebulaGPT — internal Threat Ninja assistant (Phase 2)
+-- ============================================================
+CREATE SCHEMA IF NOT EXISTS gpt;
+
+CREATE TABLE IF NOT EXISTS gpt.session (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_oid    TEXT NOT NULL,
+    title       TEXT NOT NULL DEFAULT 'New chat',
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS gpt.message (
+    id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    session_id   UUID NOT NULL REFERENCES gpt.session(id) ON DELETE CASCADE,
+    role         TEXT NOT NULL CHECK (role IN ('user','assistant','tool')),
+    content      TEXT NOT NULL,
+    citations    JSONB NOT NULL DEFAULT '[]'::jsonb,
+    created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS gpt.upload (
+    id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_oid        TEXT NOT NULL,
+    file_name       TEXT NOT NULL,
+    size            INT  NOT NULL DEFAULT 0,
+    content_type    TEXT NOT NULL DEFAULT '',
+    sharepoint_url  TEXT,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_gpt_session_user_updated ON gpt.session (user_oid, updated_at DESC);
+CREATE INDEX IF NOT EXISTS idx_gpt_message_session      ON gpt.message (session_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_gpt_upload_user          ON gpt.upload (user_oid, created_at DESC);
+
+GRANT USAGE ON SCHEMA gpt TO "$miName";
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA gpt TO "$miName";
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA gpt TO "$miName";
+ALTER DEFAULT PRIVILEGES IN SCHEMA gpt GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO "$miName";
+ALTER DEFAULT PRIVILEGES IN SCHEMA gpt GRANT USAGE, SELECT ON SEQUENCES TO "$miName";
 "@
 
 $tmp = New-TemporaryFile
