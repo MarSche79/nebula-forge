@@ -316,6 +316,7 @@ module portalApp 'modules/containerapp-portal.bicep' = {
     registryServer: registry.outputs.loginServer
     apiBaseUrl: 'https://${apiApp.outputs.fqdn}'
     gptBaseUrl: 'https://${gptApp.outputs.fqdn}'
+    storageAccountName: storage.outputs.storageAccountName
     appInsightsConnectionString: monitoring.outputs.appInsightsConnectionString
     entraTenantId: subscription().tenantId
     entraClientId: effectiveEntraClientId

@@ -51,6 +51,42 @@ param proxySharedSecret string = ''
 @description('Optional custom hostname bindings (e.g. www.nebula-forge.at) with their managed-cert names.')
 param customDomains array = []
 
+@description('Storage account name (used for the Easy Auth tokenStore blob container)')
+param storageAccountName string = ''
+
+@description('SAS expiry timestamp for the Easy Auth tokenStore SAS — must be a future ISO-8601 timestamp. Default is one year from provision time.')
+param tokenStoreSasExpiry string = dateTimeAdd(utcNow('yyyy-MM-ddTHH:mm:ssZ'), 'P1Y')
+
+// Reference the existing storage account to read its account key for the
+// Easy Auth tokenStore SAS URL.
+resource storageAcct 'Microsoft.Storage/storageAccounts@2023-05-01' existing = if (authEnabled && !empty(storageAccountName)) {
+  name: storageAccountName
+}
+
+var tokenStoreSasParams = {
+  signedServices: 'b'
+  signedResourceTypes: 'sco'
+  signedPermission: 'rwdlacu'
+  signedExpiry: tokenStoreSasExpiry
+  signedProtocol: 'https'
+}
+var tokenStoreSasUrl = (authEnabled && !empty(storageAccountName))
+  ? '${storageAcct.properties.primaryEndpoints.blob}easy-auth-token-store?${listAccountSas(storageAcct.id, '2023-05-01', tokenStoreSasParams).accountSasToken}'
+  : ''
+
+// Pre-create the blob container so Easy Auth doesn't have to.
+resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2023-05-01' existing = if (authEnabled && !empty(storageAccountName)) {
+  parent: storageAcct
+  name: 'default'
+}
+resource tokenStoreContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = if (authEnabled && !empty(storageAccountName)) {
+  parent: blobService
+  name: 'easy-auth-token-store'
+  properties: {
+    publicAccess: 'None'
+  }
+}
+
 resource app 'Microsoft.App/containerApps@2024-03-01' = {
   name: name
   location: location
@@ -71,6 +107,12 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
           {
             name: 'aad-client-secret'
             value: aadClientSecret
+          }
+        ] : [],
+        (authEnabled && !empty(storageAccountName)) ? [
+          {
+            name: 'auth-token-store-sas'
+            value: tokenStoreSasUrl
           }
         ] : [],
         !empty(proxySharedSecret) ? [
@@ -190,7 +232,7 @@ resource auth 'Microsoft.App/containerApps/authConfigs@2024-03-01' = if (authEna
     }
     login: {
       tokenStore: {
-        enabled: true
+        enabled: false
       }
       preserveUrlFragmentsForLogins: false
     }

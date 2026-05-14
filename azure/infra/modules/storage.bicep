@@ -20,10 +20,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   properties: {
     accessTier: 'Hot'
     allowBlobPublicAccess: false
-    // Re-enabled because Easy Auth's tokenStore on Container Apps uses a SAS
-    // URL (shared key), and there is no managed-identity path for it yet.
-    // SAS keys are scoped + time-limited and the storage account is firewalled.
-    allowSharedKeyAccess: true
+    // Subscription policy enforces this — leave it disabled.
+    allowSharedKeyAccess: false
     allowCrossTenantReplication: false
     minimumTlsVersion: 'TLS1_2'
     supportsHttpsTrafficOnly: true
