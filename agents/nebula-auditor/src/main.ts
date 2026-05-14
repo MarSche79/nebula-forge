@@ -47,6 +47,44 @@ const SIGNAL_TEMPLATES = {
     fileCount: 2173, sizeMb: 8112, sourceSite: "NebulaForgeAgentSharePoint",
     detail: "User downloaded 2,173 files in 4 minutes from the agent SharePoint site.",
   }),
+  "impossible-travel": (user: string) => ({
+    eventType: "ImpossibleTravel", user,
+    locations: ["Vienna, AT", "Singapore, SG"], windowMinutes: 48,
+    detail: "Sign-in from Vienna at 09:14 then Singapore at 10:02 — geographic impossibility (~9,800km / 48 min).",
+  }),
+  "mfa-fatigue": (user: string) => ({
+    eventType: "MFAFatigue", user,
+    rejectedPrompts: 86, windowMinutes: 12,
+    detail: "86 MFA prompts rejected by user in 12 minutes — likely push-bombing attack.",
+  }),
+  "password-spray": (user: string) => ({
+    eventType: "PasswordSpray", user, sourceIp: "198.51.100.42",
+    failedAttemptsAgainstAccounts: 41, windowSeconds: 90,
+    detail: "Failed sign-ins observed against 41 accounts from a single source IP within 90 seconds.",
+  }),
+  "powershell-encoded": (user: string) => ({
+    eventType: "SuspiciousPowershell", user, host: `NF-LAPTOP-${Math.floor(Math.random() * 999)}`,
+    detail: "powershell.exe -enc <base64> observed. Decoded content includes Net.WebClient.DownloadString of remote payload.",
+  }),
+  "defender-evasion": (user: string) => ({
+    eventType: "DefenderEvasion", user, host: `NF-LAPTOP-${Math.floor(Math.random() * 999)}`,
+    detail: "Real-time protection disabled on endpoint outside of an approved maintenance window.",
+  }),
+  "casb-exfil": (user: string) => ({
+    eventType: "CASBDataExfil", user,
+    destination: "personal.dropbox.com",
+    sizeMb: 1248,
+    detail: "Large outbound transfer (1.2 GB) to personal Dropbox account from corporate device.",
+  }),
+  "scheduled-task": (user: string) => ({
+    eventType: "ScheduledTaskPersist", user, host: `NF-LAPTOP-${Math.floor(Math.random() * 999)}`,
+    taskName: "WindowsUpdateAgent",
+    detail: "New scheduled task with payload that runs every 30 minutes — likely persistence.",
+  }),
+  "bec-financial": (user: string) => ({
+    eventType: "BusinessEmailCompromise", user,
+    detail: "Email from agentops@nebula-forge.local matching CEO display name requested an urgent wire transfer to a new vendor IBAN.",
+  }),
 } as const;
 
 type SignalKind = keyof typeof SIGNAL_TEMPLATES;
@@ -60,7 +98,12 @@ async function main() {
     "emit_signal",
     "Emit a synthetic Defender/Entra signal to the Log Analytics custom table via the audit Logic App.",
     {
-      kind: z.enum(["risky-sign-in", "mailbox-rule", "app-consent", "mass-download"]),
+      kind: z.enum([
+        "risky-sign-in", "mailbox-rule", "app-consent", "mass-download",
+        "impossible-travel", "mfa-fatigue", "password-spray",
+        "powershell-encoded", "defender-evasion", "casb-exfil",
+        "scheduled-task", "bec-financial",
+      ]),
       user: z.string().default("agentops@nebula-forge.local"),
       taskId: z.string().optional(),
     },
