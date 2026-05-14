@@ -380,9 +380,115 @@ This registers NebulaGPT as a workload identity that Entra governs. From Agent C
 After provision + deploy:
 
 1. Open **https://ca-portal-jiehil2zaklu2.../nebula-gpt** signed in as a `*@threatninja.at` user.
-2. Ask "What's on my calendar tomorrow?" — should see tool activity (WorkIQ tool call) and a grounded answer.
+2. Ask "What's on my calendar tomorrow?" — should see tool activity (Graph tool call) and a grounded answer.
 3. Ask "Draft a status update for project X" — copy or click **Save to SharePoint** — file should land in `NebulaGPT-Uploads`.
 4. Upload a PDF using the paperclip icon — should appear in **Uploads** drawer + in `NebulaGPT-Uploads`.
 5. Open **/security-alerts** — should list recent Defender/Purview alerts (limited by what your account can see).
 6. From a `*@somethingelse.example` account, signing in should fail / be redirected — tenant lock is at the Easy Auth app reg + a redundant `tid` check at the API.
+
+---
+
+# Phase 2 close-out — what to know on resume
+
+## State as of 2026-05-14
+
+| Status | Surface |
+|---|---|
+| ✅ Live | 9 original MCP agents (HR…Med-bay) |
+| ✅ Live | 5 new agents (Scribe, Herald, Sentinel, Auditor, Whisperer) |
+| ✅ Live | Cron tick `*/30 * * * *` autonomously firing all 5 agents |
+| ✅ Live | Agents Board + Activity feed at `/agents-board` |
+| ✅ Live | NebulaGPT at `/nebula-gpt` — Azure OpenAI gpt-4o + Microsoft Graph tools (app-only) |
+| ✅ Live | Security Alerts at `/security-alerts` — Graph Security `alerts_v2` |
+| ✅ Live | 3 of 4 Power Automate flows (Teams post, CC trigger, SP create-doc) |
+| ✅ Live | All 14 agents registered as Entra app regs (tag `NebulaForgeAgent`) |
+| ✅ Live | `agents.*` + `gpt.*` PostgreSQL schemas |
+| ✅ Live | Defender Logic App `la-defender-ingest-…` writes to `NebulaForgeAgentSignals_CL` |
+| 🟡 Disabled | WorkIQ MCP subprocess — single-user model doesn't fit a multi-user app (kept in image, feature-flagged) |
+| ⏳ TODO | 4th Power Automate flow (`pa-sharepoint-apply-label`) — see §D |
+| ⏳ TODO | Defender XDR HIGH-severity custom-detection rule — see below |
+
+## On resume — 3 things left to do
+
+### 1. Author the HIGH-severity custom detection rule
+
+Microsoft's built-in Defender for AI alerts (jailbreak, CredentialTheft, MaliciousURL, SensitiveDataLeak, LLM Recon) all rate **Medium** out of the box. To get **High** severity incidents in Defender XDR's queue you need a SOC correlation rule. Author it once:
+
+1. https://security.microsoft.com → **Hunting → Custom detection rules → + Create custom detection**.
+2. **Query** — paste:
+
+```kusto
+// "AI compound — agent under attack (HIGH)"
+let aiAlerts =
+    AlertInfo
+    | where TimeGenerated > ago(1h)
+    | where ServiceSource has_any ("MicrosoftDefenderForCloud", "MicrosoftDefenderForOffice365", "Microsoft365Defender", "MicrosoftSentinel")
+        or DetectionSource has_any ("AI", "Copilot", "AzureOpenAI")
+        or Category has_any ("AI", "Prompt", "Jailbreak", "SensitiveDataLeak")
+    | join kind=leftouter (
+        AlertEvidence
+        | where EntityType in ("User", "CloudApplication", "Account")
+        | summarize Account = make_set(AccountUpn, 5) by AlertId
+      ) on AlertId
+    | project AlertTime = TimeGenerated, AlertId, Title, Severity, ServiceSource, DetectionSource, Category, Account;
+let nebulaSignals =
+    NebulaForgeAgentSignals_CL
+    | where TimeGenerated > ago(1h)
+    | extend AccountUpn = tostring(user_s),
+             EventType  = tostring(eventType_s),
+             SeverityRaw = tostring(severity_s),
+             Compound   = tostring(compound_s)
+    | summarize Events = make_set(EventType, 20), EventCount = count(),
+                MaxSev = max(case(SeverityRaw == 'critical', 4,
+                                  SeverityRaw == 'high', 3,
+                                  SeverityRaw == 'medium', 2, 1))
+      by AccountUpn, Compound;
+aiAlerts
+| extend Account = tostring(Account[0])
+| join kind=leftouter nebulaSignals on $left.Account == $right.AccountUpn
+| project Timestamp = AlertTime, AccountUpn = Account, AiAlertTitle = Title,
+          AiAlertSeverity = Severity, ServiceSource, DetectionSource,
+          CorrelatedSignals = Events, CompoundEventCount = EventCount,
+          ReportId = AlertId
+```
+
+3. Frequency: every 1 hour, look-back 1 hour.
+4. Title: `Coordinated attack on AI agent — {AiAlertTitle}`
+5. **Severity: High** ← the key bit.
+6. Category: `SuspiciousActivity` · MITRE `T1078` + `T1059`.
+7. Entity mapping: Account → `AccountUpn`, Report ID → `ReportId`.
+8. Save.
+
+Once active, fire the trigger:
+```pwsh
+pwsh ./scripts/fire-high-severity.ps1 -CompromisedUser markus@threatninja.at
+```
+…and within 1 hour the new rule produces a **HIGH** incident correlating the Medium AI alert with our infra signals.
+
+### 2. Recreate the 4th Power Automate flow
+
+`pa-sharepoint-apply-label` template at `azure/flows/pa-sharepoint-apply-label.flow.json`. Recreate as `agentops`, then:
+```pwsh
+azd env set PA_SP_LABEL_WEBHOOK '<flow trigger URL>'
+azd provision
+```
+
+### 3. Turn Purview policies ON (out of Simulation Mode)
+
+Open https://purview.microsoft.com → DLP / Communication Compliance → for each policy click Edit → flip **Status: On**, scope = Nebula Forge agent site + team. Without this, Scribe's sensitive docs and Herald's CC-trigger messages never produce alerts.
+
+## Operational scripts
+
+| Script | When to use |
+|---|---|
+| `scripts/demo-spike.ps1 [-Intensity light\|normal\|heavy]` | Pre-demo burst across every M365 surface |
+| `scripts/fire-high-severity.ps1 [-CompromisedUser <upn>]` | One-shot HIGH-severity trigger |
+| `scripts/register-agents-in-entra.ps1` | Idempotent — refresh 14 agent app reg tags / metadata |
+
+## Architecture parking-lot (next time)
+
+* WorkIQ is single-user by design — re-enable per-developer locally, NOT in shared `ca-gpt`.
+* Easy Auth tokenStore needs shared-key storage — blocked by subscription policy. Use the app-only Graph path instead (already wired).
+* If you onboard **Microsoft Sentinel** on `log-jiehil2zaklu2`, port the same KQL into a scheduled analytic rule for richer correlation + incident grouping.
+* `proxySharedSecret` is now sticky in azd env — don't unset `PROXY_SHARED_SECRET`, otherwise the next provision regenerates it and every `/api/*` call 401s until you restart the API + portal revisions.
 
