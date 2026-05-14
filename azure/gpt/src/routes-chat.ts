@@ -77,13 +77,18 @@ chatRouter.post("/:sessionId/message", requireAuth, async (req, res) => {
     })) as ChatCompletionMessageParam[];
 
   let fullText = "";
+  const ctx = {
+    userOid: req.user!.oid,
+    userUpn: req.user!.upn || req.user!.name || "",
+    userName: req.user!.name || "",
+  };
   try {
     await runChat(history, body.data.message, {
       onText: (delta) => { fullText += delta; send("text", { delta }); },
       onToolCall: (name, args) => send("tool_call", { name, args }),
       onToolResult: (name, text) => send("tool_result", { name, preview: text.slice(0, 200) }),
       onDone: ({ fullText: ft }) => { fullText = ft || fullText; },
-    });
+    }, ctx);
     await appendMessage(sessionId, "assistant", fullText);
     send("done", { ok: true });
   } catch (err) {

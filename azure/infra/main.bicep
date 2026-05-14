@@ -95,6 +95,9 @@ param paSpLabelWebhook string = ''
 @description('Whether to deploy a gpt-4o (full) deployment for richer document generation')
 param deployGpt4o bool = true
 
+@description('Enable WorkIQ MCP subprocess in NebulaGPT (off by default; single-user-only model)')
+param workiqEnabled bool = false
+
 @description('CRON expression for the agent-tick job')
 param agentTickCron string = '*/30 * * * *'
 
@@ -153,6 +156,7 @@ module resources 'resources.bicep' = {
     paSpCreateWebhook: paSpCreateWebhook
     paSpLabelWebhook: paSpLabelWebhook
     deployGpt4o: deployGpt4o
+    workiqEnabled: workiqEnabled
     agentTickCron: agentTickCron
     proxySharedSecret: proxySharedSecret
   }

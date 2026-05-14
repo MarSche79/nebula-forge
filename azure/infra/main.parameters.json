@@ -62,6 +62,7 @@
     "paSpCreateWebhook":    { "value": "${PA_SP_CREATE_WEBHOOK=}" },
     "paSpLabelWebhook":     { "value": "${PA_SP_LABEL_WEBHOOK=}" },
     "deployGpt4o":          { "value": "${DEPLOY_GPT_4O=true}" },
+    "workiqEnabled":        { "value": "${WORKIQ_ENABLED=false}" },
     "agentTickCron":        { "value": "${AGENT_TICK_CRON=*/30 * * * *}" },
     "proxySharedSecret":    { "value": "${PROXY_SHARED_SECRET=}" }
   }

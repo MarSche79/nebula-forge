@@ -92,8 +92,11 @@ param gptAppClientSecret string = ''
 @description('SharePoint site URL for NebulaGPT uploads + generated docs')
 param nebulaGptSharepointSiteUrl string = 'https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint'
 
-@description('Whether to deploy the gpt-4o (full) model alongside gpt-4o-mini for richer document generation by the new agents')
+@description('Whether to deploy a gpt-4o (full) model alongside gpt-4o-mini for richer document generation by the new agents')
 param deployGpt4o bool = true
+
+@description('Enable the WorkIQ MCP subprocess inside NebulaGPT. Off by default because WorkIQ is single-user/interactive and does not fit a multi-user web app.')
+param workiqEnabled bool = false
 
 @description('CRON expression for the agent-tick job. Defaults to every 30 min.')
 param agentTickCron string = '*/30 * * * *'
@@ -409,7 +412,7 @@ module gptApp 'modules/containerapp-gpt.bicep' = {
     paSaveDocWebhook: paSaveDocWebhook
     sharepointSiteUrl: nebulaGptSharepointSiteUrl
     uploadsLibrary: 'NebulaGPT-Uploads'
-    workiqEnabled: true
+    workiqEnabled: workiqEnabled
   }
 }
 
