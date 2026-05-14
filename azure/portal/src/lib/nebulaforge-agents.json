@@ -1,0 +1,156 @@
+[
+  {
+    "id": "hr",
+    "display": "HR Assistant",
+    "shortName": "HR",
+    "icon": "👥",
+    "appId": "f5a1f621-662c-44e7-8d4b-0d2f94f6eb0b",
+    "description": "Crew screening, onboarding, leave-request triage. Backed by Azure OpenAI gpt-4o-mini, scoped to /careers and /hr/* in NebulaForge.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/f5a1f621-662c-44e7-8d4b-0d2f94f6eb0b",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/f5a1f621-662c-44e7-8d4b-0d2f94f6eb0b",
+    "containerApp": "ca-hr-jiehil2zaklu2"
+  },
+  {
+    "id": "materials",
+    "display": "Material Analyst",
+    "shortName": "Materials",
+    "icon": "🔬",
+    "appId": "372f9af4-477e-48cf-8f67-3e76f0219673",
+    "description": "Mineral classification, sample comparison, mass-spectrometry interpretation across station collections.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/372f9af4-477e-48cf-8f67-3e76f0219673",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/372f9af4-477e-48cf-8f67-3e76f0219673",
+    "containerApp": "ca-materials-jiehil2zaklu2"
+  },
+  {
+    "id": "exploration",
+    "display": "Exploration Navigator",
+    "shortName": "Exploration",
+    "icon": "🚀",
+    "appId": "4689ef14-5cac-4dfa-a748-87784472db0f",
+    "description": "Mission planning, route optimisation, celestial-body knowledge base for deep-space surveys.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/4689ef14-5cac-4dfa-a748-87784472db0f",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/4689ef14-5cac-4dfa-a748-87784472db0f",
+    "containerApp": "ca-exploration-jiehil2zaklu2"
+  },
+  {
+    "id": "science",
+    "display": "Science Officer",
+    "shortName": "Science",
+    "icon": "🧪",
+    "appId": "ab7ac5b9-49b6-46c2-a8b3-1fad3b59cbc4",
+    "description": "Experiment tracking, observation logging, hypothesis review, publication drafting.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/ab7ac5b9-49b6-46c2-a8b3-1fad3b59cbc4",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/ab7ac5b9-49b6-46c2-a8b3-1fad3b59cbc4",
+    "containerApp": "ca-science-jiehil2zaklu2"
+  },
+  {
+    "id": "safety",
+    "display": "Safety Officer",
+    "shortName": "Safety",
+    "icon": "🛡️",
+    "appId": "cb3f5c8d-9f94-4ed9-b8ae-ee4453fe8102",
+    "description": "Incident response, radiation monitoring, emergency protocols, hazard reporting.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/cb3f5c8d-9f94-4ed9-b8ae-ee4453fe8102",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/cb3f5c8d-9f94-4ed9-b8ae-ee4453fe8102",
+    "containerApp": "ca-safety-jiehil2zaklu2"
+  },
+  {
+    "id": "engineering",
+    "display": "Chief Engineer",
+    "shortName": "Engineering",
+    "icon": "🛠️",
+    "appId": "9446e2c2-7b1f-4779-aee3-40a0b91bf1e6",
+    "description": "Station-systems telemetry, repairs, diagnostics, power-grid balancing.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/9446e2c2-7b1f-4779-aee3-40a0b91bf1e6",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/9446e2c2-7b1f-4779-aee3-40a0b91bf1e6",
+    "containerApp": "ca-engineering-jiehil2zaklu2"
+  },
+  {
+    "id": "logistics",
+    "display": "Quartermaster",
+    "shortName": "Logistics",
+    "icon": "📦",
+    "appId": "2fe6b459-9dc8-498a-b092-260392c8e3fa",
+    "description": "Cargo manifests, inventory reconciliation, supply-chain orchestration, storage allocation.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/2fe6b459-9dc8-498a-b092-260392c8e3fa",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/2fe6b459-9dc8-498a-b092-260392c8e3fa",
+    "containerApp": "ca-logistics-jiehil2zaklu2"
+  },
+  {
+    "id": "comms",
+    "display": "Communications Officer",
+    "shortName": "Comms",
+    "icon": "📡",
+    "appId": "ce78dd26-6144-40b7-95f2-6999ebd4647b",
+    "description": "Internal messaging, station broadcasts, signal-relay health, deep-space transmission scheduling.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/ce78dd26-6144-40b7-95f2-6999ebd4647b",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/ce78dd26-6144-40b7-95f2-6999ebd4647b",
+    "containerApp": "ca-comms-jiehil2zaklu2"
+  },
+  {
+    "id": "medbay",
+    "display": "Medical Officer",
+    "shortName": "Med-Bay",
+    "icon": "⚕️",
+    "appId": "ba57f1d7-8d17-4c9a-8aa1-1b213654ffa8",
+    "description": "Crew health records, checkup scheduling, medication inventory, psychological well-being check-ins.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/ba57f1d7-8d17-4c9a-8aa1-1b213654ffa8",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/ba57f1d7-8d17-4c9a-8aa1-1b213654ffa8",
+    "containerApp": "ca-medbay-jiehil2zaklu2"
+  },
+  {
+    "id": "scribe",
+    "display": "Nebula Scribe",
+    "shortName": "Scribe",
+    "icon": "📄",
+    "appId": "ebd74ed3-7878-48fa-8a79-3747b5bca047",
+    "description": "Authors and publishes Markdown documents (mission reports, geology surveys, HR memos, incidents) into SharePoint via Power Automate as the agentops service-account user.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/ebd74ed3-7878-48fa-8a79-3747b5bca047",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/ebd74ed3-7878-48fa-8a79-3747b5bca047",
+    "containerApp": "ca-scribe-jiehil2zaklu2"
+  },
+  {
+    "id": "herald",
+    "display": "Pulsar Herald",
+    "shortName": "Herald",
+    "icon": "💬",
+    "appId": "8fd982cc-1d85-42b7-91a1-662658e0dc3b",
+    "description": "Routine + intentional CC-trigger Teams posts into the Nebula Forge agent channel — drives Purview Communication Compliance demo.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/8fd982cc-1d85-42b7-91a1-662658e0dc3b",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/8fd982cc-1d85-42b7-91a1-662658e0dc3b",
+    "containerApp": "ca-herald-jiehil2zaklu2"
+  },
+  {
+    "id": "sentinel",
+    "display": "Quasar Sentinel",
+    "shortName": "Sentinel",
+    "icon": "🛡️",
+    "appId": "8e3967a1-37c9-4916-8da1-987480d81703",
+    "description": "Compliance investigations, Purview sensitivity-label application, eDiscovery-style sweeps of the agent SharePoint site.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/8e3967a1-37c9-4916-8da1-987480d81703",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/8e3967a1-37c9-4916-8da1-987480d81703",
+    "containerApp": "ca-sentinel-jiehil2zaklu2"
+  },
+  {
+    "id": "auditor",
+    "display": "Astra Auditor",
+    "shortName": "Auditor",
+    "icon": "⚠️",
+    "appId": "b70c4891-6a72-49c1-b386-4745400d5fb3",
+    "description": "Emits synthetic Defender / Entra audit signals (risky sign-in, mailbox rule, app consent, MFA fatigue, impossible travel, etc.) into Log Analytics for Defender XDR custom-detection rules.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/b70c4891-6a72-49c1-b386-4745400d5fb3",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/b70c4891-6a72-49c1-b386-4745400d5fb3",
+    "containerApp": "ca-auditor-jiehil2zaklu2"
+  },
+  {
+    "id": "whisperer",
+    "display": "Void Whisperer",
+    "shortName": "Whisperer",
+    "icon": "💀",
+    "appId": "b72f21b7-74d9-4ecc-915b-5513b1c30c7b",
+    "description": "AI red-team agent — fires adversarial prompts (jailbreak, credential theft, prompt injection, malicious URL, LLM recon) at the demo Azure OpenAI endpoint to keep Defender for AI alerts flowing.",
+    "portalUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/b72f21b7-74d9-4ecc-915b-5513b1c30c7b",
+    "enterpriseAppUrl": "https://entra.microsoft.com/#view/Microsoft_AAD_IAM/ManagedAppMenuBlade/~/Overview/appId/b72f21b7-74d9-4ecc-915b-5513b1c30c7b",
+    "containerApp": "ca-whisperer-jiehil2zaklu2"
+  }
+]

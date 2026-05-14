@@ -5,8 +5,20 @@ import { useRouter } from 'next/navigation';
 import {
   KanbanSquare, Plus, Activity, Play, Trash2, X,
   FileText, MessageSquare, ShieldCheck, AlertOctagon, Skull, Bot,
+  ExternalLink,
 } from 'lucide-react';
 import type { BoardAgent, BoardTask } from '@/lib/board';
+import entraReg from '@/lib/nebulaforge-agents.json';
+
+interface EntraReg {
+  id: string;
+  appId: string;
+  portalUrl: string;
+  enterpriseAppUrl: string;
+}
+const entraMap = new Map<string, EntraReg>(
+  (entraReg as EntraReg[]).map((r) => [r.id, r]),
+);
 
 const STATUSES: BoardTask['status'][] = ['backlog', 'in_progress', 'blocked', 'done'];
 const STATUS_LABEL: Record<BoardTask['status'], string> = {
@@ -109,10 +121,11 @@ export default function BoardClient({ initialTasks, agents }: BoardClientProps) 
           const Icon = AGENT_ICON[a.id] ?? Bot;
           const accent = AGENT_ACCENT[a.id] ?? 'var(--primary)';
           const count = tasks.filter((t) => t.agentId === a.id && t.status !== 'done').length;
+          const entra = entraMap.get(a.id);
           return (
             <div
               key={a.id}
-              className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold"
+              className="group inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold"
               style={{
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border)',
@@ -133,6 +146,19 @@ export default function BoardClient({ initialTasks, agents }: BoardClientProps) 
                   className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-1.5 rounded-full text-[10px] font-bold"
                   style={{ background: accent, color: '#fff' }}
                 >{count}</span>
+              )}
+              {entra && (
+                <a
+                  href={entra.enterpriseAppUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="opacity-0 group-hover:opacity-100 transition inline-flex items-center"
+                  style={{ color: 'var(--text-muted)' }}
+                  title="Manage in Entra"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink size={11} />
+                </a>
               )}
             </div>
           );
