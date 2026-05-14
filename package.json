@@ -21,6 +21,11 @@
     "start:logistics": "npx tsx agents/nebula-logistics/src/main.ts",
     "start:comms": "npx tsx agents/nebula-comms/src/main.ts",
     "start:medbay": "npx tsx agents/nebula-medbay/src/main.ts",
+    "start:scribe": "npx tsx agents/nebula-scribe/src/main.ts",
+    "start:herald": "npx tsx agents/nebula-herald/src/main.ts",
+    "start:sentinel": "npx tsx agents/nebula-sentinel/src/main.ts",
+    "start:auditor": "npx tsx agents/nebula-auditor/src/main.ts",
+    "start:whisperer": "npx tsx agents/nebula-whisperer/src/main.ts",
     "package": "pwsh -ExecutionPolicy Bypass -File scripts/build-packages.ps1",
     "inspector:hr": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3001/mcp",
     "inspector:materials": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3002/mcp",
@@ -30,13 +35,19 @@
     "inspector:engineering": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3006/mcp",
     "inspector:logistics": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3007/mcp",
     "inspector:comms": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3008/mcp",
-    "inspector:medbay": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3009/mcp"
+    "inspector:medbay": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3009/mcp",
+    "inspector:scribe": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3010/mcp",
+    "inspector:herald": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3011/mcp",
+    "inspector:sentinel": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3012/mcp",
+    "inspector:auditor": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3013/mcp",
+    "inspector:whisperer": "npx @modelcontextprotocol/inspector --transport http --server-url http://localhost:3014/mcp"
   },
   "dependencies": {
     "@azure/data-tables": "^13.3.0",
     "@azure/identity": "^4.13.1",
     "@modelcontextprotocol/sdk": "^1.12.1",
     "express": "^4.21.0",
+    "openai": "^4.77.0",
     "uuid": "^11.1.0",
     "zod": "^3.24.0",
     "zod-to-json-schema": "^3.25.2"

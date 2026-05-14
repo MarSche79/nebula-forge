@@ -1,0 +1,6 @@
+{
+  "name": "@nebula-forge/nebula-herald",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": { "@nebula-forge/shared": "*" }
+}

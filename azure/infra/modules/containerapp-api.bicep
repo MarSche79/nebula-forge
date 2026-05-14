@@ -74,6 +74,10 @@ param resourceToken string
 @description('List of MCP agents: [{ serviceName, port }]')
 param mcpAgents array
 
+@description('Shared secret used by agents to authenticate /api/board/activity callbacks')
+@secure()
+param agentCallbackSecret string = ''
+
 var mcpUrlVars = [for agent in mcpAgents: {
   name: 'MCP_${toUpper(replace(agent.serviceName, '-', '_'))}_URL'
   value: 'https://ca-${agent.serviceName}-${resourceToken}.internal.${caEnvDefaultDomain}'
@@ -111,12 +115,17 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
     workloadProfileName: 'Consumption'
     configuration: {
       activeRevisionsMode: 'Single'
-      secrets: !empty(proxySharedSecret) ? [
+      secrets: union(!empty(proxySharedSecret) ? [
         {
           name: 'proxy-shared-secret'
           value: proxySharedSecret
         }
-      ] : []
+      ] : [], !empty(agentCallbackSecret) ? [
+        {
+          name: 'agent-callback-secret'
+          value: agentCallbackSecret
+        }
+      ] : [])
       ingress: {
         external: false
         targetPort: 3000
@@ -153,6 +162,8 @@ resource app 'Microsoft.App/containerApps@2024-03-01' = {
           }
           env: concat(baseEnv, mcpUrlVars, !empty(proxySharedSecret) ? [
             { name: 'PROXY_SHARED_SECRET', secretRef: 'proxy-shared-secret' }
+          ] : [], !empty(agentCallbackSecret) ? [
+            { name: 'AGENT_CALLBACK_SECRET', secretRef: 'agent-callback-secret' }
           ] : [])
         }
       ]

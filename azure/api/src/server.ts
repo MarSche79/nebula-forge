@@ -6,6 +6,7 @@ import { meRouter } from "./routes/me.js";
 import { agentsRouter } from "./routes/agents.js";
 import { chatRouter } from "./routes/chat.js";
 import { applicationsRouter, demoRouter } from "./routes/applications.js";
+import { boardRouter } from "./routes/board.js";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/api/agents", agentsRouter);
 app.use("/api/chat", chatRouter);
 app.use("/api/applications", applicationsRouter);
 app.use("/api/demo", demoRouter);
+app.use("/api/board", boardRouter);
 
 app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error("[api] unhandled error:", err);

@@ -50,6 +50,34 @@ param engineeringImageName string = ''
 param logisticsImageName string = ''
 param commsImageName string = ''
 param medbayImageName string = ''
+param scribeImageName string = ''
+param heraldImageName string = ''
+param sentinelImageName string = ''
+param auditorImageName string = ''
+param whispererImageName string = ''
+param agentTickImageName string = ''
+
+@description('Power Automate webhook (Teams post message)')
+@secure()
+param paTeamsWebhook string = ''
+
+@description('Power Automate webhook (Communication Compliance trigger)')
+@secure()
+param paCcWebhook string = ''
+
+@description('Power Automate webhook (SharePoint create file)')
+@secure()
+param paSpCreateWebhook string = ''
+
+@description('Power Automate webhook (SharePoint apply label)')
+@secure()
+param paSpLabelWebhook string = ''
+
+@description('Whether to deploy a gpt-4o (full) deployment for richer document generation')
+param deployGpt4o bool = true
+
+@description('CRON expression for the agent-tick job')
+param agentTickCron string = '*/30 * * * *'
 
 var resourceToken = uniqueString(subscription().subscriptionId, environmentName, location)
 var tags = {
@@ -90,6 +118,18 @@ module resources 'resources.bicep' = {
     logisticsImageName: logisticsImageName
     commsImageName: commsImageName
     medbayImageName: medbayImageName
+    scribeImageName: scribeImageName
+    heraldImageName: heraldImageName
+    sentinelImageName: sentinelImageName
+    auditorImageName: auditorImageName
+    whispererImageName: whispererImageName
+    agentTickImageName: agentTickImageName
+    paTeamsWebhook: paTeamsWebhook
+    paCcWebhook: paCcWebhook
+    paSpCreateWebhook: paSpCreateWebhook
+    paSpLabelWebhook: paSpLabelWebhook
+    deployGpt4o: deployGpt4o
+    agentTickCron: agentTickCron
   }
 }
 
@@ -122,3 +162,10 @@ output AZURE_ENTRA_TENANT_ID string = resources.outputs.AZURE_ENTRA_TENANT_ID
 
 output PSQL_HOST string = resources.outputs.PSQL_HOST
 output PSQL_DATABASE string = resources.outputs.PSQL_DATABASE
+
+// ----- Agent army -----
+output AZURE_OPENAI_DEPLOYMENT_4O string = resources.outputs.AZURE_OPENAI_DEPLOYMENT_4O
+output DEFENDER_INGEST_WORKFLOW_NAME string = resources.outputs.DEFENDER_INGEST_WORKFLOW_NAME
+output DEFENDER_INGEST_CALLBACK_URL string = resources.outputs.DEFENDER_INGEST_CALLBACK_URL
+output AGENT_TICK_JOB_NAME string = resources.outputs.AGENT_TICK_JOB_NAME
+output AGENT_CALLBACK_SECRET string = resources.outputs.AGENT_CALLBACK_SECRET

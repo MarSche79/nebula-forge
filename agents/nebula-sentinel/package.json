@@ -1,0 +1,6 @@
+{
+  "name": "@nebula-forge/nebula-sentinel",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": { "@nebula-forge/shared": "*" }
+}

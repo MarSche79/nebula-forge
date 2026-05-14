@@ -1,0 +1,46 @@
+{
+  "$comment": "Same shape as pa-teams-post-message but used for posts that intentionally include Communication-Compliance trigger phrases. Kept as a separate flow so you can target it with a CC policy and audit it independently.",
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "triggers": {
+      "manual": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "channel": { "type": "string" },
+              "subject": { "type": "string" },
+              "message": { "type": "string" }
+            },
+            "required": [ "message" ]
+          }
+        }
+      }
+    },
+    "actions": {
+      "Post_CC_message": {
+        "type": "OpenApiConnection",
+        "inputs": {
+          "host": {
+            "connectionName": "shared_teams",
+            "operationId": "PostMessageToConversation",
+            "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams"
+          },
+          "parameters": {
+            "poster": "User",
+            "location": "Channel",
+            "body/recipient/groupId": "<TEAM_GROUP_ID>",
+            "body/recipient/channelId": "<CHANNEL_ID>",
+            "body/messageBody": {
+              "content": "@{triggerBody()?['message']}",
+              "contentType": "html"
+            }
+          }
+        }
+      }
+    }
+  }
+}

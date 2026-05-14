@@ -12,6 +12,11 @@ COPY agents/nebula-engineering/package.json ./agents/nebula-engineering/
 COPY agents/nebula-logistics/package.json ./agents/nebula-logistics/
 COPY agents/nebula-comms/package.json ./agents/nebula-comms/
 COPY agents/nebula-medbay/package.json ./agents/nebula-medbay/
+COPY agents/nebula-scribe/package.json ./agents/nebula-scribe/
+COPY agents/nebula-herald/package.json ./agents/nebula-herald/
+COPY agents/nebula-sentinel/package.json ./agents/nebula-sentinel/
+COPY agents/nebula-auditor/package.json ./agents/nebula-auditor/
+COPY agents/nebula-whisperer/package.json ./agents/nebula-whisperer/
 RUN npm install --omit=dev=false
 
 # Copy source

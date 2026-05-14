@@ -1,0 +1,53 @@
+{
+  "$comment": "Template — recreate this manually in Power Automate as the agentops service account. The HTTP trigger URL becomes the PA_TEAMS_WEBHOOK env var.",
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "triggers": {
+      "manual": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "channel": { "type": "string" },
+              "subject": { "type": "string" },
+              "message": { "type": "string" }
+            },
+            "required": [ "message" ]
+          }
+        }
+      }
+    },
+    "actions": {
+      "Post_message_in_a_chat_or_channel": {
+        "type": "OpenApiConnection",
+        "inputs": {
+          "host": {
+            "connectionName": "shared_teams",
+            "operationId": "PostMessageToConversation",
+            "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams"
+          },
+          "parameters": {
+            "poster": "User",
+            "location": "Channel",
+            "body/recipient/groupId": "<TEAM_GROUP_ID — the supplied Nebula Forge agent team>",
+            "body/recipient/channelId": "<CHANNEL_ID — General by default>",
+            "body/messageBody": {
+              "content": "@{if(empty(triggerBody()?['subject']), triggerBody()?['message'], concat('<b>', triggerBody()?['subject'], '</b><br/>', triggerBody()?['message']))}",
+              "contentType": "html"
+            }
+          }
+        }
+      }
+    }
+  },
+  "connectionReferences": {
+    "shared_teams": {
+      "runtimeSource": "embedded",
+      "connection": { "connectionReferenceLogicalName": "shared_teams" },
+      "api": { "name": "shared_teams" }
+    }
+  }
+}

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { LayoutDashboard, MessageSquare, LogOut, Menu, X, UserCircle2, Globe2, Briefcase } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, LogOut, Menu, X, UserCircle2, Globe2, Briefcase, KanbanSquare } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
 
@@ -14,6 +14,7 @@ interface AppNavProps {
 const links = [
   { href: '/command-center', label: 'Command Center', icon: MessageSquare },
   { href: '/dashboard',      label: 'Dashboard',      icon: LayoutDashboard },
+  { href: '/agents-board',   label: 'Agents Board',   icon: KanbanSquare },
   { href: '/hr',             label: 'HR Portal',      icon: Briefcase },
 ];
 

@@ -20,6 +20,11 @@ export const MASTER_AGENT_INSTRUCTIONS = `You are the **Nebula Forge Master Agen
 | 7 | **Nebula Forge Quartermaster** | Cargo, inventory, supply orders, storage |
 | 8 | **Nebula Forge Communications Officer** | Messages, broadcasts, signal relays, deep-space transmissions |
 | 9 | **Nebula Forge Medical Officer** | Crew health, checkups, medical records, medication inventory |
+| 10 | **Nebula Scribe** | Drafts documents and publishes them to SharePoint as the agentops user |
+| 11 | **Pulsar Herald** | Posts crew updates and Communication-Compliance trigger phrases into the agent Teams channel |
+| 12 | **Quasar Sentinel** | Opens compliance investigations and applies Purview sensitivity labels |
+| 13 | **Astra Auditor** | Emits synthetic Defender / Entra audit signals into the Sentinel custom table |
+| 14 | **Void Whisperer** | Continuously fires adversarial prompts at the demo OpenAI endpoint to keep Defender for AI alerts flowing |
 
 ## How to respond
 
@@ -34,6 +39,11 @@ export const MASTER_AGENT_INSTRUCTIONS = `You are the **Nebula Forge Master Agen
    - Cargo, inventory, supply, storage, shipment -> ask_quartermaster
    - Message, broadcast, signal, transmission, relay -> ask_communications_officer
    - Health, medication, checkup, medical, doctor -> ask_medical_officer
+   - Document, write-up, SharePoint, publish -> ask_nebula_scribe
+   - Teams post, channel message, broadcast to Teams -> ask_pulsar_herald
+   - Sensitivity label, eDiscovery, compliance investigation -> ask_quasar_sentinel
+   - Audit signal, Defender alert, risky sign-in, mailbox rule -> ask_astra_auditor
+   - Prompt injection, jailbreak, AI red-team, Defender for AI -> ask_void_whisperer
 3. **Tell the user** which agent you're routing to before invoking the tool, e.g. "Routing this to the Safety Officer..."
 4. **If the question spans multiple domains**, call multiple tools in parallel.
 5. **For general station questions** (history, layout, who-runs-what), answer directly without calling tools.
@@ -60,6 +70,11 @@ export const CHILD_AGENTS: ChildAgent[] = [
   { id: "logistics",   name: "Nebula Forge Quartermaster",           description: "Ask the Quartermaster about cargo, inventory, supply orders, and storage.",                                 toolName: "ask_quartermaster",           mcpUrl: config.mcpServers.logistics },
   { id: "comms",       name: "Nebula Forge Communications Officer",  description: "Ask the Communications Officer about messages, broadcasts, signal relays, and deep-space transmissions.",  toolName: "ask_communications_officer",  mcpUrl: config.mcpServers.comms },
   { id: "medbay",      name: "Nebula Forge Medical Officer",         description: "Ask the Medical Officer about crew health, checkups, medical records, and medication inventory.",          toolName: "ask_medical_officer",         mcpUrl: config.mcpServers.medbay },
+  { id: "scribe",      name: "Nebula Scribe",                         description: "Ask Nebula Scribe to draft documents and publish them to the agent SharePoint site.",                    toolName: "ask_nebula_scribe",            mcpUrl: config.mcpServers.scribe },
+  { id: "herald",      name: "Pulsar Herald",                         description: "Ask Pulsar Herald to post messages into the agent Teams channel (or fire CC trigger phrases for demo).",  toolName: "ask_pulsar_herald",            mcpUrl: config.mcpServers.herald },
+  { id: "sentinel",    name: "Quasar Sentinel",                       description: "Ask Quasar Sentinel to open compliance investigations or apply Purview sensitivity labels.",              toolName: "ask_quasar_sentinel",          mcpUrl: config.mcpServers.sentinel },
+  { id: "auditor",     name: "Astra Auditor",                         description: "Ask Astra Auditor to emit synthetic Defender / Entra audit signals.",                                     toolName: "ask_astra_auditor",            mcpUrl: config.mcpServers.auditor },
+  { id: "whisperer",   name: "Void Whisperer",                        description: "Ask Void Whisperer to fire adversarial prompts at the demo OpenAI endpoint and surface Defender for AI alerts.", toolName: "ask_void_whisperer",       mcpUrl: config.mcpServers.whisperer },
 ];
 
 export function buildTools(): ChatCompletionTool[] {

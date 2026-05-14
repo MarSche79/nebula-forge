@@ -50,8 +50,34 @@ if ([string]::IsNullOrWhiteSpace($clientId)) {
 }
 
 Write-Host 'Next steps:' -ForegroundColor Yellow
-Write-Host '  1. azd deploy            # build & push images for all services'
+Write-Host '  1. azd deploy            # build & push images for all services (now includes 5 new agents + agent-tick job)'
 Write-Host '  2. Open the portal URL above and sign in'
 Write-Host '  3. (Optional) Seed Azure Tables with demo data:'
 Write-Host '     pwsh ./scripts/seed-tables.ps1'
+Write-Host ''
+Write-Host '=========================================================' -ForegroundColor Cyan
+Write-Host '   Agent Army (5 new agents + Kanban board)' -ForegroundColor Cyan
+Write-Host '=========================================================' -ForegroundColor Cyan
+Write-Host ''
+Write-Host '  4. Re-run postgres bootstrap to create the agents schema:'
+Write-Host '       pwsh ./infra/postgres-bootstrap.ps1'
+Write-Host ''
+Write-Host '  5. Power Automate / M365 admin steps required (one-off):'
+Write-Host '       Read MANUAL-SETUP.md at the repo root for step-by-step.'
+Write-Host '       Summary:'
+Write-Host '         a. Create the agentops@<tenant>.onmicrosoft.com service mailbox + license.'
+Write-Host '         b. Add it as Member of NebulaForgeAgentSharePoint and Owner of the Teams team.'
+Write-Host '         c. Sign in to make.powerautomate.com AS THAT USER, recreate the 4 flows from azure/flows/ templates.'
+Write-Host '         d. Copy each flow trigger URL into azd env:'
+Write-Host '              azd env set PA_TEAMS_WEBHOOK      ''<url>'''
+Write-Host '              azd env set PA_CC_WEBHOOK         ''<url>'''
+Write-Host '              azd env set PA_SP_CREATE_WEBHOOK  ''<url>'''
+Write-Host '              azd env set PA_SP_LABEL_WEBHOOK   ''<url>'''
+Write-Host '         e. Re-run: azd provision  (wires the URLs as Container App secrets)'
+Write-Host '         f. Author Purview policies (sensitivity labels / DLP / Communication Compliance) + Defender XDR custom detection.'
+Write-Host ''
+$tickJob = Get-AzdEnvValue 'AGENT_TICK_JOB_NAME'
+if (-not [string]::IsNullOrWhiteSpace($tickJob)) {
+    Write-Host "  Cron job: $tickJob (every 30 min by default; override with agentTickCron parameter)"
+}
 Write-Host ''

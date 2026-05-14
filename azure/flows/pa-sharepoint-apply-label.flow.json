@@ -1,0 +1,56 @@
+{
+  "$comment": "Apply a Purview sensitivity label to a SharePoint file. Power Automate's 'Apply sensitivity label to a file' action works for files in any document library the connection identity has Edit on. Demo labels: Public / Internal / Confidential / HighlyConfidential.",
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "triggers": {
+      "manual": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "folder":   { "type": "string" },
+              "fileName": { "type": "string" },
+              "label":    { "type": "string" }
+            },
+            "required": [ "folder", "fileName", "label" ]
+          }
+        }
+      }
+    },
+    "actions": {
+      "Get_file_metadata_using_path": {
+        "type": "OpenApiConnection",
+        "inputs": {
+          "host": {
+            "connectionName": "shared_sharepointonline",
+            "operationId": "GetFileMetadataByPath",
+            "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+          },
+          "parameters": {
+            "dataset": "https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint",
+            "path": "@{concat('Shared Documents/', triggerBody()?['folder'], '/', triggerBody()?['fileName'])}"
+          }
+        }
+      },
+      "Apply_sensitivity_label": {
+        "runAfter": { "Get_file_metadata_using_path": [ "Succeeded" ] },
+        "type": "OpenApiConnection",
+        "inputs": {
+          "host": {
+            "connectionName": "shared_sharepointonline",
+            "operationId": "ApplySensitivityLabelToFile",
+            "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+          },
+          "parameters": {
+            "dataset": "https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint",
+            "fileId": "@{outputs('Get_file_metadata_using_path')?['body/Id']}",
+            "labelName": "@{triggerBody()?['label']}"
+          }
+        }
+      }
+    }
+  }
+}
