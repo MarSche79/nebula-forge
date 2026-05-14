@@ -58,19 +58,101 @@ Teams messages appear as a real human user.
 > **Sign out of Power Automate as yourself first.** Then sign back in
 > **as `agentops@<tenant>.onmicrosoft.com`** at https://make.powerautomate.com.
 
-For each `.flow.json` file under `azure/flows/`:
+> ⚠ **Important — do NOT paste the whole `.flow.json` file anywhere.**
+> Those files are reference only. Power Automate's "Request Body JSON Schema"
+> field rejects expressions and reserved keys (it will say
+> *"TriggerInputSchemaInvalid … expressions are not supported"*).
+> You'll paste **just the small schema snippet** shown below into the trigger,
+> then build the action with the UI dropdowns.
 
-1. **+ Create → Instant cloud flow** — choose trigger **"When an HTTP request is received"**.
-2. Open the JSON template in a text editor; copy the **`triggers.manual.inputs.schema`**
-   block into the trigger's "Request Body JSON Schema" field.
-3. Add the action(s) listed in the JSON file (e.g. *Post message in a chat or channel* /
-   *Create file* / *Apply sensitivity label to a file*). For Teams flows use
-   **Post as = User**, not "Flow bot", so messages show `agentops` as the author.
-4. For the SharePoint flows, set the site URL to
-   `https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint` and
-   the folder to `Shared Documents/AgentDrops`.
-5. **Save** the flow. Open the trigger again and **copy the HTTP POST URL**.
-6. Repeat for all four flows. You'll have four URLs at the end:
+For each flow:
+
+1. **+ Create → Instant cloud flow** — name it (e.g. `pa-teams-post-message`),
+   choose trigger **"When an HTTP request is received"**.
+2. Paste **only the schema snippet** for that flow (see tables below) into the
+   trigger's "Request Body JSON Schema" field — nothing else.
+3. Click **+ New step → Add an action**, pick the action listed below
+   (e.g. *"Post message in a chat or channel"*). Sign in the connector
+   **as `agentops`** if prompted.
+4. Fill the action's inputs using the **dropdowns / pickers**, not JSON.
+   Use the lightning-bolt "Dynamic content" icon to bind fields to the
+   trigger output. For Teams flows set **Post as = User** so messages
+   show `agentops` as the author, not "Flow bot".
+5. **Save** the flow. Re-open the trigger and **copy the HTTP POST URL** —
+   that's the webhook your agents will call.
+
+### Flow 1 — `pa-teams-post-message`
+**Trigger schema (paste this exact JSON):**
+```json
+{
+  "type": "object",
+  "properties": {
+    "channel":  { "type": "string" },
+    "subject":  { "type": "string" },
+    "message":  { "type": "string" }
+  },
+  "required": ["message"]
+}
+```
+**Action:** *Post message in a chat or channel* (Microsoft Teams).
+* Post as: **User**
+* Post in: **Channel**
+* Team: pick `NebulaForgeAgentSharePoint` from the dropdown
+* Channel: pick `General` from the dropdown
+* Message: bind to the trigger's `message` dynamic content
+
+### Flow 2 — `pa-purview-cc-trigger`
+Same trigger schema as Flow 1. Same action with the same settings.
+The point of having it as a *separate* flow is to scope a different
+Communication Compliance policy to its activity if you want.
+
+### Flow 3 — `pa-sharepoint-create-doc`
+**Trigger schema:**
+```json
+{
+  "type": "object",
+  "properties": {
+    "folder":      { "type": "string" },
+    "fileName":    { "type": "string" },
+    "content":     { "type": "string" },
+    "contentType": { "type": "string" },
+    "title":       { "type": "string" }
+  },
+  "required": ["folder", "fileName", "content"]
+}
+```
+**Action:** *Create file* (SharePoint).
+* Site Address: `https://mngenvmcap805678.sharepoint.com/sites/NebulaForgeAgentSharePoint`
+* Folder Path: expression `concat('Shared Documents/', triggerBody()?['folder'])`
+  (or use the picker: type `Shared Documents/`, then add dynamic `folder`)
+* File Name: trigger's `fileName`
+* File Content: trigger's `content`
+
+### Flow 4 — `pa-sharepoint-apply-label`
+**Trigger schema:**
+```json
+{
+  "type": "object",
+  "properties": {
+    "folder":   { "type": "string" },
+    "fileName": { "type": "string" },
+    "label":    { "type": "string" }
+  },
+  "required": ["folder", "fileName", "label"]
+}
+```
+**Actions (two in sequence):**
+1. *Get file metadata using path* (SharePoint).
+   * Site Address: same as Flow 3.
+   * File Path: expression `concat('Shared Documents/', triggerBody()?['folder'], '/', triggerBody()?['fileName'])`
+2. *Apply sensitivity label to a file* (SharePoint).
+   * Site Address: same.
+   * File Identifier: dynamic content `Id` from step 1.
+   * Label: trigger's `label`.
+
+---
+
+At the end you'll have four URLs:
 
 | Flow | Env var | Where it's used |
 |---|---|---|
